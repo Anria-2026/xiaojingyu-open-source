@@ -25,6 +25,12 @@ function Git-Run([string[]]$GitArgs, [switch]$AllowFailure) {
 }
 function Names([string]$Value) { @($Value.Split([char]0) | Where-Object { $_ -ne '' }) }
 function Clean-Remote([string]$Url) { $Url.Trim().TrimEnd('/').Replace('git@github.com:', 'https://github.com/').Replace('ssh://git@github.com/', 'https://github.com/') -replace '\.git$', '' }
+function File-Hash([string]$Path) {
+    $algorithm = [Security.Cryptography.SHA256]::Create()
+    $stream = [IO.File]::OpenRead($Path)
+    try { ([BitConverter]::ToString($algorithm.ComputeHash($stream))).Replace('-', '').ToLowerInvariant() }
+    finally { $stream.Dispose(); $algorithm.Dispose() }
+}
 function Check-Path([string]$Rel) {
     if ($Rel -match '^[/\\]|^[A-Za-z]:|\\|(^|/)\.\.(/|$)|[\x00-\x1f]') { throw ('Unsafe allowlist path: ' + $Rel) }
     if ($Rel -match '(^|/)(\.git|\.local-secrets|\.workbuddy|\.trae|\.zcode|doc|backup|backups|saves|origin_source|output|tmp|node_modules|__pycache__|\.venv)(/|$)|(^|/)\.env(?:\.|$)|(^|/)server_config\.json$|\.(?:bak|backup|log|pyc|lnk)(?:[._-].*)?$') { throw ('Private/generated file is not publishable: ' + $Rel) }
@@ -93,7 +99,7 @@ try {
         $row = $resourceRows[$rel]
         if (-not $row) { $row = [pscustomobject][ordered]@{'文件'=$rel;'字节'=0;'SHA256'='';'保留依据'='手动列入公开白名单';'直接引用文件'=''} }
         $row.'字节' = (Get-Item -LiteralPath $file).Length
-        $row.'SHA256' = (Get-FileHash -LiteralPath $file -Algorithm SHA256).Hash.ToLowerInvariant()
+        $row.'SHA256' = (File-Hash $file)
         $updatedRows += $row
     }
     $csvText = ($updatedRows | ConvertTo-Csv -NoTypeInformation) -join "`r`n"
@@ -105,7 +111,7 @@ try {
         $file = Join-Path $RepoRoot $rel
         $length = (Get-Item -LiteralPath $file).Length
         $totalBytes += $length
-        $items += [pscustomobject]@{path=$rel;bytes=$length;sha256=(Get-FileHash -LiteralPath $file -Algorithm SHA256).Hash.ToLowerInvariant()}
+        $items += [pscustomobject]@{path=$rel;bytes=$length;sha256=(File-Hash $file)}
     }
     $inventory.manifest = $items
     $inventory.sourceFiles = @($present | Sort-Object)

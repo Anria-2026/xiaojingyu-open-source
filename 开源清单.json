@@ -75,7 +75,7 @@
 
                           ],
     "status":  "approved by author for initial public upload",
-    "bytesExcludingManifest":  82205679,
+    "bytesExcludingManifest":  82205917,
     "verification":  {
                          "sensitivePatterns":  [
 
@@ -3489,8 +3489,8 @@
                      },
                      {
                          "path":  "tools/push_open_source.ps1",
-                         "bytes":  12240,
-                         "sha256":  "e3fb65a016d8ef969969f8892eb1bb39461c7a934c0e858905dd085dd84e6f9b"
+                         "bytes":  12431,
+                         "sha256":  "6cb66c9594e318feddf0434665b267b8ee7e30d82cc1477e39b2c14d1f46e9f0"
                      },
                      {
                          "path":  "tools/python-bootstrap.json",
@@ -3534,8 +3534,8 @@
                      },
                      {
                          "path":  "推送开源.bat",
-                         "bytes":  311,
-                         "sha256":  "93575d9ec11cdeb5599f9124de820d32ee718401976ebe24950961bb9c260a6c"
+                         "bytes":  358,
+                         "sha256":  "d362681e8ef2e144c0892b5730be86b6cd1172fbdb2dd75b86435e2bda4383c4"
                      },
                      {
                          "path":  "资源清单.csv",
