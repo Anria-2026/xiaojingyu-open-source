@@ -25,3 +25,10 @@ Thumbs.db
 
 # Local-only publisher binding
 /.open-source-local.json
+
+# Author publishing tools must stay local
+/.open-source-local/
+/推送开源.bat
+/tools/push_open_source.ps1
+/tools/open-source-publish.json
+/开源检查说明.txt

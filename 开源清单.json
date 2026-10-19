@@ -1,6 +1,6 @@
 {
     "mode":  "public-source",
-    "files":  675,
+    "files":  671,
     "resources":  458,
     "resourceBytes":  71271186,
     "resourceExcluded":  [
@@ -75,7 +75,7 @@
 
                           ],
     "status":  "approved by author for initial public upload",
-    "bytesExcludingManifest":  82205917,
+    "bytesExcludingManifest":  82163278,
     "verification":  {
                          "sensitivePatterns":  [
 
@@ -194,8 +194,8 @@
                      },
                      {
                          "path":  ".gitignore",
-                         "bytes":  346,
-                         "sha256":  "5e4567648d6b46971a60a5405328921a75d0b0ca3f6725014573c67d607ef1f0"
+                         "bytes":  519,
+                         "sha256":  "b2984f820ef15e65340966839d51c9c91b26af901b0ccd2b3ab86e56777d9a9c"
                      },
                      {
                          "path":  "AGENTS.md",
@@ -1144,8 +1144,8 @@
                      },
                      {
                          "path":  "README.md",
-                         "bytes":  4547,
-                         "sha256":  "26a702c47de2f5e6c3d6f27b19edf896ef47335c8ae3bd8226469fb2cf97140e"
+                         "bytes":  3559,
+                         "sha256":  "b7d70c572cf62b048723d2e650e127150bcec187e09baf00b5989e1f7d312da1"
                      },
                      {
                          "path":  "resource/character/outfit_festive.webp",
@@ -3483,16 +3483,6 @@
                          "sha256":  "f537a1db0d1d0f085a89d0e93c779313721ac3d5e73907def9656361d4d4385a"
                      },
                      {
-                         "path":  "tools/open-source-publish.json",
-                         "bytes":  26957,
-                         "sha256":  "8d453f98bf7e49fde6c18d0c9745f40a40efb00bbee9d4f4ffa29c1e7652673d"
-                     },
-                     {
-                         "path":  "tools/push_open_source.ps1",
-                         "bytes":  12431,
-                         "sha256":  "6cb66c9594e318feddf0434665b267b8ee7e30d82cc1477e39b2c14d1f46e9f0"
-                     },
-                     {
                          "path":  "tools/python-bootstrap.json",
                          "bytes":  645,
                          "sha256":  "20cbf85f9e89b85966a811ebc71db0ffca0187ab8e6469edae2efd3f58b63def"
@@ -3513,11 +3503,6 @@
                          "sha256":  "c328bde953922fedc60ebee5e0488fa7a0cdb354f116f584604f78e2c8da5300"
                      },
                      {
-                         "path":  "开源检查说明.txt",
-                         "bytes":  2078,
-                         "sha256":  "d34299f5cad2f9298a1f8e6b4714bfd453c95ee082a1417efa3be70eb96d938a"
-                     },
-                     {
                          "path":  "启动编辑器.bat",
                          "bytes":  67,
                          "sha256":  "1355c40589a1250c9e3a2992e291108305c8256c9293e6a163dd4fa5e6c04aa1"
@@ -3531,11 +3516,6 @@
                          "path":  "入门与编辑器指南.md",
                          "bytes":  15182,
                          "sha256":  "072be1f99bf895de7b37b79785a5b38f7671f5adb8a4638fb256e318bda5eab0"
-                     },
-                     {
-                         "path":  "推送开源.bat",
-                         "bytes":  358,
-                         "sha256":  "d362681e8ef2e144c0892b5730be86b6cd1172fbdb2dd75b86435e2bda4383c4"
                      },
                      {
                          "path":  "资源清单.csv",
@@ -4206,19 +4186,14 @@
                         "tools/legacy-build/manifest.json",
                         "tools/legacy-build/package.json",
                         "tools/legacy-build/package-lock.json",
-                        "tools/open-source-publish.json",
-                        "tools/push_open_source.ps1",
                         "tools/python-bootstrap.json",
                         "tools/start_local.py",
                         "tools/sync_cfg_jsons.js",
                         "tools/sync_editor_defaults.js",
-                        "开源检查说明.txt",
                         "开源清单.json",
                         "启动编辑器.bat",
                         "启动游戏.bat",
                         "入门与编辑器指南.md",
-                        "推送开源.bat",
                         "资源清单.csv"
-                    ],
-    "publishScope":  "Only this standalone repository and explicit per-file allowlist; no sibling synchronization."
+                    ]
 }
