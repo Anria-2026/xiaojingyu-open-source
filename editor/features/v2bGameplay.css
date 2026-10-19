@@ -1,0 +1,31 @@
+#gamecfg-base .v2b-invalid { border-color: var(--danger); background: var(--panel-2); color: var(--danger); }
+#v2b-config-errors { color: var(--danger); }
+#gamecfg-base details { margin: .35rem 0; }
+#gamecfg-base details > summary { cursor: pointer; }
+
+.whale-care-config { display:grid; gap:14px; }
+.whale-care-config .whale-care-section { margin:0; min-width:0; }
+.whale-care-config .rc-title { margin-bottom:12px; }
+.whale-care-config .gcf-grid { grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr)); align-items:start; }
+.whale-care-config .gcf-grid > .gcf-grid,
+.whale-care-config .gcf-grid > .gcf-row-card { grid-column:1/-1; }
+.whale-care-config .gcf-field { min-width:0; }
+.whale-care-config input:not([type=checkbox]),
+.whale-care-config textarea,
+.whale-care-config select { box-sizing:border-box; width:100%; min-width:0; }
+.whale-care-config textarea { min-height:84px; }
+.whale-care-config .whale-care-levels { grid-template-columns:repeat(5,minmax(0,1fr)); }
+.whale-care-snacks > .gcf-grid > .gcf-row-card { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr)); gap:12px; }
+.whale-care-snacks > .gcf-grid > .gcf-row-card > .rc-head,
+.whale-care-snacks > .gcf-grid > .gcf-row-card > button { grid-column:1/-1; }
+#gamecfg-base .whale-care-snacks details { border:1px solid var(--line); border-radius:8px; padding:12px; margin:0; min-width:0; }
+.whale-care-snacks summary { font-weight:600; margin-bottom:12px; }
+.whale-care-notices > .gcf-grid { grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr)); }
+.whale-care-notices > .gcf-grid > .gcf-row-card { grid-column:auto; border:1px solid var(--line); border-radius:8px; padding:12px; }
+.whale-care-notices .gcf-grid .gcf-row-card > .gcf-grid { grid-template-columns:minmax(0,1fr); }
+
+@media (max-width:800px) { .whale-care-config .whale-care-levels { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+
+.whale-care-lines > .gcf-grid { grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr)); align-items:start; }
+.whale-care-lines .gcf-row-card { min-width:0; }
+.whale-care-lines textarea { box-sizing:border-box; width:100%; min-height:84px; }

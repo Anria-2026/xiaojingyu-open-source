@@ -1,0 +1,84 @@
+.v2b-panel-host { position: absolute; inset: 0; z-index: 110; pointer-events: none; }
+.v2b-panel-host .modal-body { overflow: hidden; }
+/* Portrait offices scroll independently; dialogs stay inside the viewport. */
+@media (orientation: portrait) {
+  .v2b-panel-host { position: fixed; }
+}
+.v2b-panel-host .v2b-responsive-card {
+  width: min(700px, calc(100% - 24px)); max-width: calc(100% - 24px);
+  max-height: calc(100% - 24px); min-height: 0; border-radius: 20px;
+  container: v2b-panel / inline-size;
+}
+.v2b-responsive-card .modal-header { padding: 14px 18px 12px; gap: 10px; }
+.v2b-responsive-card .modal-title { min-width: 0; font-size: 15px; line-height: 1.35; }
+.v2b-responsive-card .modal-title > span { overflow-wrap: anywhere; }
+.v2b-responsive-card .modal-close { width: 32px; height: 32px; flex: none; }
+.v2b-responsive-card .modal-body { padding: 18px 20px; min-height: 0; zoom: 1 !important; }
+.v2b-responsive-card .modal-footer:empty { display: none; }
+.v2b-responsive-card p { overflow-wrap: anywhere; }
+.v2b-responsive-card .dg-btn { min-height: 36px; font-family: inherit; line-height: 1.3; }
+.v2b-responsive-card .modal-body .dg-btn { overflow: hidden; }
+.v2b-responsive-card .dg-btn::before { pointer-events: none; }
+.v2b-responsive-card button:focus-visible { outline: 2px solid var(--aqua-primary); outline-offset: 3px; }
+@media (max-height: 450px) {
+  .v2b-responsive-card .modal-header { padding: 9px 14px; }
+  .v2b-responsive-card .modal-body { padding: 10px 14px; }
+}
+@container v2b-panel (max-width: 420px) {
+  .v2b-responsive-card .modal-body { padding: 14px; }
+}
+@media (max-width: 600px) and (orientation: portrait) {
+  .v2b-responsive-card .modal-header { padding: 6px 12px; gap: 8px; }
+  .v2b-responsive-card .modal-close { width: 44px; height: 44px; }
+  .v2b-responsive-card .arcade-toolbar .arc-btn { min-height: 44px; font-size: 13px; }
+}
+/* A candidate's pay gets its own line: it must never squeeze a tier suffix in half. */
+.office-shell .recruit-list .recruit-row {
+  display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: 3px 8px;
+}
+.office-shell .recruit-list .recruit-avatar { grid-row: 1 / 3; align-self: center; }
+.office-shell .recruit-list .recruit-info { min-width: 0; }
+.office-shell .recruit-list .recruit-name {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 2px 6px;
+  white-space: nowrap; line-height: 1.4;
+}
+.office-shell .recruit-list .recruit-name .dg-tier-badge,
+.office-shell .recruit-detail-name .dg-tier-badge {
+  display: inline-flex; flex: none; width: max-content; white-space: nowrap;
+  word-break: normal; overflow-wrap: normal; line-height: 1.35; margin: 0;
+}
+.office-shell .recruit-detail-name .dg-tier-badge { margin-left: 6px; }
+.office-shell .recruit-list .recruit-role { white-space: nowrap; }
+.office-shell .recruit-list .recruit-salary {
+  grid-column: 2; justify-self: end; white-space: nowrap; line-height: 1.35;
+}
+/* Four recruitment roles share the same portrait-safe office dialog. */
+@media (orientation: portrait) {
+  .office-shell .modal-mask:has(.hire-modal-body) { align-items: flex-start; }
+  .office-shell .modal-mask:has(.hire-modal-body) .modal-card {
+    margin-top: var(--modal-top, 0px);
+    max-height: calc(100% - var(--modal-top, 0px) - 10px);
+  }
+  .office-shell .hire-modal-body { justify-content: flex-start; }
+  .office-shell .hire-panel { gap: 8px; }
+  .office-shell .hire-panel .hr-name { min-width: 0; font-size: 13px; }
+  .office-shell .hire-panel .hire-note { margin-top: 2px; font-size: 11.2px; line-height: 1.5; }
+  .office-shell .hire-bar { display: grid; grid-template-columns: 1fr 1.55fr; margin-top: 4px; }
+  .office-shell .hire-bar .skew-btn { min-height: 44px; padding-inline: 12px; font-size: 12.5px; }
+  .office-shell .recruit-list .recruit-row { display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 3px 6px; padding: 6px; }
+  .office-shell .recruit-list .recruit-avatar { width: 26px; height: 26px; grid-row: 1; align-self: start; }
+  .office-shell .recruit-list .recruit-name { line-height: 1.4; }
+  .office-shell .recruit-list .recruit-name .dg-tier-badge { margin: 0; }
+  .office-shell .recruit-list .recruit-role { white-space: nowrap; }
+  .office-shell .recruit-list .recruit-salary { grid-column: 1 / -1; width: 100%; text-align: right; white-space: nowrap; }
+}
+
+/* Active recruitment: a separate, comfortable touch target for paid expedition. */
+.hire-rush-bar{display:grid;justify-items:start;gap:7px;margin-top:12px;padding-top:12px;border-top:1px solid var(--aqua-border)}
+.hire-rush-bar .skew-btn{min-height:44px;max-width:100%;font-size:13px;padding:10px 18px;white-space:normal;line-height:1.4}
+.hire-rush-bar .hire-note{margin:0;line-height:1.5}
+@media (orientation:portrait){
+ .hire-rush-bar{justify-items:stretch;margin-top:9px;padding-top:9px}
+ .hire-rush-bar .skew-btn{font-size:12.5px}
+ .hire-status .hs-title{font-size:13px;line-height:1.5}
+}

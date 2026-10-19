@@ -1,0 +1,15 @@
+{
+  "name": "xiaojingyu-open-source",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Whale girl game and local editor",
+  "license": "SEE LICENSE IN LICENSE",
+  "scripts": {
+    "check": "node h5_demo/audit_cfg_sync.js",
+    "test:save": "node h5_demo/test_save_restore_atomic.js && node h5_demo/test_local_save_storage.js",
+    "test:gallery": "node h5_demo/test_gallery_special_ledger.js"
+  },
+  "devDependencies": {
+    "jsdom": "30.0.1"
+  }
+}

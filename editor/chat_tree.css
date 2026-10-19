@@ -1,0 +1,245 @@
+/* ==========================================================================
+   对话树可视化编辑器（测试界面页）—— **本文件由 tools/gen_editor_chat_tree.js 生成**，
+   请勿手改：要改样式请改 tools/chat_tree_demo_shell.html 的 <style> 再重新生成。
+   所有规则都限定在 #page-testui 作用域内，不影响编辑器其它页面。
+   ========================================================================== */
+#page-testui{
+  --bg:#eef3f7; --panel:#fff; --line:#dbe4ec; --line2:#c3d0dc;
+  --txt:#172533; --txt2:#54687c; --txt3:#8ea1b3;
+  --brand:#0e7490; --brandbg:#e8f7fb; --brandbd:#a5e4f0;
+  --edge:#7fb3c4; --edge-ans:#5aa9c4; --edge-note:#c98a19; --edge-cross:#7c3aed;
+  --t-text:#64748b; --t-think:#7c3aed; --t-cot:#0f766e; --t-image:#0891b2; --t-audio:#b45309; --t-link:#2563eb;
+  --hdr:56px; --insp:376px;
+}
+#page-testui *,#page-testui *::before,#page-testui *::after{box-sizing:border-box}
+#page-testui{background:var(--bg);color:var(--txt);font:13px/1.6 system-ui,-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}
+#page-testui button,#page-testui select{font:inherit;cursor:pointer}
+#page-testui input,#page-testui select,#page-testui textarea{font:inherit}
+
+#page-testui .ct-bar{position:fixed;left:0;right:0;top:0;height:var(--hdr);z-index:40;display:flex;align-items:center;gap:10px;padding:0 12px;
+  background:linear-gradient(135deg,#0e7490,#155e75);color:#fff;box-shadow:0 2px 10px rgba(15,42,60,.16)}
+#page-testui .ct-bar h1{margin:0;font-size:15px;font-weight:650;white-space:nowrap}
+#page-testui .ct-bar .sub{font-size:11.5px;color:#bfe7f2;white-space:nowrap}
+#page-testui .hsep{width:1px;height:24px;background:rgba(255,255,255,.24)}
+#page-testui .tools{display:flex;gap:6px;align-items:center;margin-left:auto;flex-wrap:nowrap}
+#page-testui .tbtn{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:7px;padding:4px 10px;font-size:12.5px;white-space:nowrap}
+#page-testui .tbtn:hover{background:rgba(255,255,255,.26)}
+#page-testui .tbtn.on{background:#fff;color:#0e5b73;border-color:#fff}
+#page-testui .tbtn.prim{background:#0f766e;border-color:#0f766e}
+#page-testui .tbtn.prim:hover{background:#115e59}
+#page-testui .tsel{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:7px;padding:4px 5px;font-size:12.5px}
+#page-testui .tsel option{color:#172533}
+#page-testui .zoomi{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:7px;padding:4px 6px;font-size:12.5px;width:52px;text-align:center}
+#page-testui .search{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:7px;padding:4px 9px;font-size:12.5px;width:126px}
+#page-testui .search::placeholder{color:rgba(255,255,255,.72)}
+
+#page-testui #viewport{position:fixed;left:0;right:var(--insp);top:var(--hdr);bottom:0;overflow:hidden;cursor:grab;
+  background:radial-gradient(circle at 1px 1px,#cfdbe5 1px,transparent 0) 0 0/22px 22px,linear-gradient(#f5f9fc,#e9f1f7)}
+#page-testui #viewport.dragging{cursor:grabbing}
+#page-testui #canvas{position:absolute;left:0;top:0;transform-origin:0 0;will-change:transform}
+#page-testui #zones{position:absolute;left:0;top:0;z-index:1}
+/* ⚠️⚠️ 连线层必须**整层 pointer-events:none**，只让「线本身」可点（装饰层逃逸的老毛病，见技能 §14）。
+   踩过（2026-09-19 用户报「点击配置状态文案 点不了」）：
+   #edges 是盖住**整个画布**的 <svg>（width/height 按 CANVAS.w/h 设），而 `.live` 是把
+   `pointer-events:stroke` 加在**根 <svg>** 上的 —— 根元素一旦不是 none，**整块矩形**都会成为命中目标，
+   于是 z-index:2 的连线层把 z-index:1 的 #zones 整个吞掉：状态条、阶段标题（拖整段）、
+   「＋加选项」「＋加记事本」全部点不到（真机 elementFromPoint 返回 svg#edges）。
+   正确写法：根 svg 穿透，把可点性下沉到 path。 */
+#page-testui #edges{position:absolute;left:0;top:0;overflow:visible;z-index:2;pointer-events:none}
+#page-testui #edges.live path{pointer-events:stroke}   /* 允许点线删除（只在没拖拽时开启） */
+#page-testui #edges path{cursor:pointer}
+#page-testui #edges path.hotsel{stroke:#d9534f !important;stroke-width:3 !important;opacity:1 !important}
+
+/* 节点下方的「出线把手」：hover 节点才出现，拖它到别的节点上方 = 建立引用 */
+#page-testui .handle{
+  position:absolute;left:50%;transform:translateX(-50%);bottom:-9px;width:16px;height:16px;border-radius:50%;
+  background:#0f766e;border:2.5px solid #fff;box-shadow:0 1px 5px rgba(15,42,60,.35);
+  cursor:crosshair;display:none;z-index:12;
+}
+#page-testui .handle::after{content:"";position:absolute;inset:-6px;border-radius:50%}
+#page-testui .wrap:hover .handle{display:block}
+#page-testui .handle:hover{background:#115e59;transform:translateX(-50%) scale(1.18)}
+#page-testui .wrap.linking .handle{display:block;background:#c2410c;box-shadow:0 0 0 4px rgba(194,65,12,.25)}
+#page-testui .wrap.dropok>.opt,#page-testui .wrap.dropok>.ans{border-color:#0f766e !important;box-shadow:0 0 0 3px #9fe3d3 !important}
+#page-testui .wrap.dropno>.opt,#page-testui .wrap.dropno>.ans{opacity:.35}
+#page-testui #ghost{position:absolute;left:0;top:0;overflow:visible;pointer-events:none;z-index:11}
+#page-testui #ghost path{stroke:#c2410c;stroke-width:2;fill:none;stroke-dasharray:6 4}
+#page-testui #ghost circle{fill:#c2410c}
+#page-testui .hint{
+  position:fixed;left:50%;bottom:64px;transform:translateX(-50%);z-index:59;background:rgba(194,65,12,.94);color:#fff;
+  padding:7px 15px;border-radius:999px;font-size:12.5px;display:none;pointer-events:none;
+}
+#page-testui .hint.on{display:block}
+#page-testui #nodes{position:absolute;left:0;top:0;z-index:3}
+
+#page-testui .stage{position:absolute;border:1px solid var(--line2);border-radius:16px;background:rgba(255,255,255,.5)}
+#page-testui .stage-hd{position:absolute;display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--brandbd);
+  border-radius:999px;padding:2px 12px;font-size:12.5px;font-weight:700;color:#0e5b73;white-space:nowrap;
+  box-shadow:0 1px 4px rgba(15,42,60,.08);cursor:grab}
+#page-testui .stage-hd:active{cursor:grabbing}
+#page-testui .stage-hd .n{font-weight:500;color:var(--txt3);font-size:11px}
+#page-testui .statusbar{position:absolute;display:flex;gap:7px;flex-wrap:wrap;cursor:pointer;border-radius:8px;padding:2px}
+#page-testui .statusbar:hover{background:rgba(232,247,251,.9);outline:1px dashed var(--brandbd)}
+#page-testui .st{font-size:11px;border-radius:7px;padding:3px 9px;border:1px dashed var(--line2);background:#fbfdff;color:var(--txt2);max-width:210px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#page-testui .st b{color:var(--txt3);font-weight:600;margin-right:4px}
+#page-testui .st.sel{border-style:solid;border-color:var(--brand);background:var(--brandbg)}
+
+/* 开始 / 结束 —— ⚠️ 2026-09-19 用户要求「结束开始节点也允许拖拽」：给 grab 光标让它可被发现 */
+#page-testui .term{display:flex;align-items:center;justify-content:center;border-radius:999px;font-weight:700;white-space:nowrap;
+  border:1px solid;box-shadow:0 1px 4px rgba(15,42,60,.09);cursor:grab}
+#page-testui .wrap.dragging .term{cursor:grabbing}
+#page-testui .term-start{background:#0f766e;border-color:#0f766e;color:#fff;font-size:14px;letter-spacing:2px}
+#page-testui .term-end{background:#fff;border-color:#eccb8e;color:#8a5a12;font-size:12px}
+
+/* 「＋ 节点」菜单 + 跟随鼠标的落点虚影（用户 2026-09-19 要求：
+   点按钮 → 选「选项 / 回答」→ 虚影吸附跟随鼠标 → 再点一次把节点放下） */
+#page-testui .addmenu{position:absolute;right:12px;top:58px;z-index:38;display:flex;flex-direction:column;gap:4px;
+  background:#fff;border:1px solid var(--line);border-radius:9px;padding:6px;box-shadow:0 8px 22px rgba(15,42,60,.18)}
+#page-testui .addmenu[hidden]{display:none}
+/* 禁用态必须看得出来（撤回按钮空栈时是 disabled） */
+#page-testui .tbtn:disabled{opacity:.42;cursor:default}
+#page-testui .tbtn:disabled:hover{border-color:var(--line2);color:var(--txt);background:transparent}
+#page-testui .addmenu button{border:1px solid var(--line2);background:#fbfdff;color:var(--txt);border-radius:7px;
+  padding:5px 12px;font-size:12.5px;cursor:pointer;white-space:nowrap;text-align:left}
+#page-testui .addmenu button:hover{border-color:var(--brand);color:var(--brand);background:var(--brandbg)}
+#page-testui .addghost{position:fixed;z-index:70;pointer-events:none;transform:translate(-50%,-50%);
+  border:2px dashed var(--brand);background:rgba(232,247,251,.94);color:#0e5b73;border-radius:10px;
+  padding:7px 14px;font-size:12.5px;font-weight:650;box-shadow:0 6px 18px rgba(15,42,60,.16)}
+#page-testui .addghost[hidden]{display:none}
+
+/* 选项卡片 */
+#page-testui .opt{border:1px solid var(--brandbd);border-radius:11px;background:#fff;box-shadow:0 1px 3px rgba(15,42,60,.08);overflow:hidden;position:relative}
+#page-testui .opt:hover{box-shadow:0 3px 12px rgba(15,42,60,.14)}
+#page-testui .opt.sel{border-color:var(--brand);box-shadow:0 0 0 2px var(--brandbd)}
+#page-testui .opt.dim{opacity:.28}
+#page-testui .opt.dragging{box-shadow:0 8px 22px rgba(15,42,60,.22);z-index:9}
+/* ⚠️ 2026-09-19 修：拖动时 class 是加在 **[data-wrap]** 上的（wrapOf(key).classList.add）⇒
+   上面那条 .opt.dragging 其实**从来没生效过**。这里补 [data-wrap] 口径；
+   顺带让把手在拖动中保持可见（鼠标离开卡片时 .grip 会 opacity:0，带子节点拖动时会看不到自己在拖什么）。 */
+#page-testui .wrap.dragging .opt,#page-testui .wrap.dragging .ans{box-shadow:0 8px 22px rgba(15,42,60,.22)}
+#page-testui .wrap.dragging .grip{opacity:1}
+#page-testui .opt-hd{padding:6px 9px 5px;cursor:grab}
+#page-testui .opt-hd:active{cursor:grabbing}
+#page-testui .opt-t{font-size:12.5px;font-weight:650;line-height:1.42;word-break:break-word;padding-right:62px}
+#page-testui .opt-id{font-size:10px;color:var(--txt3);margin-top:2px;font-variant-numeric:tabular-nums}
+#page-testui .grip{position:absolute;right:6px;top:6px;display:flex;gap:3px;opacity:0;transition:opacity .12s}
+#page-testui .opt:hover .grip,#page-testui .ans:hover .grip{opacity:1}
+#page-testui .icob{width:19px;height:19px;border:1px solid var(--line2);background:#fff;border-radius:5px;display:flex;align-items:center;justify-content:center;padding:0;color:var(--txt2)}
+#page-testui .icob:hover{border-color:var(--brand);color:var(--brand);background:var(--brandbg)}
+#page-testui .icob.del:hover{border-color:#d9534f;color:#d9534f;background:#fdf2f1}
+#page-testui .badges{display:flex;gap:4px;flex-wrap:wrap;margin-top:4px}
+#page-testui .bd{font-size:9.5px;border-radius:999px;padding:1px 6px;border:1px solid;white-space:nowrap}
+#page-testui .bd-start{color:#0f766e;border-color:#9fe3d3;background:#effbf7;font-weight:700}
+#page-testui .bd-next{color:#54687c;border-color:#dbe4ec;background:#f7fafc}
+#page-testui .bd-cond{color:#8a5a12;border-color:#eccb8e;background:#fdf6e7}
+#page-testui .bd-warn{color:#b91c1c;border-color:#fca5a5;background:#fef2f2;font-weight:700}
+#page-testui .bd-add{color:#0f766e;border-color:#9fe3d3;background:#f0fdfa;cursor:pointer}
+#page-testui .bd-add:hover{background:#c9f5ea}
+
+/* 回答节点（小卡） */
+#page-testui .ans{border:1px solid var(--line);border-radius:9px;background:#fbfdff;box-shadow:0 1px 2px rgba(15,42,60,.06);position:relative;padding:5px 8px 6px;cursor:grab}
+#page-testui .ans:hover{border-color:var(--brandbd);box-shadow:0 3px 10px rgba(15,42,60,.12)}
+#page-testui .ans.sel{border-color:var(--brand);box-shadow:0 0 0 2px var(--brandbd)}
+#page-testui .ans.dim{opacity:.28}
+#page-testui .ans.dragging{box-shadow:0 8px 20px rgba(15,42,60,.2);z-index:9}
+#page-testui .ans-top{display:flex;align-items:center;gap:5px;margin-bottom:3px}
+#page-testui .ans-tx{font-size:11px;line-height:1.45;color:#3b4c5e;word-break:break-word}
+#page-testui .tag{flex:0 0 auto;font-size:9px;font-weight:700;border-radius:4px;padding:1px 4px;border:1px solid;letter-spacing:.2px}
+#page-testui .tag-text{color:var(--t-text);border-color:#dbe4ec;background:#fff}
+#page-testui .tag-think{color:var(--t-think);border-color:#ddd0fb;background:#f7f3ff}
+#page-testui .tag-cot{color:var(--t-cot);border-color:#a9e0d3;background:#f0fcf8}
+#page-testui .tag-image{color:var(--t-image);border-color:#a5e0ec;background:#eefafd}
+#page-testui .tag-audio{color:var(--t-audio);border-color:#efd0a6;background:#fdf7ec}
+#page-testui .tag-link{color:var(--t-link);border-color:#c2d6fd;background:#f0f5ff}
+#page-testui .tag-dumb{color:#8a5a12;border-color:#eccb8e;background:#fdf6e7}
+#page-testui .tag-full{color:#0f766e;border-color:#9fe3d3;background:#effbf7}
+#page-testui .ans-id{font-size:9.5px;color:var(--txt3);margin-left:auto;font-variant-numeric:tabular-nums}
+#page-testui .ans-cond{font-size:9.5px;color:var(--txt3);margin-top:3px}
+
+#page-testui .note-node{border:1px dashed #eccb8e;border-radius:10px;background:#fdfaf3;padding:7px 9px;position:relative}
+#page-testui .note-node .nm{font-size:12px;font-weight:700;color:#8a5a12;padding-right:24px}
+#page-testui .note-node .tx{font-size:11px;color:#6b5320;margin-top:2px}
+#page-testui .note-node .id{font-size:10px;color:var(--txt3)}
+#page-testui .note-node.sel{border-style:solid;border-color:#c98a19;box-shadow:0 0 0 2px #f2ddb4}
+#page-testui .note-node.dim{opacity:.28}
+#page-testui .zone-hd{position:absolute;font-size:12px;font-weight:700;color:#8a5a12;background:#fff;border:1px solid #eccb8e;border-radius:999px;padding:2px 12px;white-space:nowrap}
+
+#page-testui #insp{position:fixed;right:0;top:var(--hdr);bottom:0;width:var(--insp);z-index:30;background:var(--panel);border-left:1px solid var(--line);overflow-y:auto}
+#page-testui #insp::-webkit-scrollbar{width:9px}
+#page-testui #insp::-webkit-scrollbar-thumb{background:#d3dde6;border-radius:9px}
+#page-testui .insp-hd{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);padding:10px 13px 9px;z-index:2}
+#page-testui .insp-hd .t{font-size:13.5px;font-weight:650}
+#page-testui .insp-hd .s{font-size:11.5px;color:var(--txt3);margin-top:2px}
+#page-testui .mod{margin:9px 11px;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff}
+#page-testui .mod-hd{background:#f6fafc;padding:6px 10px;font-size:11.5px;font-weight:700;color:var(--txt2);display:flex;align-items:center;gap:6px;border-bottom:1px solid var(--line)}
+#page-testui .mod-hd .pill{font-size:10px;font-weight:600;border-radius:999px;padding:0 6px;border:1px solid;margin-left:auto}
+#page-testui .pill.full{color:#0f766e;border-color:#9fe3d3;background:#effbf7}
+#page-testui .pill.dumb{color:#8a5a12;border-color:#eccb8e;background:#fdf6e7}
+#page-testui .fld{display:flex;gap:8px;padding:6px 10px;border-bottom:1px solid #f1f5f8;font-size:12px;align-items:flex-start}
+#page-testui .fld:last-child{border-bottom:0}
+#page-testui .fld .k{flex:0 0 80px;color:var(--txt3);font-size:11.5px;padding-top:4px}
+#page-testui .fld .v{flex:1 1 auto;min-width:0;word-break:break-word;color:#28394a}
+#page-testui .fld .v.mono{font-family:ui-monospace,Consolas,Menlo,monospace;font-size:11.5px;color:#0f5c6e}
+#page-testui .fld .v.empty{color:var(--txt3)}
+#page-testui .inp,#page-testui .ta,#page-testui .sel2{width:100%;border:1px solid var(--line2);border-radius:7px;padding:4px 7px;font-size:12px;background:#fff}
+#page-testui .inp:focus,#page-testui .ta:focus,#page-testui .sel2:focus{outline:2px solid var(--brandbd);outline-offset:-1px;border-color:var(--brand)}
+#page-testui .ta{min-height:54px;resize:vertical;line-height:1.55}
+#page-testui .sel2{font-size:11.5px}
+#page-testui .row{display:flex;gap:5px;align-items:center}
+#page-testui .row .inp{flex:1 1 auto}
+#page-testui .mini{border:1px solid var(--line2);background:#fff;border-radius:6px;padding:3px 7px;font-size:11px;color:var(--txt2);white-space:nowrap}
+#page-testui .mini:hover{border-color:var(--brand);color:var(--brand);background:var(--brandbg)}
+#page-testui .mini.del:hover{border-color:#d9534f;color:#d9534f;background:#fdf2f1}
+#page-testui .steps-edit{display:flex;flex-direction:column;gap:4px;padding:6px 10px}
+#page-testui .warnbox{margin:8px 11px;border:1px solid #fca5a5;background:#fef2f2;border-radius:9px;padding:7px 10px;font-size:11.5px;color:#b91c1c}
+#page-testui .tipbox{margin:8px 11px;border:1px dashed var(--line2);background:#f8fbfd;border-radius:9px;padding:7px 10px;font-size:11.5px;color:var(--txt2)}
+/* 「校验」结果面板（2026-09-19）：挂在画布左下，默认 hidden。
+   ⚠️ 为什么要有它：编辑器顶栏那颗「校验」按钮以前写进 #chattree-result，
+   而那个容器在新 DOM 里根本不存在 ⇒ validate() 一进门就 return，**点了完全没反应**（静默失效）。
+   ⚠️ [hidden] 必须显式写 —— flex/grid 会顶掉它（技能 §15「四个静默坑」之一）。 */
+#page-testui .ct-report{position:absolute;left:13px;right:calc(var(--insp) + 13px);bottom:44px;max-height:46%;overflow-y:auto;z-index:36;
+  background:rgba(255,255,255,.97);border:1px solid var(--line);border-radius:11px;padding:9px 12px;
+  box-shadow:0 8px 24px rgba(15,42,60,.16);font-size:12px;line-height:1.7;color:var(--txt);cursor:pointer}
+#page-testui .ct-report[hidden]{display:none}
+#page-testui .ct-report .hd{font-weight:700;margin-bottom:5px}
+#page-testui .ct-report .hd.ok{color:#0f766e}
+#page-testui .ct-report .hd.err{color:#c2410c}
+#page-testui .ct-report .err{color:#c2410c;word-break:break-word}
+#page-testui .ct-report .warn{color:#a16207;word-break:break-word}
+#page-testui .empty-tip{padding:20px 15px;color:var(--txt3);font-size:12.5px;line-height:1.9}
+#page-testui .empty-tip b{color:var(--txt2)}
+#page-testui .kbd{font-family:ui-monospace,Consolas,monospace;font-size:11px;background:#f2f6fa;border:1px solid var(--line);border-radius:4px;padding:0 4px}
+
+#page-testui .legend{position:fixed;left:13px;bottom:13px;z-index:35;background:rgba(255,255,255,.96);border:1px solid var(--line);
+  border-radius:10px;padding:7px 12px;font-size:11.5px;color:var(--txt2);box-shadow:0 3px 12px rgba(15,42,60,.1);
+  display:flex;gap:12px;flex-wrap:wrap;max-width:calc(100vw - var(--insp) - 40px)}
+#page-testui .legend i{display:inline-block;width:18px;height:0;border-top-width:2px;border-top-style:solid;vertical-align:4px;margin-right:5px}
+#page-testui .lg-flow{border-color:#0f766e}
+#page-testui .lg-ans{border-color:var(--edge-ans)}
+#page-testui .lg-note{border-color:var(--edge-note);border-top-style:dashed}
+#page-testui .lg-cross{border-color:var(--edge-cross);border-top-style:dashed}
+#page-testui .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:60;background:rgba(15,42,60,.92);color:#fff;
+  padding:8px 16px;border-radius:999px;font-size:12.5px;opacity:0;transition:opacity .2s;pointer-events:none}
+#page-testui .toast.on{opacity:1}
+
+/* ===== 编辑器内布局覆盖（demo 是整页应用，编辑器里只是其中一页） ===== */
+#page-testui{width:100%;box-sizing:border-box}
+#page-testui .ct-wrap{display:flex;flex-direction:column;width:100%;box-sizing:border-box;height:calc(100vh - 128px);min-height:560px;
+  border:1px solid #dbe4ec;border-radius:12px;overflow:hidden;position:relative;background:#eef3f7}
+/* ⚠️⚠️ shell 里的 .ct-bar（原 header）是 position:fixed 的**整页顶栏**。嵌进编辑器后它会飘到页面 y=0，
+   正好压在分页 tab 行和右上角「保存全部」按钮上（2026-09-18 用户报「挡住保存按钮」）。
+   fixed 四件套必须显式解掉 —— flex 布局不会自动覆盖 position。 */
+#page-testui .ct-bar{position:static;left:auto;right:auto;top:auto;bottom:auto;z-index:auto;
+  flex:0 0 auto;display:flex;align-items:center;gap:12px;padding:0 12px;height:52px;
+  background:linear-gradient(135deg,#0e7490,#155e75);color:#fff}
+#page-testui .ct-bar h1{font-size:15px;font-weight:650;margin:0;white-space:nowrap}
+#page-testui .ct-bar .sub{font-size:11.5px;color:#bfe7f2;white-space:nowrap}
+#page-testui .ct-tools{display:flex;gap:6px;align-items:center;margin-left:auto;flex-wrap:nowrap}
+#page-testui .ct-body{flex:1 1 auto;min-height:0;position:relative;width:100%;box-sizing:border-box}
+/* ⚠️ flex:1 在编辑器的 .page 里没撑开（实测 #viewport 宽 0、画布全空）⇒ 改用绝对定位填满，
+   最稳、也不依赖父级宽度推导。右边留 376px 给属性面板。 */
+#page-testui #viewport{position:absolute;left:0;top:0;bottom:0;right:376px;overflow:hidden}
+#page-testui #insp{position:absolute;right:0;top:0;bottom:0;width:376px;overflow-y:auto}
+#page-testui .legend{position:absolute;left:12px;bottom:12px;max-width:calc(100% - 30px)}
+#page-testui .toast{position:absolute}
+#page-testui .hint{position:absolute}

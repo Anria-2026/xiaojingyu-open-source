@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" type="image/png" href="resource/ui/favicon.png">
+<link rel="apple-touch-icon" href="resource/ui/favicon-180.png">
+<title>鲸鱼娘养成计划</title>
+<!-- [feature:mobile-boot-health] -->
+<style id="boot-critical-style">
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#e7f7ff;color:#17324d;font-family:"Microsoft YaHei",sans-serif}
+[hidden]{display:none!important}
+#game{position:fixed;left:0;top:0;width:100vw;height:100vh;z-index:1}
+.screen{position:fixed;left:0;top:0;right:0;bottom:0;overflow:hidden;opacity:1;transition:opacity .5s ease}
+.loading{z-index:100;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 18% 12%,rgba(79,183,238,.22),transparent 32%),radial-gradient(circle at 90% 92%,rgba(255,126,179,.10),transparent 26%),linear-gradient(135deg,#e7f7ff,#edf9ff)}
+.load-inner{text-align:center;width:80vw;max-width:20rem}
+.load-bar{height:.7rem;border-radius:999px;background:rgba(255,255,255,.6);box-shadow:inset 0 1px 3px rgba(40,90,130,.18);overflow:hidden;padding:2px}
+.load-fill{height:100%;width:0%;border-radius:999px;background:linear-gradient(90deg,#5ba9f5,#6fc3ff,#ff9f45);transition:width .25s ease}
+.load-text{margin-top:.9rem;font-size:.8rem;letter-spacing:.3em;color:#5d7890}
+#boot-health-status{margin-top:12px;font-size:13px;line-height:1.6;letter-spacing:0;text-align:center}
+#boot-health-retry{display:inline-block;margin-top:8px;padding:8px 16px;border:1px solid #89c8ee;border-radius:10px;background:#fff;color:#246c98;text-decoration:none}
+</style>
+<script id="boot-health">
+/* ES5: the first screen and its error path cannot depend on downloaded JavaScript. */
+(function (W, D) {
+  var styles = [], sealed = false, ready = false, waiting = [];
+  var styleMessage = "", fatalMessage = "", softMessage = "", sdkLoaded = false, sdkStatus = "loading", sdkException = false;
+  var cloudLinked = false, cloudWaitingForSdk = false, stylesStarted = false;
+  function loading() {
+    var el = D.getElementById("loading");
+    return el && !el.hidden ? el : null;
+  }
+  function retryTarget() {
+    var href = String(W.location.href || ""), hashAt = href.indexOf("#");
+    var hash = hashAt >= 0 ? href.slice(hashAt) : "";
+    var base = hashAt >= 0 ? href.slice(0, hashAt) : href;
+    var queryAt = base.indexOf("?"), target = queryAt >= 0 ? base.slice(0, queryAt) : base;
+    var parts = queryAt >= 0 ? base.slice(queryAt + 1).split("&") : [], keep = [];
+    var stamp = new Date().getTime();
+    for (var i = 0; i < parts.length; i++) {
+      var name = parts[i].split("=")[0];
+      try { name = decodeURIComponent(name); } catch (e) {}
+      if (name === "boot_retry") {
+        if (parts[i].slice(parts[i].indexOf("=") + 1) === String(stamp)) stamp++;
+      } else if (parts[i]) keep.push(parts[i]);
+    }
+    keep.push("boot_retry=" + stamp);
+    return target + "?" + keep.join("&") + hash;
+  }
+  function renderStatus() {
+    if (!loading()) return;
+    var box = D.getElementById("load-diag"), panel = D.getElementById("boot-health-status");
+    if (!box) return;
+    var message = fatalMessage || styleMessage || softMessage;
+    if (!message) {
+      if (panel && panel.parentNode) panel.parentNode.removeChild(panel);
+      return;
+    }
+    if (!panel) {
+      panel = D.createElement("div");
+      panel.id = "boot-health-status";
+      box.appendChild(panel);
+    }
+    var text = D.getElementById("boot-health-message");
+    if (!text) {
+      text = D.createElement("div");
+      text.id = "boot-health-message";
+      panel.appendChild(text);
+    }
+    text.textContent = message;
+    if (!D.getElementById("boot-health-retry")) {
+      var retry = D.createElement("a");
+      retry.id = "boot-health-retry";
+      retry.textContent = "重新加载";
+      retry.href = retryTarget();
+      retry.target = "_self";
+      panel.appendChild(retry);
+    }
+  }
+  function checkStyles() {
+    if (!sealed) return;
+    var pending = 0, failed = false;
+    for (var i = 0; i < styles.length; i++) {
+      var state = styles[i].getAttribute("data-boot-state");
+      if (state !== "loaded") pending++;
+      if (state === "failed") failed = true;
+    }
+    ready = pending === 0;
+    if (failed) styleMessage = "界面资源加载失败，请检查网络后重新加载。";
+    else if (ready) styleMessage = "";
+    renderStatus();
+    if (ready && !fatalMessage) {
+      var callbacks = waiting;
+      waiting = [];
+      for (var j = 0; j < callbacks.length; j++) callbacks[j]();
+    }
+  }
+  function startStyles() {
+    if (stylesStarted) return;
+    stylesStarted = true;
+    for (var i = 0; i < styles.length; i++) {
+      (function (definition) {
+        var link = D.createElement("link");
+        link.rel = "stylesheet";
+        link.media = "all";
+        link.setAttribute("data-boot-stylesheet", "");
+        link.__bootDefinition = definition;
+        link.onload = function () { W.BootHealth.styleLoaded(link, true); };
+        link.onerror = function () { W.BootHealth.styleLoaded(link, false); };
+/* [feature:legacy-webview-style-route] */
+        link.href = W.BootCompat ? W.BootCompat.styleHref(definition.getAttribute("href")) : definition.getAttribute("href");
+/* [/feature:legacy-webview-style-route] */
+        (D.head || D.documentElement).appendChild(link);
+      })(styles[i]);
+    }
+  }
+  function scheduleStyles() {
+    /* Give the inline loading screen one painted frame before normal CSS. */
+    W.setTimeout(startStyles, 250);
+    if (typeof W.requestAnimationFrame === "function") {
+      W.requestAnimationFrame(function () { W.requestAnimationFrame(startStyles); });
+    } else W.setTimeout(startStyles, 0);
+  }
+  function cloudReady() {
+    var cloud = W.ToyCloud;
+    if (!cloud || cloudLinked || sdkException) return;
+    cloudLinked = true;
+    cloudWaitingForSdk = !sdkLoaded;
+    /* init binds lifecycle once and flushes only the existing score queue. */
+    try { if (typeof cloud.init === "function") cloud.init(); } catch (e) {}
+  }
+  W.BootHealth = {
+/* [feature:legacy-webview-health-fail] */
+    fail: function (message) { fatalMessage = String(message); renderStatus(); },
+/* [/feature:legacy-webview-health-fail] */
+    stylesReady: function () { return sealed && ready && !fatalMessage; },
+    whenStylesReady: function (fn) {
+      if (this.stylesReady()) fn();
+      else waiting.push(fn);
+    },
+    styleLoaded: function (link, ok) {
+      /* Preload completion does not mean the stylesheet is applied. */
+      var definition = link && link.__bootDefinition;
+      if (!definition) return;
+      definition.setAttribute("data-boot-state", ok ? "loaded" : "failed");
+      checkStyles();
+    },
+    sealStyles: function () {
+      styles = D.querySelectorAll("link[data-boot-style]");
+      sealed = true;
+      checkStyles();
+    },
+    cloudReady: cloudReady,
+    sdkState: function () { return sdkStatus; },
+    sdkDone: function (ok) {
+      var api = W.toy;
+      sdkLoaded = !!ok && !sdkException && !!api && typeof api.setCloudStorage === "function";
+      sdkStatus = sdkLoaded ? "ready" : "failed";
+      if (!sdkLoaded) return;
+      softMessage = "";
+      renderStatus();
+      if (!cloudLinked) cloudReady();
+      else if (cloudWaitingForSdk && W.ToyCloud) {
+        cloudWaitingForSdk = false;
+        /* A late SDK retries historical scores, never uploads current player progress. */
+        try { if (typeof W.ToyCloud.flushQueue === "function") W.ToyCloud.flushQueue(); } catch (e) {}
+      }
+    }
+  };
+  W.addEventListener("error", function (ev) {
+    var el = ev && ev.target;
+    if (el && el.tagName === "LINK" && (el.__bootDefinition || el.getAttribute("data-boot-style") !== null)) {
+      if (el.__bootDefinition) W.BootHealth.styleLoaded(el, false);
+    } else if (el && el.tagName === "SCRIPT") {
+      if (el.getAttribute("data-boot-sdk") !== null) { W.BootHealth.sdkDone(false); return; }
+      fatalMessage = "游戏启动文件加载失败，请检查网络后重新加载。";
+      renderStatus();
+    } else if (ev && (ev.message || ev.error)) {
+      var sdk = D.querySelector("script[data-boot-sdk]");
+      if (sdk && ev.filename && ev.filename === sdk.src) {
+        sdkException = true;
+        W.BootHealth.sdkDone(false);
+        return;
+      }
+      if (!ev.filename && String(ev.message || "").toLowerCase() === "script error.") {
+        softMessage = "启动过程中遇到临时问题，可以继续等待，或重新加载重试。";
+        renderStatus();
+        return;
+      }
+      fatalMessage = "游戏启动出错，请重新加载重试。";
+      renderStatus();
+    }
+  }, true);
+  D.addEventListener("DOMContentLoaded", function () {
+    renderStatus();
+    scheduleStyles();
+  });
+  W.setTimeout(function () {
+    if (!ready) {
+      if (!styleMessage) styleMessage = "界面资源加载较慢，请检查网络，或重新加载重试。";
+      renderStatus();
+    }
+  }, 12000);
+})(window, document);
+</script>
+<!-- [/feature:mobile-boot-health] -->
+<!-- [feature:legacy-webview-capabilities] -->
+<script id="boot-compat">
+// [feature:boot-native-csp-comment]
+/* ES5 only. Required API/CSS gaps choose local ES5; CSP EvalError alone preserves the capable native path. */
+// [/feature:boot-native-csp-comment]
+(function (W, D) {
+  var mode = "unsupported", reason = "base", started = false, complete = false;
+  function baseReady() {
+    try {
+      var c = D.createElement("canvas"), el = D.createElement("div");
+      return !!(D.addEventListener && W.addEventListener && D.querySelectorAll &&
+        Object.defineProperty && Object.keys && Array.isArray && Array.prototype.forEach &&
+        W.JSON && W.ArrayBuffer && W.Uint8Array && W.XMLHttpRequest && W.MutationObserver && W.getComputedStyle && W.matchMedia &&
+        "responseType" in new W.XMLHttpRequest() && "classList" in el && "dataset" in el &&
+        D.createElement("template").content && D.createElementNS &&
+        c.getContext && c.getContext("2d") && W.CSS && typeof W.CSS.supports === "function" &&
+        W.CSS.supports("display", "flex") && W.CSS.supports("display", "grid") && W.CSS.supports("display", "contents") && W.CSS.supports("--whale-boot", "0"));
+    } catch (e) { return false; }
+  }
+  function nativeStylesReady() {
+    try { return W.CSS.supports("inset", "0") && W.CSS.supports("width", "min(1px,2px)") && W.CSS.supports("height", "max(1px,2px)") && W.CSS.supports("height", "clamp(1px,2px,3px)") && W.CSS.supports("padding", "env(safe-area-inset-top)") && W.CSS.supports("gap", "1px") && W.CSS.supports("aspect-ratio", "1 / 1") && W.CSS.supports("selector(:has(*))") && W.CSS.supports("height", "1dvh"); } catch (e) { return false; }
+  }
+  // [feature:boot-native-csp-capabilities]
+  function nativeReady() {
+    try {
+      var ep = W.Element.prototype, np = W.Node.prototype, cp = W.CanvasRenderingContext2D.prototype;
+      if (!(nativeStylesReady() && typeof W.Promise === "function" && typeof W.Promise.prototype.finally === "function" &&
+        typeof W.fetch === "function" && typeof W.AbortController === "function" &&
+        typeof W.Symbol === "function" && !!W.Symbol.iterator &&
+        typeof W.Map === "function" && new W.Map([[1, 2]]).get(1) === 2 &&
+        typeof W.Set === "function" && Array.from(new W.Set([1, 1])).length === 1 && Array.from("😀").length === 1 &&
+        !!(Object.assign && Object.entries && Object.values && Object.fromEntries && Array.from &&
+          Array.prototype.includes && Array.prototype.find && Array.prototype.findIndex &&
+          Array.prototype.keys && Array.prototype.flatMap && Array.prototype.at && String.prototype.startsWith &&
+          String.prototype.endsWith && String.prototype.includes && String.prototype.repeat &&
+          String.prototype.padStart && Number.isFinite && Number.isInteger && Number.isSafeInteger &&
+          Math.hypot && W.performance && typeof W.performance.now === "function" && typeof W.requestAnimationFrame === "function" && typeof W.cancelAnimationFrame === "function" && ep.closest && ep.matches && ep.remove && ep.replaceWith && "isConnected" in np &&
+          W.NodeList.prototype.forEach && cp.ellipse))) return false;
+      try {
+      W.Function("class C{}; const f=async (x={})=>({...x,a:x?.a??1}); let [a]=[1]; for(const x of [a]){}; return f;");
+      } catch (probeError) { if (!probeError || probeError.name !== "EvalError") return false; }
+      return true;
+    } catch (e) { return false; }
+  }
+  // [/feature:boot-native-csp-capabilities]
+  function fail(message) { if (W.BootHealth) W.BootHealth.fail(message); }
+  function unsupported() {
+    fail("当前应用内的网页内核过旧，无法启动游戏。请在应用商店更新哔站 App 和系统 WebView 后重新加载。");
+    var loader = D.getElementById("loading");
+    if (loader) { loader.style.zIndex = "2147483000"; loader.style.background = "#e7f7ff"; loader.style.opacity = "1"; loader.style.display = "flex"; loader.style.visibility = "visible"; }
+    var panel = D.getElementById("boot-health-status");
+    if (panel && !D.getElementById("boot-health-upgrade")) {
+      var a = D.createElement("a"); a.id = "boot-health-upgrade";
+      a.textContent = "更新哔站 App"; a.href = "https://app.bilibili.com/"; a.target = "_top";
+      a.style.cssText = "display:block;margin-top:8px;color:#246c98"; panel.appendChild(a);
+    }
+  }
+  if (baseReady()) { mode = nativeReady() ? "modern" : "compat"; reason = mode === "modern" ? "native" : "syntax-or-api"; }
+  W.BootCompat = {
+    mode: mode, reason: reason,
+    styleHref: function (url) { var at = url.indexOf("?"); return mode === "compat" && !nativeStylesReady() ? "js/legacy/styles." + (at < 0 ? url : url.slice(0, at)).replace(/[^\w.-]/g, "_") + (at < 0 ? "" : url.slice(at)) : url; },
+    gameReady: function () { complete = true; if (W.BootHealth) W.BootHealth.cloudReady(); },
+    load: function () {
+      if (started) return; started = true;
+      if (mode === "unsupported") { unsupported(); return; }
+      var manifest = D.getElementById("game-script-manifest"), out = "", i;
+      if (!manifest || !manifest.content) { fail("启动资源清单缺失，请重新加载。"); return; }
+      if (mode === "compat") {
+        out = '<script data-boot-compat src="js/legacy/polyfills.js?v=20261017a"><\/script>' +
+          '<script data-boot-compat src="js/legacy/game.es5.js?v=20261019c"><\/script>';
+      } else {
+        var list = manifest.content.querySelectorAll("script[src]");
+        for (i = 0; i < list.length; i++) {
+          var src = list[i].getAttribute("src");
+          if (!/^js\/[\w./-]+\.js\?v=[\w-]+$/.test(src) || src.indexOf("..") >= 0) { fail("启动资源地址无效，请重新加载。"); return; }
+          out += '<script src="' + src + '"><\/script>';
+        }
+      }
+      out += '<script>window.BootCompat.gameReady();<\/script>';
+      D.write(out);
+      W.setTimeout(function () { if (!complete) fail("游戏启动资源未能完成加载，请检查网络后重新加载。"); }, 15000);
+    }
+  };
+  D.addEventListener("DOMContentLoaded", function () { if (mode === "unsupported") unsupported(); });
+})(window, document);
+</script>
+<!-- [/feature:legacy-webview-capabilities] -->
+<link rel="preload" as="style" href="style.css?v=20261018d" data-boot-style>
+<link rel="preload" as="style" href="features/voice_replay.css?v=20261010p" data-boot-style>
+<link rel="preload" as="style" href="features/office_scene.css?v=20261017m" data-boot-style>
+<link rel="preload" as="style" href="features/office_bubbles.css?v=20261009e" data-boot-style>
+<link rel="preload" as="style" href="features/office_sleep.css?v=20261011j" data-boot-style>
+<link rel="preload" as="style" href="features/office_pause.css?v=20261017m" data-boot-style>
+<link rel="preload" as="style" href="features/v2_panels.css?v=20261012f" data-boot-style>
+<link rel="preload" as="style" href="features/whale.css?v=20261015h" data-boot-style>
+<link rel="preload" as="style" href="features/whale_autocare.css?v=20261017d" data-boot-style>
+<link rel="preload" as="style" href="features/embodied_presentation.css?v=20261018c" data-boot-style>
+<link rel="preload" as="style" href="features/cg_rating.css?v=20261015h" data-boot-style>
+<link rel="preload" as="style" href="css/embodied_fitness_review.css?v=20261015h" data-boot-style>
+<link rel="preload" as="style" href="features/whale_size.css?v=20261009e" data-boot-style>
+<link rel="preload" as="style" href="features/more_menu.css?v=20261017m" data-boot-style>
+<link rel="preload" as="style" href="features/settlement_funds.css?v=20261010e" data-boot-style>
+  <link rel="preload" as="style" href="css/embodied_factory.css?v=20261017m" data-boot-style>
+  <link rel="preload" as="style" href="css/city_journey.css?v=20261018j" data-boot-style>
+  <link rel="preload" as="style" href="css/life_finale.css?v=20261019c" data-boot-style>
+  <link rel="preload" as="style" href="css/gallery.css?v=20261015h" data-boot-style>
+<script>window.BootHealth.sealStyles();</script>
+</head>
+<body>
+  <canvas id="game"></canvas>
+
+  <!-- ====== 主场景右下角「开始训练」入口 ====== -->
+  <button id="btn-train" class="btn-train" hidden>开始训练</button>
+
+  <!-- ====== 玩法界面（二次元可爱风） ====== -->
+  <div id="training" class="training" hidden>
+    <!-- 右上角：关闭 / 说明 / 菜单（默认隐藏，招募阶段由玩法 HUD 动态渲染同名按钮接管） -->
+    <div class="train-topbar" hidden>
+      <button id="train-help" class="train-btn" type="button">说明</button>
+      <button id="train-menu" class="train-btn" type="button">菜单</button>
+      <button id="train-close" class="train-btn train-btn-close" type="button">✕</button>
+    </div>
+
+    <!-- 主体内容（占位，后续养成系统在此扩展） -->
+    <div id="train-body" class="train-body">
+      <div class="train-card">
+        <div class="train-card-title">今日训练</div>
+        <p class="train-card-text">这里是玩法操作界面主体占位区域。<br>后续会放：训练目标 / 属性面板 / 养成互动等。</p>
+      </div>
+    </div>
+
+    <!-- 大模型研发养成玩法（最小可玩闭环） -->
+    <div id="devgame" class="devgame" hidden>
+      <div id="devgame-render" class="devgame-render"></div>
+    </div>
+
+    <!-- 二级弹窗：玩法说明 -->
+    <div id="train-help-pop" class="train-pop" hidden>
+      <div class="pop-card">
+        <div class="pop-title">玩法说明</div>
+        <div class="pop-body">
+          点击地面控制小鲸鱼蹦蹦跳跳移动。<br>
+          点击主场景右下角「开始训练」进入本玩法界面。<br>
+          · 说明：了解玩法规则<br>
+          · 菜单：调整音乐 / 音效音量<br>
+          更多养成玩法正在开发中，敬请期待～
+        </div>
+        <button class="pop-btn" data-close="train-help-pop" type="button">知道了</button>
+      </div>
+    </div>
+
+    <!-- 二级弹窗：菜单（音量 + 重新开始） -->
+    <div id="train-menu-pop" class="train-pop" hidden>
+      <div class="pop-card">
+        <div class="pop-title">菜单</div>
+        <div class="pop-sec-title">音量</div>
+        <div class="pop-row">
+          <span class="pop-label">🎵 音乐</span>
+          <input id="vol-music" class="pop-range" type="range" min="0" max="1" step="0.05" value="0.6">
+        </div>
+        <div class="pop-row">
+          <span class="pop-label">🔊 音效</span>
+          <input id="vol-sfx" class="pop-range" type="range" min="0" max="1" step="0.05" value="0.9">
+        </div>
+        <div class="pop-divider"></div>
+        <div class="pop-sec-title">训练</div>
+        <button id="train-restart" class="pop-btn pop-btn-danger" type="button">🔄 重新开始游戏</button>
+        <p class="pop-tip">重新开始将清空当前训练进度（含自动存档），不可恢复。</p>
+        <button class="pop-btn" data-close="train-menu-pop" type="button">关闭</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== 强制加载界面 ====== -->
+  <div id="loading" class="screen loading">
+    <div class="load-inner">
+      <div class="load-bar"><div id="load-fill" class="load-fill"></div></div>
+      <div id="load-text" class="load-text">加载中…</div>
+      <!-- 启动黑匣显示区（2026-09-24）：诊断文案只写这里，绝不碰 load-text
+           （load-text 归加载进度/「点击开始」所有，覆盖会吃掉操作指引）。
+           内联样式避免为它单独升 style.css 版本。 -->
+      <div id="load-diag" style="margin-top:10px;font-size:12px;line-height:1.45;color:#3f6884;white-space:pre-wrap;word-break:break-all;text-align:left;max-height:48vh;overflow:hidden"></div>
+    </div>
+  </div>
+
+  <script>
+  /* 启动黑匣（2026-09-24）——故意写成 ES5 内联，不依赖任何外部 js：
+     旧探针有个致命前提：menu.js 得能被下载且能解析（错误探针/逃生通道都在它身上），
+     且旧内联 error 监听没挂 capture，<script>/<img> 下载失败根本收不到。
+     五条独立防线，断在哪一层截图即知：
+     ① 错误探针（capture）：JS 异常 / script·img·css 下载失败 / Promise 拒绝 → 写上 #load-diag；
+     ② 输入探针：pointerdown/touchstart/mousedown/click 计数 + 每 4 秒实时刷到屏上
+        ——24c 截图实锤：游戏全链路正常、点按闸已挂，但 20s 内触控事件 0 个
+        （iOS 26/27 WebKit 有 iframe 触控派发回归在案：bugs.webkit.org/307737、318173）；
+     ③ JS 落地监视：每 250ms 扫关键全局，谁出现记一笔（启动链断点一目了然）；
+     ④ 零触控指引：14s 无任何触控 → 主文案位直接指路（微信/QQ 内打开被外层吃掉输入，
+        引导去「B站内打开」或 Safari / 直链），之后触控恢复自动还原「点击开始」；
+     ⑤ 10s 逃生：任意点按先试 Menu.showMenu（幂等闸），死了则屏显完整时间线。
+     ⚠️ 诊断必须"时间驱动 + 实时更新"：输入被外层吃掉时，任何"点一下才触发"的
+        诊断永远等不到触发（24c 的教训——快照式倾倒分不清"没点"还是"没送到"）。 */
+  (function () {
+    var _gone = false;
+    var BUILD = "20261019c";
+    var t0 = new Date().getTime();
+    var LOG = [];
+    function now() { return "+" + ((new Date().getTime() - t0) / 1000).toFixed(1) + "s"; }
+    function mark(m) { LOG.push(now() + " " + m); if (LOG.length > 60) LOG.shift(); }
+    window.__B = { t0: t0, mark: mark, log: LOG };
+
+    function dead() { var el = document.getElementById("loading"); return !el || el.hidden; }
+    function tail(n) { return LOG.slice(-n).join("\n"); }
+
+    /* 环境行：系统版本 / 微信 / QQ / 是否 iframe / 视口 / build —— 截图自带现场。
+       iOS 26+ 起 Safari 系 UA 冻结在 18.x（Apple Release Notes 156170132），
+       所以「iOS 18.7」实际可能是 26/27，标注出来免得再被 UA 版本带偏。 */
+    function envLine() {
+      var ua = navigator.userAgent || "";
+      var ios = /OS (\d+[_\d]*)/.exec(ua);
+      var ver = ios ? "iOS " + ios[1].replace(/_/g, ".") : "非iOS";
+      if (ios && +ios[1].split("_")[0] >= 18) ver += "(UA冻结,或26/27)";
+      var app = /MicroMessenger/i.test(ua) ? " 微信" : (/MQQBrowser|QQ\//i.test(ua) ? " QQ" : "");
+      var iframe = false;
+      try { iframe = (window.top !== window.self); } catch (e) { iframe = true; }
+      /* 2026-10-02：URL 带 wk_esc=N = 上一次的逃生锚点导航又回到了本页 ——
+         截图里出现 esc-back#N 即实锤「跳出去又被套回外壳」，不必再猜。 */
+      var esc = /wk_esc=(\d+)/.exec(location.search || "");
+      return ver + app + (iframe ? " iframe内" : "") + (esc ? " esc-back#" + esc[1] : "") + " " +
+        (window.innerWidth || 0) + "x" + (window.innerHeight || 0) +
+        " build " + BUILD;
+    }
+
+    mark("boot:inline " + envLine());
+
+    /* 诊断统一渲染口：错误行(若有) + 环境行 + 时间线 + 触控计数（实时）。
+       ⚠️ 只写专用文本子节点 diagText 的 textContent —— 24e 教训（玩家实测抓到）：
+       直接写容器 textContent 会把注入的逃生锚点**连根抹掉**（按钮出现 4 秒后
+       被周期刷新吃掉，玩家根本来不及点）。文本走子节点，锚点永不被动。 */
+    /* iOS 判定（2026-10-03）：安卓不再显示调试信息（用户要求），只有 iOS 才铺
+       环境行/时间线/触控计数；iPadOS 13+ 桌面 UA 也算（MacIntel + 多点触控）。
+       ⚠️ menu.js 里有一份同款判定（管 iOS 自动进入）—— 两处改要同改。 */
+    var IS_IOS = /iPad|iPhone|iPod/.test(navigator.userAgent || "") ||
+      (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+
+    var inputs = 0, lastErr = "", diagText = null;
+    function renderDiag() {
+      if (_gone) return;
+      /* 2026-10-03（用户要求）：安卓不显示调试信息 —— 只在真错误（资源/JS 失败）时
+         提示一句，不铺环境行/时间线/触控计数；iOS 保留全量诊断（本轮问题现场）。 */
+      if (!IS_IOS && !lastErr) return;
+      var box = document.getElementById("load-diag");
+      if (!box) return;
+      if (!diagText || diagText.parentNode !== box) {
+        diagText = document.createElement("div");
+        if (box.firstChild) box.insertBefore(diagText, box.firstChild);
+        else box.appendChild(diagText);
+      }
+      diagText.textContent = (lastErr ? lastErr + "\n" : "") +
+        (IS_IOS
+          ? "诊断 " + envLine() + "\n" + tail(10) +
+            "\n触控: " + inputs + " 次" +
+            (inputs === 0 ? " ←点几下屏幕试试，此数字会实时+1；一直0=触控被外层吃掉" : "")
+          : "");
+    }
+
+    /* ① 错误探针：必须 capture —— 资源加载失败不冒泡，只有捕获能收到 */
+    window.addEventListener("error", function (ev) {
+      var t = ev && ev.target;
+      if (t && (t.tagName === "SCRIPT" || t.tagName === "IMG" || t.tagName === "LINK")) {
+        lastErr = "资源加载失败: " + String(t.src || t.href || "?").slice(-80);
+        mark("res-fail:" + String(t.src || t.href || "?").split("/").pop().slice(0, 40));
+      } else {
+        lastErr = "加载出错: " + String((ev && ev.message) || (ev && ev.error && ev.error.message) || "unknown").slice(0, 110);
+        mark("js-err:" + lastErr.slice(0, 60));
+      }
+      if (dead()) { _gone = true; return; }
+      renderDiag();
+    }, true);
+    window.addEventListener("unhandledrejection", function (ev) {
+      lastErr = "加载出错(Promise): " + String((ev && ev.reason && ev.reason.message) || ev.reason || "promise").slice(0, 110);
+      mark("promise:" + lastErr.slice(0, 60));
+      if (dead()) { _gone = true; return; }
+      renderDiag();
+    });
+
+    /* ② 输入探针：计数 + 立即刷新诊断（每次点按屏幕上的计数都会动——
+       玩家一眼能分辨「点了没反应」是事件没到还是逻辑没跑） */
+    var guided = false;
+    var inTypes = ["pointerdown", "touchstart", "mousedown", "click"];
+    function onInput(e) {
+      inputs++;
+      mark("input:" + e.type);
+      if (dead()) { _gone = true; return; }
+      if (guided) {   // 指引发出后触控恢复了：还原「点击开始」，证明输入链路已通
+        guided = false;
+        var t = document.getElementById("load-text");
+        if (t) t.textContent = "加载完成 · 点击开始";
+      }
+      renderDiag();
+    }
+    for (var i = 0; i < inTypes.length; i++) window.addEventListener(inTypes[i], onInput, true);
+
+    /* 实时刷新：每 4 秒把最新时间线+计数刷上屏（时间驱动，不依赖点按） */
+    setInterval(function () {
+      if (dead()) { _gone = true; return; }
+      renderDiag();
+    }, 4000);
+
+    /* ④ 零触控指引（24e 重写；2026-10-02 防循环阶梯）：14s 仍零触控 → 主文案指路 + 注入「原生锚点」逃生门。
+       24d 截图教训：玩家已照指引进了 Safari，但复制的是**分享页链接**，外壳原样重现
+       （分享页自己又套 iframe），触控照样 0 次。JS 事件全被外壳吃掉时唯一可能穿透的
+       是**原生 <a> 导航**（浏览器本地行为，不走 JS 事件）：
+       href = iframe 自己的 location（= 游戏本体直链），
+       target=_top 顶掉外壳（sandbox 带 allow-top-navigation-by-user-activation，
+       真实点按即满足激活条件）。
+       ⚠️ 2026-10-02 玩家实测（iPhone）：点锚点顶掉外壳后**又回到加载页、按钮再次出现**，
+       无限循环进不去。机理：直链顶层在 B站 App / iOS 容器语境下会**再次被套壳**
+       （顶层又变 iframe → 14s 零触控 → 又注入同一个按钮）。旧代码每次注入一模一样的
+       按钮 = 无循环检测，一直在喂循环。
+       防循环阶梯（localStorage `whale_esc_try` 计数，15 分钟过期）：
+         第 1 次 = 直链原样 + `wk_esc=1` 标记参数（envLine 显示 esc-back#1，截图实锤「跳出又被套回」）；
+         第 2 次 = **去掉 query 的裸路径** + `wk_esc=2`（防 query 触发 App 拦截/重定向）；
+         第 3 次起 = **不再注入跳转锚点**（停止喂循环），屏显手工逃生指引 + 裸路径文本。 */
+    var ESC_KEY = "whale_esc_try";
+    function escState() {
+      try {
+        var v = JSON.parse(localStorage.getItem(ESC_KEY) || "null");
+        if (v && typeof v.n === "number" && (new Date().getTime() - v.t) < 15 * 60 * 1000) return v.n;
+      } catch (e) {}
+      return 0;
+    }
+    function escSave(n) {
+      try { localStorage.setItem(ESC_KEY, JSON.stringify({ n: n, t: new Date().getTime() })); } catch (e) {}
+    }
+    function escTarget(n, stripQuery) {
+      var u = stripQuery ? (location.origin + location.pathname) : location.href;
+      return u + (u.indexOf("?") >= 0 ? "&" : "?") + "wk_esc=" + n;
+    }
+    setTimeout(function () {
+      if (dead() || inputs > 0) return;
+      guided = true;
+      mark("guide:zero-input");
+      var inFrame = false;
+      try { inFrame = (window.top !== window.self); } catch (e) { inFrame = true; }
+      if (!inFrame) return;   // 直开页没有外壳可跳，指引到此为止（也不改主文案）
+      var box = document.getElementById("load-diag");
+      var t = document.getElementById("load-text");
+      var n = escState();
+      if (n >= 2) {
+        /* 阶梯末端：自动跳出已试 2 次仍被套回 —— 停止喂循环，改手工指引 */
+        if (t) t.textContent = "自动跳出不生效（已试 " + n + " 次，跳出去又被套回外壳）";
+        if (box) {
+          var tip = document.createElement("div");
+          tip.style.cssText = "margin-top:8px;padding:10px 12px;background:#eef4fb;border:1px solid #b9d2ea;border-radius:10px;color:#274b66;word-break:break-all";
+          tip.textContent = "请回到桌面，打开 Safari，在地址栏输入下面的地址（不带任何参数）：" +
+            location.origin + location.pathname;
+          box.appendChild(tip);
+        }
+        mark("guide:manual-only try=" + n);
+        return;
+      }
+      if (t) t.textContent = "触控被外壳拦截 — 点下方「直接进入游戏本体」蓝色按钮";
+      if (!box) return;
+      escSave(n + 1);
+      var a = document.createElement("a");
+      a.href = escTarget(n + 1, n >= 1);  // 第 2 次起用去掉 query 的裸路径
+      a.target = "_top";               // 顶掉分享页外壳，整机直开游戏
+      a.textContent = n >= 1 ? "▶ 再次尝试进入游戏本体（换裸地址 · 第 " + (n + 1) + " 次）"
+                             : "▶ 直接进入游戏本体（跳过外壳）";
+      a.style.cssText = "display:block;margin-top:8px;padding:11px 12px;background:#5ba9f5;color:#fff;border-radius:10px;text-align:center;text-decoration:none;font-size:14px;font-weight:bold";
+      box.appendChild(a);
+      mark("guide:anchor try=" + (n + 1));
+    }, 14000);
+
+    /* ③ JS 落地监视：谁出现记谁 —— 启动链断点一目了然 */
+    var wanted = [
+      ["FX", "fx.js"], ["AchieveStore", "achieve_store.js"], ["Menu", "menu.js"],
+      ["AudioMgr", "menu.js"], ["SFX", "sfx.js"], ["GameCfg", "game_cfg.js"],
+      ["V35", "v35_core.js"], ["GameSave", "game_save.js"], ["Game", "main.js"],
+      ["Training", "training.js"], ["GameUI", "game_ui.js"]
+    ];
+    var seen = {};
+    var iv = setInterval(function () {
+      if (dead()) { clearInterval(iv); return; }
+      for (var j = 0; j < wanted.length; j++) {
+        var name = wanted[j][0];
+        if (!seen[name] && window[name]) {
+          seen[name] = 1; mark("js:" + wanted[j][1]);
+          /* menu.js 落地即清掉逃生闸那条「脚本仍在加载」的提示（自愈，2026-09-30）——
+             弱网下常常下一秒就好了，不能让误导文案一直挂着 */
+          if (name === "Menu" && escapeMsg) { escapeMsg = false; lastErr = ""; renderDiag(); }
+        }
+      }
+      if (!seen.toy && window.toy) { seen.toy = 1; mark("js:toy-sdk"); }
+      var rs = "ready:" + document.readyState;
+      if (!seen[rs]) { seen[rs] = 1; mark(rs); }
+    }, 250);
+
+    /* ⑤ 10s 逃生（三通道）：menu.js 活着直接进主菜单。
+       ⚠️ 2026-09-30（弱网玩家实测截图）：原版「一次点按就摘监听 + 写死
+       『启动超时（menu.js 未生效）』」是误导 —— menu.js 常只差一两秒，之后就正常了，
+       屏上却永久挂着这条吓人文案（renderDiag 每 4s 还会再刷一遍，玩家只看到"坏了"）。
+       修法：① 点按**不死锁**，未就绪时给「仍在加载」的友好提示、可反复重试；
+             ② 措辞不再武断断言"未生效"；
+             ③ 与下面的落地监视配合：window.Menu 一出现就**清掉**这条提示（自愈）。 */
+    var escapeMsg = false;
+    setTimeout(function () {
+      if (dead()) { _gone = true; clearInterval(iv); return; }
+      mark("escape:armed");
+      var types = ["pointerdown", "touchstart", "click"];
+      function ready() { return !!(window.Menu && typeof Menu.showMenu === "function"); }
+      function off() { for (var k = 0; k < types.length; k++) window.removeEventListener(types[k], h, true); }
+      var h = function () {
+        mark("escape:tap");
+        if (ready()) {
+          try { if (window.AudioMgr && AudioMgr.unlock) AudioMgr.unlock(); Menu.showMenu(); } catch (e) {}
+          off();
+          return;
+        }
+        /* menu.js 还没落地：不武断报错，提示"仍在加载"并可再点（下次点按会重判） */
+        escapeMsg = true;
+        lastErr = "网速较慢，脚本仍在加载…（点屏幕可重试）";
+        renderDiag();
+      };
+      for (var j = 0; j < types.length; j++) window.addEventListener(types[j], h, true);
+    }, 10000);
+  })();
+  </script>
+
+  <!-- ====== 等待主菜单 ====== -->
+  <div id="menu" class="screen menu" hidden>
+    <canvas id="menu-canvas"></canvas>
+    <div class="menu-shade"></div>
+    <!-- 右上角功能入口：成就 / 排行榜 / 画廊。
+         从 .menu-inner 里挪出来单独放右上角，与「开始游戏」分开。
+         底图用与 .menu-start-btn 同款的几何纹（CSS 里共享 ::before/::after），
+         底色改紫以区分主次。入口都**常驻显示** —— 未解锁时弹层内说明解锁条件，
+         藏起来会让玩家根本不知道有这个玩法。 -->
+    <div class="menu-corner">
+      <button id="menu-achv" class="menu-corner-btn" type="button">成就</button>
+      <button id="menu-rank" class="menu-corner-btn" type="button">排行榜</button>
+      <button id="menu-gallery" class="menu-corner-btn" type="button">画廊</button>
+    </div>
+    <div class="menu-inner">
+      <h1 class="menu-title" id="menu-title-node">鲸鱼娘养成计划</h1>
+      <div class="menu-sub" id="menu-sub-node">梁文峰就是我自己</div>
+      <button id="menu-start" class="menu-start-btn" type="button">开始游戏</button>
+      <!-- 选择存档（2026-09-22 用户要求）：排在「开始游戏」正下方。
+           以前云存档只能「先进游戏 → 打开存档弹窗 → 从云端恢复」，藏得太深；
+           这里在进游戏**之前**就把云存档 + 本机各槽位摆出来，选一个直接进。
+           入口**常驻显示**（与成就/排行榜同口径）—— 没有存档时弹层里给空态说明，
+           藏起来玩家根本不知道能读云存档。 -->
+      <button id="menu-load" class="menu-load-btn" type="button">选择存档</button>
+      <!-- 成就 / 排行榜已挪到右上角 .menu-corner（2026-09-17）——与「开始游戏」分开，
+           不再挤在中间这一列（原来三条入口堆在一起，主次不分）。 -->
+      <!-- 制作组名单：正文由 UI_CFG.credits 配置（UI 配置页）；空配置时这个入口自动隐藏 -->
+      <button id="menu-credits" class="menu-credits-btn" type="button" hidden>制作组名单</button>
+    </div>
+    <div class="menu-foot">首次点击任意处响起音乐</div>
+  </div>
+
+  <!-- ====== 主界面二级弹窗：制作组名单（复用办公区弹窗样式；内容 = UI_CFG.credits） ====== -->
+  <div id="credits-modal" class="credits-overlay" hidden>
+    <div class="modal-card credits-card" role="dialog" aria-modal="true" aria-label="制作组名单">
+      <div class="modal-header">
+        <div class="modal-title">
+          <div class="title-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/><path d="M19 3v4"/><path d="M21 5h-4"/></svg></div>
+          <span>制作组名单</span>
+        </div>
+        <button id="credits-close" class="modal-close" type="button" title="关闭" aria-label="关闭"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      </div>
+      <div class="modal-body credits-body" id="credits-body"></div>
+    </div>
+  </div>
+
+  <!-- 主界面二级弹窗：成就墙（2026-09-17）。与上面的 credits 逐块同构：
+       菜单层自己的遮罩 + 办公区同款 .modal-card + 自绘 SVG 标题图标/关闭键。
+       正文全动态（menu.js 的 achvWallHtml），不在 HTML 里写死任何成就。 -->
+  <div id="achv-modal" class="credits-overlay" hidden>
+    <div class="modal-card achv-wall-card" role="dialog" aria-modal="true" aria-label="成就">
+      <div class="modal-header">
+        <div class="modal-title">
+          <div class="title-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg></div>
+          <span>成就</span>
+        </div>
+        <button id="achv-close" class="modal-close" type="button" title="关闭" aria-label="关闭"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      </div>
+      <div class="modal-body achv-wall-body" id="achv-wall-body"></div>
+      <!-- 缩略图点开的「展开卡」浮层（2026-09-22）：手机竖屏/横屏矮屏下墙上是缩略图，
+           点一张就把**完整成就卡**（非 compact，带辉光/环/粒子）铺在这层。
+           位置在 .modal-card 内部（它 position:relative + overflow:hidden）⇒ 浮层被裁在
+           弹窗内，不会溢出到主菜单；点浮层任意处或 Esc 关闭。 -->
+      <div class="achv-wall-detail" id="achv-wall-detail" hidden></div>
+    </div>
+  </div>
+
+  <!-- 主界面二级弹窗：选择存档（2026-09-22 用户要求「开始游戏按钮下方加一个选择存档的按钮，
+       让玩家可以选择直接加载云存档」）。与上面的 credits / achv 逐块同构：
+       菜单层自己的遮罩 + 办公区同款 .modal-card + 自绘 SVG 标题图标/关闭键。
+       正文全动态（menu.js 的 loadListHtml），不在 HTML 里写死任何存档。 -->
+  <div id="load-modal" class="credits-overlay" hidden>
+    <div class="modal-card load-card" role="dialog" aria-modal="true" aria-label="选择存档">
+      <div class="modal-header">
+        <div class="modal-title">
+          <div class="title-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+          <span>选择存档</span>
+        </div>
+        <button id="load-close" class="modal-close" type="button" title="关闭" aria-label="关闭"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      </div>
+      <div class="modal-body load-body" id="load-body"></div>
+    </div>
+  </div>
+
+  <!-- ====== 全局转场黑幕（进入游戏：渐入 → 换场 → 渐出） ====== -->
+  <div id="transition" class="transition"></div>
+
+  <!-- [feature:legacy-webview-script-route] -->
+  <template id="game-script-manifest">
+  <script src="js/fx.js?v=20261010b"></script>
+  <!-- 注意：achieve_store.js 必须排在 menu.js **之前** —— 主菜单阶段（成就墙入口）就要读 AchieveStore，
+       晚引只会拿到 undefined 且**不报错**，表现为"入口永远显示 0 / 总数"。
+       （本句不写警示符号：test_menu.js 会扫这一段里有没有 emoji，符号会被它当成图标拦下） -->
+  <script src="js/achieve_store.js?v=20261009e"></script>
+  <script src="js/menu.js?v=20261019c"></script>
+  <script src="js/sfx.js?v=20261009e"></script>
+  <script src="js/game_cfg.js?v=20261019c"></script>
+  <script src="js/image_resources.js?v=20261018f"></script>
+  <script src="js/features/resource_paths.js?v=20261010b"></script>
+  <script src="js/v35_core.js?v=20261011e"></script>
+  <script src="js/game_save.js?v=20261019c"></script>
+  <script src="js/toy_cloud.js?v=20261018e"></script>
+  <script src="js/v35_hire.js?v=20261010f"></script>
+  <script src="js/game_core.js?v=20261018c"></script>
+  <script src="js/staff_raise_events.js?v=20261012f"></script>
+  <script src="js/v35_hire_ui.js?v=20261009e"></script>
+  <script src="js/game_ui.js?v=20261018e"></script>
+  <script src="js/features/agent_review.js?v=20261013d"></script>
+  <script src="js/features/engineer_avatars.js?v=20261009e"></script>
+  <script src="js/features/office_geometry.js?v=20261017d"></script>
+  <script src="js/features/office_scene.js?v=20261017m"></script>
+  <script src="js/features/office_bubbles.js?v=20261011j"></script>
+  <script src="js/game_bus.js?v=20261009e"></script>
+  <script src="js/training.js?v=20260917a"></script>
+  <script src="js/features/office_pause.js?v=20261017m"></script>
+  <script src="js/features/embodied_presentation.js?v=20261018c"></script>
+  <script src="js/features/embodied_review.js?v=20261015h"></script>
+  <script src="js/features/embodied_fitness_review.js?v=20261015h"></script>
+  <script src="js/features/embodied_events.js?v=20261010f"></script>
+  <script src="js/features/v2_panels.js?v=20261009e"></script>
+  <script src="js/features/follow_outfit.js?v=20261011m"></script>
+  <script src="js/features/feature_unlock.js?v=20261011e"></script>
+  <script src="js/features/talk_tier.js?v=20261009e"></script>
+  <script src="js/features/whale_care.js?v=20261017k"></script>
+  <script src="js/features/whale_autocare.js?v=20261017m"></script>
+  <script src="js/features/whale_room.js?v=20261017k"></script>
+  <script src="js/features/arcade_core.js?v=20261017k"></script>
+  <script src="js/arcade_loader.js?v=20261017k"></script>
+  <script src="js/arcade_glue.js?v=20261017k"></script>
+  <script src="js/features/arcade_ui.js?v=20261009e"></script>
+  <script src="js/features/v2b_scene_actions.js?v=20261009e"></script>
+  <script src="js/features/office_sleep.js?v=20261011j"></script>
+  <script src="js/features/whale_size.js?v=20261009e"></script>
+  <script src="js/features/more_menu.js?v=20261017k"></script>
+  <script src="js/features/embodied_factory.js?v=20261018a"></script>
+  <script src="js/features/city_journey.js?v=20261018j"></script>
+  <script src="js/features/life_music_pulse.js?v=20261011e"></script>
+  <script src="js/features/life_text_dissolve.js?v=20261009e"></script>
+  <script src="js/features/life_star_lake.js?v=20261009j"></script>
+  <script src="js/features/life_gpu_canvas.js?v=20261010p"></script>
+  <script src="js/features/life_star_compositor.js?v=20261015h"></script>
+  <script src="js/features/life_timeline.js?v=20261011j"></script>
+  <script src="js/features/life_video.js?v=20261010p"></script>
+  <script src="js/features/life_dialogue_voice.js?v=20261011b"></script>
+  <script src="js/features/screen_runtime.js?v=20261017k"></script>
+  <script src="js/features/life_finale.js?v=20261019c"></script>
+  <script src="js/features/life_milestones.js?v=20261009e"></script>
+  <script src="js/features/gallery.js?v=20261018c"></script>
+  <script src="js/main.js?v=20261018f"></script>
+  </template>
+  <!-- 云端 SDK 异步加载：CDN 慢或失败都不阻塞游戏与 DOMContentLoaded。
+       早到/晚到均由 BootHealth 接续现有云服务，不主动上传本局进度。 -->
+  <script async data-boot-sdk src="//s1.hdslb.com/bfs/seed/toy/app/sdk/toy-sdk.js" onload="window.BootHealth.sdkDone(true)" onerror="window.BootHealth.sdkDone(false)"></script>
+  <script id="boot-game-route">window.BootCompat.load();</script>
+  <!-- [/feature:legacy-webview-script-route] -->
+  <script>
+    /* 本地开发专用注入（正式部署域名一律不加载，打包时必须排除这两个文件）：
+       · cheat.js       作弊器
+       · toy_shim_mock.js  Toy API mock —— 云存档/排行榜的接口要靠平台注入的
+         toy_id 才能调通，而 toy_id 只在**正式发布页面**存在、预览页没有，
+         所以发布前唯一能验证全链路的手段就是在 localhost 用 mock 跑。
+         它严格复刻平台约束（value ≤1024 字节、≤128 key、只保留历史最高分），
+         越界会直接抛错，能在本地提前抓到问题。 */
+/* [feature:legacy-webview-dev-tools-gate] */
+    if (/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) && (!window.BootCompat || window.BootCompat.mode === "modern")) {
+/* [/feature:legacy-webview-dev-tools-gate] */
+      document.write('<script src="js/cheat.js?v=20261019c"><\/script>');
+      document.write('<script src="js/toy_shim_mock.js?v=20260917b"><\/script>');
+    }
+  </script>
+  <div id="build-tag" style="position:fixed;right:8px;bottom:6px;font:10px/1.2 monospace;color:#8899aa;opacity:0.75;z-index:99999;pointer-events:none">build 20261019c</div>
+</body>
+</html>

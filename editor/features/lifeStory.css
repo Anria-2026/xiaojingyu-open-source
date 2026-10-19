@@ -1,0 +1,294 @@
+#page-life-story .life-story-tool { width:100%; min-width:0; padding:18px; overflow-y:auto; }
+#life-story-config { max-width:1600px; margin:0 auto; padding-bottom:36px; }
+#life-story-config .ls-heading, #life-story-config .ls-timeline-heading, #life-story-config .ls-inspector-heading, #life-story-config .ls-preview-heading { display:flex; align-items:center; justify-content:space-between; gap:14px; }
+#life-story-config h2, #life-story-config h3, #life-story-config h4, #life-story-config p { margin:0; }
+#life-story-config .ls-heading { margin-bottom:16px; }
+#life-story-config h2 { font-size:24px; }
+#life-story-config .ls-heading p, #life-story-config .ls-tip { color:var(--text-dim); font-size:13px; line-height:1.6; }
+#life-story-config .ls-heading p { margin-top:8px; }
+#life-story-config .ls-actions { display:flex; gap:8px; flex-shrink:0; }
+#life-story-config .ls-global { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; align-items:end; margin-bottom:18px; padding:16px; border:1px solid var(--line); border-radius:10px; background:var(--panel); }
+#life-story-config .ls-field { min-width:0; display:flex; flex-direction:column; gap:7px; font-size:13px; line-height:1.5; }
+#life-story-config .ls-field span { overflow-wrap:anywhere; }
+#life-story-config .ls-field input, #life-story-config .ls-field select, #life-story-config .ls-field textarea, #life-story-config #ls-add-type { width:100%; min-width:0; box-sizing:border-box; border:1px solid var(--line); border-radius:6px; background:var(--panel-2); color:var(--text); padding:9px 10px; font:inherit; }
+#life-story-config .ls-field textarea { resize:vertical; line-height:1.7; }
+#life-story-config .ls-field :focus-visible { outline:2px solid var(--accent); outline-offset:1px; }
+#life-story-config .ls-layout { display:grid; grid-template-columns:minmax(290px,380px) minmax(0,1fr); gap:18px; align-items:start; }
+#life-story-config .ls-timeline { padding:14px; border:1px solid var(--line); border-radius:10px; background:var(--panel); min-width:0; }
+#life-story-config #ls-total { color:var(--text-dim); font-size:12px; white-space:nowrap; }
+#life-story-config .ls-add-row { display:flex; gap:8px; margin:14px 0 8px; }
+#life-story-config .ls-add-row .btn { white-space:nowrap; }
+#life-story-config #ls-timeline-list { list-style:none; margin:12px 0 0; padding:0; display:grid; gap:9px; }
+#life-story-config .ls-cue { border:1px solid var(--line); border-radius:8px; background:var(--panel-2); overflow:hidden; }
+#life-story-config .ls-cue.selected { border-color:var(--accent); box-shadow:0 0 0 1px var(--accent); }
+#life-story-config .ls-cue-select { color:var(--text); width:100%; padding:10px; cursor:pointer; display:flex; align-items:center; gap:9px; border:0; background:transparent; text-align:left; }
+#life-story-config .ls-cue-number { flex:none; border-radius:5px; padding:4px 7px; background:var(--panel); color:var(--accent); font-size:12px; }
+#life-story-config .ls-cue-summary { min-width:0; flex:1; display:grid; gap:4px; }
+#life-story-config .ls-cue-summary b { font-size:13px; }
+#life-story-config .ls-cue-summary > span { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; color:var(--text-dim); font-size:12px; }
+#life-story-config .ls-cue-time { color:var(--text-dim); font-size:11px; line-height:1.5; text-align:right; }
+#life-story-config .ls-cue-actions { display:flex; gap:6px; padding:0 10px 10px; }
+#life-story-config .ls-cue-actions button { min-height:30px; }
+#life-story-config .ls-workspace { display:grid; min-width:0; gap:18px; }
+#life-story-config .ls-inspector-card, #life-story-config .ls-preview { border:1px solid var(--line); border-radius:10px; padding:16px; background:var(--panel); min-width:0; }
+#life-story-config .ls-inspector-heading { margin-bottom:14px; }
+#life-story-config .ls-inspector-heading h3 { font-size:16px; }
+#life-story-config .ls-inspector-heading span { color:var(--text-dim); font-size:11px; overflow-wrap:anywhere; }
+#life-story-config .ls-inspector-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; align-items:end; }
+#life-story-config .ls-inspector-grid > .btn { align-self:end; width:max-content; }
+#life-story-config .ls-inspector-text { display:grid; gap:12px; margin:14px 0; }
+#life-story-config .ls-property-group { min-width:0; margin:0 0 18px; padding:0; border:0; }
+#life-story-config .ls-property-group > legend { width:100%; box-sizing:border-box; padding:0 0 8px; margin-bottom:12px; border-bottom:1px solid var(--line); color:var(--accent); font-size:12px; font-weight:600; }
+#life-story-config .ls-property-group .ls-inspector-grid { grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr)); align-items:start; }
+#life-story-config .ls-property-group .ls-asset-field, #life-story-config .ls-property-group .ls-field:has(textarea), #life-story-config .ls-property-wide { grid-column:1/-1; }
+#life-story-config .ls-asset-controls { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:8px; align-items:stretch; }
+#life-story-config .ls-asset-controls .btn { white-space:nowrap; min-height:36px; padding:7px 10px; align-self:stretch; }
+#life-story-config .ls-asset-field > audio { display:block; width:100%; max-width:100%; height:34px; }
+#life-story-config .ls-asset-field > audio[hidden] { display:none; }
+#life-story-config .ls-asset-field > small { font-size:11px; color:var(--text-dim); line-height:1.6; }
+#life-story-config .ls-global > .ls-asset-field { grid-column:1/-1; }
+#life-story-config .ls-empty { padding:36px 16px; text-align:center; color:var(--text-dim); border:1px dashed var(--line); border-radius:10px; }
+#life-story-config .ls-preview-heading { margin-bottom:12px; }
+#life-story-config .ls-preview-heading span { font-size:11px; color:var(--text-dim); }
+#life-story-config .ls-preview-stage { position:relative; aspect-ratio:16/9; width:100%; overflow:hidden; border-radius:8px; background:radial-gradient(ellipse at 50% 36%,#488fb9 0,#204f79 42%,#081c38 100%); isolation:isolate; container-type:inline-size; }
+#life-story-config .ls-preview-stage.is-portrait { aspect-ratio:9/19.5; max-width:390px; margin:0 auto; }
+#life-story-config .ls-preview-scene { --progress:0; position:absolute; inset:0; color:#effbff; overflow:hidden; font-family:"HarmonyOS Sans","Noto Sans SC","PingFang SC","Microsoft YaHei","Segoe UI",sans-serif; }
+#life-story-config .ls-ambient{position:absolute;inset:0;overflow:hidden;pointer-events:none;background:radial-gradient(ellipse at 30% 20%,#76dcff29,transparent 46%),radial-gradient(ellipse at 74% 68%,#3f72ec30,transparent 50%)}
+#life-story-config .has-background>.ls-ambient{display:none}
+#life-story-config .ls-ambient:before{content:"";position:absolute;inset:20% 8%;border:1px solid #99eaff26;border-radius:50%;transform:rotate(-18deg);box-shadow:0 0 36px #8bdaff12,inset 0 0 30px #8bdaff12}
+#life-story-config .ls-ambient:after{content:"";position:absolute;inset:10%;opacity:.6;background:radial-gradient(circle at 10% 32%,#cef7ff 0 1px,transparent 2px),radial-gradient(circle at 80% 16%,#cef7ff 0 1px,transparent 2px),radial-gradient(circle at 74% 80%,#cef7ff 0 1px,transparent 2px),radial-gradient(circle at 30% 76%,#cef7ff 0 1px,transparent 2px)}
+#life-story-config .ls-ambient i{position:absolute;left:21%;top:30%;width:4px;height:4px;background:#c6f7ff;border-radius:50%;box-shadow:0 0 10px #8de0ff;animation:ls-space-drift 7s ease-in-out infinite alternate}
+#life-story-config .ls-ambient i:nth-child(2){left:77%;top:65%;animation-delay:-3s}#life-story-config .ls-ambient i:nth-child(3){left:55%;top:15%;animation-delay:-5s}
+@keyframes ls-space-drift{to{translate:8px -18px;opacity:.25}}
+#life-story-config .ls-background { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+#life-story-config .ls-preview-error { position:absolute; left:50%; bottom:9%; transform:translateX(-50%); max-width:86%; margin:0; padding:6px 12px; border-radius:9px; background:#7f1d1de0; color:#fff; font-size:12px; line-height:1.5; text-align:center; z-index:20; pointer-events:none; box-shadow:0 6px 18px #0006; }
+#life-story-config .ls-motion-pan .ls-background { transform:scale(calc(1 + var(--progress)*.06)); }
+#life-story-config .ls-preview-shade { position:absolute; inset:0; background:linear-gradient(0deg,rgba(10,36,63,.7),transparent 60%); pointer-events:none; }
+#life-story-config .ls-character { position:absolute; bottom:0; left:50%; transform:translateX(-50%); width:60%; height:94%; object-fit:contain; object-position:center bottom; }
+#life-story-config .ls-motion-rise .ls-character { transform:translate(-50%,calc((1 - var(--progress))*8%)); }
+#life-story-config .ls-dialogue { position:absolute; bottom:0; width:100%; padding:4% 5%; box-sizing:border-box; background:linear-gradient(0deg,rgba(7,30,58,.95),rgba(8,41,71,.65)); }
+#life-story-config .ls-dialogue b { color:#96e6ff; font-size:clamp(13px,1.25vw,22px); }
+#life-story-config .ls-dialogue p { font-size:clamp(12px,1.15vw,20px); line-height:1.7; margin-top:5px; white-space:pre-wrap; overflow-wrap:anywhere; }
+#life-story-config .ls-split { position:absolute; inset:5% 4% 12%; display:grid; grid-template-columns:1fr 1fr; gap:3%; }
+#life-story-config .ls-memory { position:absolute; inset:8% 6% 18%; padding:5%; background:rgba(8,36,72,.82); border:1px solid rgba(160,227,255,.6); border-radius:8px; display:flex; flex-direction:column; justify-content:center; gap:12px; min-width:0; }
+#life-story-config .ls-split .ls-memory { position:relative; inset:auto; padding:8%; }
+#life-story-config .ls-memory-kicker { color:#7dd9ff; font-size:clamp(10px,1vw,15px); letter-spacing:2px; }
+#life-story-config .ls-memory h4 { line-height:1.55; font-size:clamp(11px,1.1vw,18px); }
+#life-story-config .ls-memory-bars { display:grid; gap:6px; }
+#life-story-config .ls-memory-bars div { display:flex; align-items:center; gap:8px; font-size:10px; }
+#life-story-config .ls-memory-bars i { display:block; height:8px; width:var(--bar); border-radius:5px; background:linear-gradient(90deg,#38a0e8,#a9e9ff); }
+#life-story-config .ls-memory-note { color:#b6d9ec; font-size:10px; line-height:1.5; }
+#life-story-config .ls-journey { position:absolute; inset:4% 4% 14%; border:1px solid rgba(176,231,255,.6); border-radius:8px; background:rgba(29,90,138,.28); overflow:hidden; }
+#life-story-config .ls-split .ls-journey { position:relative; inset:auto; }
+#life-story-config .ls-journey-sprite { width:100%; height:100%; object-fit:contain; object-position:center bottom; }
+#life-story-config .ls-journey-copy { position:absolute; bottom:0; left:0; right:0; padding:12px; background:rgba(7,37,64,.8); line-height:1.85; font-size:clamp(10px,1.25cqw,16px); white-space:pre-wrap; overflow-wrap:anywhere; max-height:38%; overflow:auto; }
+#life-story-config .ls-cue-narration { margin:10px 0 0; font-size:clamp(10px,1.09375cqw,14px); color:#c5e2f1; line-height:1.8; white-space:pre-wrap; overflow-wrap:anywhere; }
+/* The main cue's caption is the game's header, not a second dialogue bar.
+   Container units scale the 1280px movie, independent of editor window width. */
+#life-story-config .ls-film-heading { position:absolute; top:0; left:0; right:0; height:6.09375cqw; padding:.9375cqw 3%; display:flex; flex-direction:column; justify-content:center; gap:.546875cqw; z-index:10; pointer-events:none; border-bottom:1px solid #c2ecff13; background:linear-gradient(#062d4e66,transparent); text-shadow:0 2px 8px #00142a; }
+#life-story-config .ls-film-heading[hidden] { display:none; }
+#life-story-config .ls-film-heading>small { font-size:.703125cqw; letter-spacing:.3125cqw; color:#b2dff0; line-height:1.2; }
+#life-story-config .ls-top-caption { font-size:1.015625cqw; letter-spacing:.15625cqw; font-weight:600; line-height:1.5; color:#effbff; white-space:normal; overflow-wrap:anywhere; display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:2; overflow:hidden; max-width:72%; }
+#life-story-config .ls-ending { position:absolute; inset:0; display:grid; place-items:center; padding:8%; text-align:center; }
+#life-story-config .ls-ending h3 { color:#d9f7ff; font-size:clamp(17px,2vw,36px); line-height:1.7; transition:opacity .6s,filter .6s,transform .6s; text-shadow:0 0 15px #73ceff; z-index:1; }
+#life-story-config .is-ending-out .ls-ending h3 { opacity:0; filter:blur(7px); transform:translateY(-12px); }
+#life-story-config .ls-particles { position:absolute; inset:22% 10%; opacity:0; transition:opacity .4s; }
+#life-story-config .is-ending-out .ls-particles { opacity:1; }
+#life-story-config .ls-particles i { position:absolute; left:var(--x); top:var(--y); width:4px; height:4px; border-radius:50%; background:#90e3ff; box-shadow:0 0 7px #4dbfff; animation:ls-particle-away 2s var(--delay) ease-out infinite; }
+#life-story-config .ls-preview-controls { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; align-items:center; }
+#life-story-config .ls-audio-toggle { display:flex; align-items:center; gap:6px; margin-left:auto; font-size:12px; }
+#life-story-config .ls-seek-row { display:flex; gap:10px; margin-top:12px; align-items:center; }
+#life-story-config .ls-seek-row input { min-width:0; flex:1; }
+#life-story-config .ls-seek-row output { font-size:11px; color:var(--text-dim); white-space:nowrap; }
+#life-story-config .ls-error { color:var(--danger); border:1px solid var(--danger); border-radius:8px; padding:12px; margin-bottom:14px; white-space:pre-line; line-height:1.6; }
+#life-story-config .ls-preview-empty { position:absolute; inset:0; display:grid; place-items:center; color:#d6f4ff; }
+#life-story-config .is-portrait .ls-split { grid-template-columns:1fr; grid-template-rows:1fr 1fr; inset:3% 5% 12%; gap:3%; }
+#life-story-config .is-portrait .ls-dialogue { padding:6% 5%; }
+#life-story-config .is-portrait .ls-character { width:90%; height:82%; bottom:12%; }
+#life-story-config .is-portrait .ls-dialogue p { font-size:13px; }
+#life-story-config .is-portrait .ls-dialogue b { font-size:15px; }
+@keyframes ls-particle-away { from { opacity:1; transform:translate(0,0); } to { opacity:0; transform:translate(20px,-70px); } }
+@media(max-width:1050px) { #life-story-config .ls-global { grid-template-columns:1fr 1fr; } #life-story-config .ls-layout { grid-template-columns:290px minmax(0,1fr); } }
+@media(max-width:760px) { #life-story-config .ls-layout { grid-template-columns:1fr; } #life-story-config .ls-heading { align-items:flex-start; flex-direction:column; } #life-story-config .ls-inspector-grid, #life-story-config .ls-global { grid-template-columns:1fr; } #life-story-config .btn { min-height:40px; } #life-story-config .ls-audio-toggle { margin-left:0; } #life-story-config .ls-timeline { max-height:380px; overflow-y:auto; } }
+@media(prefers-reduced-motion:reduce) { #life-story-config .ls-particles i { animation:none; } #life-story-config .ls-ending h3 { transition:none; } }
+#life-story-config .ls-motion-none * { animation:none!important; transition:none!important; }
+
+/* The edit bench and film tracks are independent from game scene styles. */
+#life-story-config .ls-film-settings{border:1px solid var(--line);border-radius:8px;background:var(--panel);margin-bottom:14px}
+#life-story-config .ls-film-settings>summary,#life-story-config .ls-sequence>summary{cursor:pointer;padding:11px 14px;font-size:13px;color:var(--text-dim)}
+#life-story-config .ls-film-settings .ls-global{margin:0;border:0}
+#life-story-config .ls-film-settings .ls-music-tip{padding:0 16px 14px;margin:0;font-size:12px}
+#life-story-config .ls-edit-bench{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(280px,1fr);gap:16px;align-items:stretch}
+#life-story-config .ls-edit-bench .ls-preview{min-width:0}
+#life-story-config .ls-edit-bench #ls-inspector{max-height:650px;overflow:auto;scrollbar-width:thin}
+#life-story-config .ls-composer{border:1px solid var(--line);border-radius:10px;background:var(--panel);margin-top:16px;padding:12px;overflow:hidden}
+#life-story-config .ls-composer-toolbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+#life-story-config .ls-composer-toolbar>div{display:flex;gap:12px;align-items:baseline;margin-right:auto}
+#life-story-config .ls-composer-toolbar>label{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--text-dim)}
+#life-story-config .ls-composer-toolbar>select{max-width:140px;padding:6px;border:1px solid var(--line);color:var(--text);background:var(--panel-2);border-radius:5px}
+#life-story-config .ls-composer-toolbar input[type=range]{width:110px;accent-color:var(--accent)}
+#life-story-config .ls-timeline-scroll{position:relative;overflow:auto;max-height:405px;border:1px solid var(--line);border-radius:7px;background:#0b1423;overscroll-behavior:contain;scrollbar-width:thin}
+#life-story-config #ls-timeline-tracks{position:relative;min-width:100%;color:#c2d2ea}
+#life-story-config .ls-ruler-row,#life-story-config .ls-track-row{display:grid;grid-template-columns:118px 1fr;position:relative;border-bottom:1px solid #283449}
+#life-story-config .ls-track-row{height:52px;--clip:#327ec4}
+#life-story-config .ls-track-row[data-track=memory]{--clip:#7361c9}#life-story-config .ls-track-row[data-track=journey]{--clip:#299f97}#life-story-config .ls-track-row[data-track=caption]{--clip:#b18a35}#life-story-config .ls-track-row[data-track=fx]{--clip:#9c55a3}#life-story-config .ls-track-row[data-track=audio]{--clip:#348557}
+#life-story-config .ls-track-label{position:sticky;left:0;z-index:6;display:flex;align-items:center;gap:9px;padding:8px 12px;background:#162133;border-right:1px solid #32435b;font-size:11px;white-space:nowrap}
+#life-story-config .ls-track-label>i{width:7px;height:7px;border-radius:2px;background:var(--clip,#80cfff)}
+#life-story-config .ls-track-lane{position:relative;background:repeating-linear-gradient(90deg,transparent 0 calc(var(--ls-grid) - 1px),#34415680 calc(var(--ls-grid) - 1px) var(--ls-grid));}
+#life-story-config .ls-ruler-row{height:30px;position:sticky;top:0;z-index:8;background:#101a2b}
+#life-story-config .ls-ruler-lane{position:relative;cursor:crosshair;touch-action:none}
+#life-story-config .ls-ruler-lane>span{position:absolute;top:5px;border-left:1px solid #879cba80;padding-left:5px;font-size:10px;font-variant-numeric:tabular-nums;color:#b1c4e1}
+#life-story-config .ls-clip{position:absolute;top:7px;height:38px;display:flex;align-items:stretch;border:1px solid #b9d9fd60;border-radius:5px;background:linear-gradient(180deg,color-mix(in srgb,var(--clip),white 12%),var(--clip));color:#f5fbff;cursor:grab;overflow:hidden;touch-action:none;user-select:none}
+#life-story-config .ls-clip.is-selected{outline:2px solid #dcf4ff;outline-offset:1px;box-shadow:0 0 12px #94c8ff35}
+#life-story-config .ls-clip>div{min-width:0;flex:1;display:flex;flex-direction:column;justify-content:center;gap:2px;padding:2px 5px;overflow:hidden}
+#life-story-config .ls-clip b{font-size:10px;font-weight:600;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}
+#life-story-config .ls-clip small{font-size:9px;font-variant-numeric:tabular-nums;opacity:.75}
+#life-story-config .ls-clip-handle{flex:none;width:7px;background:#091e3460;cursor:ew-resize;position:relative}
+#life-story-config .ls-clip-handle::after{content:"";position:absolute;top:11px;bottom:11px;left:3px;border-left:1px solid #fff9;pointer-events:none}
+#life-story-config .ls-playhead{position:absolute;top:0;bottom:0;width:1px;background:#ff7c8b;z-index:9;pointer-events:none}
+#life-story-config .ls-playhead>button{position:absolute;left:-7px;top:0;width:15px;height:18px;border:0;border-radius:3px 3px 8px 8px;background:#ff7c8b;pointer-events:auto;cursor:ew-resize;touch-action:none}
+#life-story-config .ls-composer>.ls-tip{margin-top:9px;font-size:11px}
+#life-story-config .ls-sequence{margin-top:12px;border:1px solid var(--line);border-radius:8px}
+#life-story-config .ls-sequence #ls-timeline-list{padding:0 12px 12px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+#life-story-config .ls-overlay-layers{position:absolute;inset:0;pointer-events:none}
+#life-story-config .ls-overlay-caption{position:absolute;bottom:6.875cqw;left:6%;right:6%;text-align:center;color:#effbff;z-index:5;overflow:visible}
+#life-story-config .ls-overlay-caption .ls-film-title{position:relative;inset:auto;translate:none;width:auto;max-width:none;padding:1.25cqw 1.953125cqw;background:linear-gradient(90deg,transparent,#061e37e8 24%,#061e37e8 76%,transparent)}
+#life-story-config .ls-overlay-caption .ls-film-title small{display:none}
+#life-story-config .ls-overlay-caption .ls-film-title h3{font-size:1.8cqw;letter-spacing:.15625cqw;margin:0;line-height:1.65}
+#life-story-config .ls-overlay-caption .ls-film-title p{font-size:.9375cqw;margin:.46875cqw 0 0;line-height:1.7}
+#life-story-config .ls-overlay-memory{position:absolute;left:5%;top:15%;width:37%;padding:5%;display:grid;gap:10px;background:#092741d9;border:1px solid #a6dbff55;border-radius:7px}
+#life-story-config .ls-overlay-memory small{color:#82ddff;font-size:10px}#life-story-config .ls-overlay-memory b{font-size:12px}#life-story-config .ls-overlay-memory i{height:5px;border-radius:3px;background:linear-gradient(90deg,#58a6e2,#b6f1ff)}
+#life-story-config .ls-overlay-journey{position:absolute;right:5%;top:10%;width:40%;height:72%;display:flex;flex-direction:column}
+#life-story-config .ls-overlay-journey img{height:100%;min-height:0;object-fit:contain}
+#life-story-config .ls-overlay-journey span{font-size:12px;text-align:center;background:#0c2548c9;padding:6px}
+#life-story-config .ls-overlay-fx{position:absolute;inset:20%;border:1px solid #aeeaff33;border-radius:50%;box-shadow:0 0 28px #64c4ff35}
+#life-story-config .ls-overlay-fx i{position:absolute;width:8px;height:8px;background:#c9f6ff;border-radius:50%;left:20%;top:30%;box-shadow:0 0 14px #89eaff}
+#life-story-config .ls-overlay-fx i:nth-child(2){left:80%;top:60%}#life-story-config .ls-overlay-fx i:nth-child(3){left:45%;top:90%}
+#life-story-config .ls-camera-push .ls-journey-sprite{transform:scale(calc(1 + var(--progress)*.12))}
+#life-story-config .ls-camera-pull .ls-journey-sprite{transform:scale(calc(1.12 - var(--progress)*.12))}
+#life-story-config .ls-camera-drift-left .ls-journey-sprite{transform:scale(1.08) translateX(calc(var(--progress)*-3%))}
+#life-story-config .ls-camera-drift-right .ls-journey-sprite{transform:scale(1.08) translateX(calc(var(--progress)*3%))}
+@media(max-width:1050px){#life-story-config .ls-edit-bench{grid-template-columns:minmax(0,1.3fr) minmax(250px,1fr)}}
+@media(max-width:760px){#life-story-config .ls-edit-bench{grid-template-columns:1fr}#life-story-config .ls-edit-bench #ls-inspector{max-height:420px}#life-story-config .ls-actions{flex-wrap:wrap}#life-story-config .ls-composer-toolbar>div{flex-basis:100%}}
+
+#life-story-config .ls-film-title{position:absolute;top:calc(50% + .234375cqw);left:50%;translate:-50% -50%;width:max-content;max-width:66.40625cqw;padding:1.953125cqw;display:block;text-align:center;font-size:1.25cqw;line-height:normal;text-shadow:0 5px 25px #041831}
+#life-story-config .ls-film-title small{font-size:.78125cqw;letter-spacing:.390625cqw;color:#97cde7}
+#life-story-config .ls-film-title h3{font-size:3.75cqw;font-weight:600;line-height:1.7;letter-spacing:.390625cqw;color:inherit;white-space:pre-wrap;margin:1.5625cqw 0}
+#life-story-config .ls-film-title p{font-size:1.25cqw;line-height:1.8;color:#c3e0f0;white-space:pre-wrap;margin:0}
+#life-story-config .ls-type-caption.ls-motion-fade > .ls-film-title,#life-story-config .ls-type-caption.ls-motion-pan > .ls-film-title{animation:ls-film-fade .65s both}
+#life-story-config .ls-type-caption.ls-motion-rise > .ls-film-title{animation:ls-film-rise .65s both}
+#life-story-config .ls-type-caption.ls-motion-particles > .ls-film-title{animation:ls-film-fade .8s both}
+#life-story-config .ls-ending-sprite{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:.42;pointer-events:none}
+#life-story-config .ls-transition-slide > .ls-split,#life-story-config .ls-transition-slide > .ls-film-title,#life-story-config .ls-transition-slide > .ls-dialogue{animation:ls-film-slide .65s both}
+#life-story-config .ls-transition-flash:after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse,#eafcff,transparent);pointer-events:none;animation:ls-film-flash .65s both}
+#life-story-config .is-preview-paused *{animation-play-state:paused!important}
+#life-story-config .is-preview-paused .ls-split,#life-story-config .is-preview-paused .ls-film-title,#life-story-config .is-preview-paused .ls-dialogue{animation:none!important}
+#life-story-config .is-preview-paused:after{animation:none!important;opacity:0}
+#life-story-config [data-ls-layer]{animation:ls-film-fade .8s both}
+#life-story-config [data-ls-layer][data-motion=rise]{animation:ls-film-rise .8s both}
+#life-story-config .ls-transition-slide > .ls-film-title,#life-story-config [data-ls-layer][data-transition=slide]{animation:ls-film-slide .8s both}
+#life-story-config .ls-motion-none > .ls-film-title,#life-story-config .ls-transition-none > .ls-film-title{animation:none!important}
+#life-story-config [data-ls-layer][data-transition=flash]:after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse,#eafcff,transparent);animation:ls-film-flash .65s both;pointer-events:none}
+#life-story-config [data-ls-layer][data-transition=none],#life-story-config [data-ls-layer][data-motion=none],#life-story-config .is-preview-paused [data-ls-layer]{animation:none!important}
+#life-story-config .is-preview-paused [data-ls-layer]:after{animation:none!important;opacity:0}
+#life-story-config .ls-clip:focus-visible{outline:2px solid #b3eaff;outline-offset:2px}
+#life-story-config .is-portrait .ls-overlay-memory{left:5%;top:6%;width:90%;height:38%;padding:5%}
+#life-story-config .is-portrait .ls-overlay-journey{right:5%;top:48%;width:90%;height:42%}
+#life-story-config .is-portrait .ls-overlay-caption{bottom:84px;left:12px;right:12px}
+#life-story-config .is-portrait .ls-overlay-caption .ls-film-title h3{font-size:15px;letter-spacing:.8px}
+#life-story-config .is-portrait .ls-overlay-caption .ls-film-title p{font-size:11px}
+@keyframes ls-film-fade{from{opacity:0}to{opacity:1}}
+@keyframes ls-film-rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes ls-film-slide{from{opacity:0;transform:translateX(2.734375cqw)}to{opacity:1;transform:none}}
+@keyframes ls-film-flash{0%{opacity:0}25%{opacity:.8}100%{opacity:0}}
+@media(prefers-reduced-motion:reduce){#life-story-config .ls-preview-scene *{animation:none!important;transition:none!important}#life-story-config .ls-preview-scene:after,#life-story-config [data-ls-layer]:after{animation:none!important;opacity:0}}
+
+#life-story-config .ls-wall-settings{margin-top:14px;border:1px solid var(--line);border-radius:8px;padding:12px}
+#life-story-config .ls-wall-settings>summary{cursor:pointer;font-weight:600;padding-bottom:8px}
+#life-story-config .ls-wall-card-settings{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:10px;margin:12px 0}
+#life-story-config .ls-wall-card-settings>article{padding:12px;border:1px solid var(--line);background:var(--panel);border-radius:8px;min-width:0}
+#life-story-config .ls-wall-card-settings>article>div{display:grid;gap:8px;margin:10px 0}
+#life-story-config .ls-wall-card-settings>article>p{display:flex;gap:6px}
+#life-story-config .ls-memorial{position:absolute;inset:6.09375cqw 0 5.625cqw;background:linear-gradient(180deg,#16395942,#091b35a8 68%,#082443);overflow:hidden;color:#e6faff}
+#life-story-config .ls-wall-heading{position:absolute;top:3%;left:8%;right:8%;text-align:center;font-size:1.25cqw;line-height:normal}
+#life-story-config .ls-wall-heading>small{font-size:.78125cqw;letter-spacing:.390625cqw;color:#a8dae9}
+#life-story-config .ls-wall-heading>h3{font-size:2cqw;font-weight:500;letter-spacing:.15625cqw;line-height:1.6;margin:.625cqw 0;color:#effcff;overflow-wrap:anywhere}
+#life-story-config .ls-wall-viewport{position:absolute;inset:22% 0 29%;overflow:hidden}
+#life-story-config .ls-wall-track{display:flex;width:max-content;height:100%}
+#life-story-config .ls-wall-cycle{position:relative;display:flex;flex:none;gap:12px;padding-inline:6px;height:100%;align-items:center}
+#life-story-config .ls-wall-cycle>figure{width:168px;height:calc(100% - 60px);box-sizing:border-box;flex:none;background:#e9faff;padding:6px;border-radius:3px;color:#1b5a79;margin:0;overflow:hidden;opacity:var(--card-visibility,0);transform:translateY(calc(var(--card-offset,0px) + (1 - var(--card-entry,0))*12px)) scale(calc(.97 + var(--card-entry,0)*.03));transform-origin:50% 60%}
+#life-story-config .ls-wall-cycle>figure>div{height:62%;background:#b7ddf0;display:grid;place-items:center;font-size:32px}
+#life-story-config .ls-wall-cycle img{width:100%;height:100%;object-fit:cover}
+#life-story-config .ls-wall-cycle figcaption{display:grid;gap:4px;padding:6px 3px;font-size:10px;line-height:1.5}
+#life-story-config .ls-wall-cycle small{font-size:9px;color:#53869c}
+#life-story-config .ls-wall-path{position:absolute;left:0;right:0;bottom:0;height:36%;border-bottom:1px solid #a3e5ff66;background:linear-gradient(180deg,transparent,#329bcc18)}
+#life-story-config .ls-walker{position:absolute;bottom:18%;left:24%;height:100%;width:auto;aspect-ratio:.75;background-repeat:no-repeat;transform:translateX(-50%);filter:drop-shadow(0 3px 3px #06172c80)}
+#life-story-config .ls-wall-path>span{position:absolute;left:6%;bottom:2%;font-size:11px;color:#bfdfef}
+#life-story-config .ls-farewell{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center;color:#edfbff;background:radial-gradient(ellipse at 50% 48%,#5ba5c649,transparent 60%)}
+#life-story-config .ls-farewell-sprite{position:absolute;top:50%;left:50%;bottom:auto;translate:-50% -50%;width:90%;height:96%;object-fit:contain;object-position:center bottom;transform-origin:50% 50%;mask-image:linear-gradient(#000 0 85%,transparent 100%)}
+#life-story-config .ls-farewell>div{position:relative;z-index:2;width:100%;padding:4% 6%;background:linear-gradient(transparent,#061c35dd 25%);text-align:center}
+#life-story-config .ls-farewell small{font-size:10px;letter-spacing:2px}
+#life-story-config .ls-farewell h3{font-size:clamp(16px,2vw,26px);line-height:1.8;white-space:pre-wrap;text-wrap:balance;margin:8px 0}
+#life-story-config .ls-farewell p{font-size:12px;line-height:1.8;white-space:pre-wrap}
+#life-story-config .ls-farewell.is-white{align-items:center;background:#f7fcff;color:#2d6887}
+#life-story-config .ls-farewell.is-white>div{background:none}
+#life-story-config .is-portrait .ls-wall-viewport{inset:20% 0 35%}
+#life-story-config .is-portrait .ls-wall-cycle>figure{width:138px}
+#life-story-config .is-portrait .ls-wall-path{height:35%}
+#life-story-config .is-portrait .ls-walker{height:92%}
+#life-story-config .is-portrait .ls-farewell h3{font-size:20px}
+#life-story-config .is-portrait .ls-farewell-sprite[src*="_youth_complete."]{width:130%;max-width:none}
+#life-story-config .ls-star-lake{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+#life-story-config .has-star-lake>.ls-ambient{display:none}
+#life-story-config .has-star-lake>.ls-preview-shade{background:linear-gradient(0deg,#071b3542,transparent 50%)}
+#life-story-config .has-star-lake .ls-memorial{background:linear-gradient(180deg,#1639590d,#08244338)}
+#life-story-config .ls-type-dialogue.is-continuing .ls-dialogue,#life-story-config .ls-type-dialogue.is-continuing:after{animation:none!important}
+
+/* Shared real-glyph ending dissolve; the caller supplies the movie clock. */
+#life-story-config .life-text-dissolve-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:8;pointer-events:none;animation:none!important;transition:none}
+#life-story-config .life-text-dissolve-source{position:relative}
+#life-story-config .life-text-dissolve-char{display:inline-block;white-space:pre;vertical-align:baseline;mask-repeat:no-repeat;-webkit-mask-repeat:no-repeat;transition:none}
+
+/* The editor uses the same native decoded clips as the game. */
+#life-story-config .ls-walk-video-settings{margin-top:14px;border:1px solid var(--line);border-radius:8px;padding:12px}
+#life-story-config .ls-walk-video-settings>summary{cursor:pointer;font-weight:600;padding-bottom:8px}
+#life-story-config .ls-walk-video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;margin-top:12px}
+#life-story-config .ls-walk-video-grid>article{display:grid;gap:10px;min-width:0;padding:14px;border:1px solid var(--line);border-radius:8px;background:var(--panel)}
+#life-story-config .ls-walker.has-walk-video{background:none!important;filter:none}
+#life-story-config .life-native-media{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+#life-story-config .life-native-media>video,#life-story-config .life-native-media>img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:50% 100%}
+#life-story-config .life-native-media>[hidden]{display:none!important}
+#life-story-config .ls-closeup-screen{position:absolute;inset:0;background:#02040b;overflow:hidden}
+#life-story-config .ls-closeup-screen .life-native-media>video,#life-story-config .ls-closeup-screen .life-native-media>img{object-fit:cover;object-position:50% 50%}
+#life-story-config .ls-media-veil{position:absolute;inset:0;z-index:12;pointer-events:none;opacity:0;transition:none;background:#02040b}
+#life-story-config .ls-landscape-gate{position:absolute;inset:0;z-index:20;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:20px;text-align:center;background:radial-gradient(ellipse,#12354ee8,#06162ef5);color:#e6faff}
+#life-story-config .ls-landscape-gate[hidden]{display:none}
+#life-story-config .ls-landscape-gate b{font-size:18px;line-height:1.7}
+#life-story-config .ls-landscape-gate span{font-size:12px;line-height:1.7;color:#a3d4eb}
+#life-story-config .ls-farewell.is-white small,#life-story-config .ls-farewell.is-white p{display:none}
+#life-story-config .ls-farewell.is-white{background:radial-gradient(ellipse at 50% 48%,#fff 0%,#effbff 75%,#ddecf6);color:#225774}
+#life-story-config .ls-farewell.is-white h3{font-size:3.4cqw;letter-spacing:.11em;line-height:2.05;font-weight:500;white-space:pre;overflow-wrap:normal;text-wrap:initial;text-shadow:0 0 25px #94d5eb70}
+#life-story-config .ls-farewell-line{display:inline-block;opacity:0;will-change:opacity,transform}
+#life-story-config .is-portrait .ls-film-heading{height:68px;padding:8px 12px;gap:5px}
+#life-story-config .is-portrait .ls-film-heading>small{font-size:8px;letter-spacing:3px}
+#life-story-config .is-portrait .ls-top-caption{font-size:11px;letter-spacing:.8px;max-width:43%}
+#life-story-config .is-portrait .ls-film-title{top:50%;max-width:calc(100% - 24px);padding:16px;font-size:16px}
+#life-story-config .is-portrait .ls-film-title small{font-size:10px;letter-spacing:5px}
+#life-story-config .is-portrait .ls-film-title h3{font-size:clamp(23px,7cqw,32px);letter-spacing:2px;margin:20px 0}
+#life-story-config .is-portrait .ls-film-title p{font-size:14px}
+#life-story-config .is-portrait .ls-overlay-caption .ls-film-title{inset:auto;translate:none;width:auto;max-width:none;padding:12px 8px}
+#life-story-config .is-portrait .ls-overlay-caption .ls-film-title h3{font-size:15px;letter-spacing:.8px;margin:0}
+#life-story-config .is-portrait .ls-overlay-caption .ls-film-title p{font-size:11px;margin:6px 0 0}
+#life-story-config .is-portrait .ls-farewell.is-white h3{font-size:clamp(20px,3.4cqw,48px)}
+#life-story-config .is-portrait .ls-memorial{inset:68px 0}
+#life-story-config .is-portrait .ls-wall-heading{left:6%;right:6%;font-size:16px}
+#life-story-config .is-portrait .ls-wall-heading>small{font-size:9px;letter-spacing:3px}
+#life-story-config .is-portrait .ls-wall-heading>h3{font-size:18px;letter-spacing:1px;line-height:1.65;margin:8px 0}
+#life-story-config .ls-preview-scene.is-intro-dialogue{background:#000}
+#life-story-config .is-intro-dialogue>.ls-ambient,#life-story-config .is-intro-dialogue>.ls-preview-shade,#life-story-config .is-intro-dialogue>.ls-overlay-layers,#life-story-config .is-intro-dialogue:after{display:none}
+#life-story-config .ls-intro-curtain{position:absolute;inset:0;z-index:40;pointer-events:none;background:#000;opacity:0}
+#life-story-config .ls-preview-scene.is-prologue-entry{visibility:hidden}
+#life-story-config .ls-film-heading,#life-story-config .ls-film-title>small,#life-story-config .ls-wall-heading>small{display:none}
+#life-story-config .ls-landscape-gate{z-index:100}
+
+#ls-preview-stage .ls-dialogue{background:linear-gradient(115deg,rgba(8,52,89,var(--life-dialogue-opacity)),rgba(21,73,101,var(--life-dialogue-opacity)));backdrop-filter:none;text-shadow:0 1px 3px #001427}

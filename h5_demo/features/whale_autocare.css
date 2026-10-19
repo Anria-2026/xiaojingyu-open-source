@@ -1,0 +1,108 @@
+/* Compact, independently arranged care controls. No office-wide fitting/zoom. */
+.care-auto-console { display:flex; flex-direction:column; gap:10px; min-width:0; min-height:0; }
+.care-auto-energy { display:flex; align-items:center; flex-wrap:wrap; gap:6px 12px; padding:8px 12px; background:#ecf9ff; border:1px solid #c2e9f7; border-radius:12px; color:#287b9e; font-size:13px; }
+.care-auto-energy b { white-space:nowrap; font-variant-numeric:tabular-nums; }
+.care-auto-energy small { margin-left:auto; font-size:11px; color:#668699; white-space:nowrap; }
+.care-auto-tabs { display:grid; grid-template-columns:1fr 1fr; gap:5px; background:#e8f5fc; padding:4px; border-radius:12px; }
+.care-auto-tabs button { min-height:38px; border:0; border-radius:9px; font:inherit; font-size:13px; font-weight:700; color:#64819a; background:transparent; cursor:pointer; }
+.care-auto-tabs button[aria-pressed="true"] { background:white; color:#1984b7; box-shadow:0 2px 7px #3689b716; }
+.care-auto-options { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; align-items:stretch; min-width:0; }
+.care-auto-console[data-care-auto-tab="team"] .care-auto-options { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.care-v2-card .modal-body .care-auto-option { display:flex; flex-direction:column; gap:7px; width:100%; min-width:0; padding:14px; text-align:left; font:inherit; color:#23485c; border:1px solid #b3e5fa; border-radius:14px; background:#fff; cursor:pointer; overflow:hidden; }
+.care-auto-option-head { display:flex; align-items:center; gap:6px; justify-content:space-between; width:100%; }
+.care-auto-option-head b { font-size:15px; line-height:1.4; }
+.care-auto-switch { flex:none; padding:4px 7px; border-radius:20px; font-size:11px; line-height:1.4; background:#edf4f8; color:#526c7e; white-space:nowrap; }
+.care-auto-option.is-on { border-color:#44b7df; background:linear-gradient(130deg,#effbff,#fff); }
+.care-auto-option.is-on .care-auto-switch { background:#218ac1; color:white; }
+.care-auto-option > strong { font-size:12px; line-height:1.5; color:#197eac; }
+.care-auto-description { font-size:12px; line-height:1.55; color:#54768c; }
+.care-auto-option small { font-size:11px; line-height:1.5; color:#89703b; }
+.care-auto-option:disabled { opacity:.65; cursor:default; }
+.care-auto-console .care-auto-note,.care-auto-console .care-auto-last { margin:0; font-size:11px; line-height:1.5; color:#6c8da0; }
+.care-auto-last { border-top:1px solid #cce8f5; padding-top:8px; }
+.care-auto-guide-compact { display:flex; align-items:center; gap:10px; padding:9px 12px!important; border:1px solid #bae4f7; border-radius:12px; background:#f0fbff; }
+.care-auto-guide-compact > div:first-child { min-width:0; flex:1; }
+.care-auto-guide-compact small { display:block; font-size:11px; font-weight:700; line-height:1.35; color:#2697bd; }
+.care-v2-content .care-auto-guide-compact p { font-size:12px; line-height:1.45; margin-top:3px; }
+.care-auto-guide-compact .care-auto-guide-actions { display:flex; gap:5px; flex:none; }
+.care-v2-card .care-auto-guide-compact .dg-btn { padding:5px 10px; min-height:32px; font-size:12px; }
+.care-v2-automation.v2b-responsive-card { width:min(840px,calc(100% - 24px)); }
+.v2b-panel-host .care-v2-automation .modal-body { overflow:hidden; }
+.care-v2-automation .care-v2-content { gap:10px; }
+.care-v2-automation .care-v2-page-nav { padding-bottom:7px; }
+.care-v2-automation .care-v2-page-nav > span:empty { display:none; }
+/* A short caption sits inside the image's bottom edge, without a wide backplate. */
+.office-scene .whale-autocare-status { position:absolute; z-index:7; display:block; width:max-content; min-width:0; margin:0; padding:2px 9px; box-sizing:border-box; transform:translateX(-50%); border:1px solid #b9e3f2b0; border-radius:999px; background:#f6fcffe8; box-shadow:0 2px 8px #20456b16; color:#247a9e; font-size:11px; line-height:16px; text-align:center; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; pointer-events:none; }
+.whale-autocare-status.is-working { color:#135c9a; }
+.office-scene:has(.whale-autocare-status) .embodied-mentor-notice { bottom:calc(var(--autocare-caption-bottom,6px) + 26px); }
+.whale-autocare-actor { position:absolute; left:0; top:0; z-index:17; pointer-events:none; transform-origin:50% 100%; will-change:transform; contain:layout style; }
+.whale-autocare-actor img { position:absolute; inset:0; display:block; width:100%; height:100%; object-fit:contain; object-position:center bottom; opacity:0; transition:opacity .07s linear; }
+.whale-autocare-actor[data-phase="walk"] [data-pose="stand"],.whale-autocare-actor[data-phase="return"] [data-pose="stand"] { opacity:1; animation:whale-care-step .32s ease-in-out infinite alternate; }
+.whale-autocare-actor[data-phase="wave"] [data-pose="wand"],.whale-autocare-actor[data-phase="team"] [data-pose="wand"] { opacity:1; }
+.whale-autocare-actor[data-phase="wave"] [data-pose="wand"] { animation:whale-care-wave .3s ease-out both; transform-origin:50% 90%; }
+.whale-autocare-actor[data-phase="team"] [data-pose="wand"] { animation:whale-care-step .32s ease-in-out infinite alternate; }
+.whale-autocare-effects { position:absolute; inset:0; z-index:22; pointer-events:none; contain:layout style; }
+.whale-autocare-effect { position:absolute; width:100px; height:62px; transform:translate(-50%,-75%); pointer-events:none; }
+.whale-autocare-effect i { position:absolute; width:8px; height:8px; border-radius:50%; background:#ffdc75; box-shadow:0 0 5px #ffe797,0 0 12px #fff3a485; opacity:0; }
+.whale-autocare-effect i:nth-child(1) { left:14px; top:25px; --dx:-13px; }
+.whale-autocare-effect i:nth-child(2) { left:47px; top:10px; --dx:0px; }
+.whale-autocare-effect i:nth-child(3) { right:12px; top:25px; --dx:14px; }
+.whale-autocare-effect b { position:absolute; top:40px; left:50%; white-space:nowrap; transform:translateX(-50%); padding:3px 8px; border-radius:14px; background:#f2fff7; border:1px solid #8edab5; color:#25794f; font-size:12px; opacity:0; }
+.whale-autocare-effect[data-pop="a"] i { animation:whale-care-glint-a .85s ease-out both; }
+.whale-autocare-effect[data-pop="b"] i { animation:whale-care-glint-b .85s ease-out both; }
+.whale-autocare-effect[data-pop="a"] b { animation:whale-care-gain-a .9s ease-out both; }
+.whale-autocare-effect[data-pop="b"] b { animation:whale-care-gain-b .9s ease-out both; }
+@keyframes whale-care-step { to { transform:translateY(-2px) rotate(.6deg); } }
+@keyframes whale-care-wave { 0%,100% { transform:rotate(0); } 38% { transform:rotate(-5deg); } 68% { transform:rotate(3deg); } }
+@keyframes whale-care-glint-a { 0% { opacity:0; transform:scale(.3); } 20% { opacity:1; } 100% { opacity:0; transform:translate(var(--dx),-24px) scale(.7); } }
+@keyframes whale-care-glint-b { 0% { opacity:0; transform:scale(.3); } 20% { opacity:1; } 100% { opacity:0; transform:translate(var(--dx),-24px) scale(.7); } }
+@keyframes whale-care-gain-a { 0% { opacity:0; transform:translate(-50%,5px); } 16%,60% { opacity:1; } 100% { opacity:0; transform:translate(-50%,-13px); } }
+@keyframes whale-care-gain-b { 0% { opacity:0; transform:translate(-50%,5px); } 16%,60% { opacity:1; } 100% { opacity:0; transform:translate(-50%,-13px); } }
+@container v2b-panel (max-width:600px) {
+  .care-auto-options,.care-auto-console[data-care-auto-tab="team"] .care-auto-options { grid-template-columns:1fr; gap:8px; }
+  .care-v2-card .modal-body .care-auto-option { padding:10px 12px; gap:4px; }
+  .care-auto-option-head b { font-size:14px; }
+  .care-auto-guide-compact { padding:7px 10px!important; gap:6px; }
+  .care-auto-console,.care-v2-automation .care-v2-content { gap:8px; }
+}
+@media (orientation:portrait) and (max-height:730px) {
+  .care-auto-console .care-auto-note,.care-auto-console .care-auto-last { display:none; }
+  .care-auto-energy { padding:5px 10px; }
+  .care-v2-card .modal-body .care-auto-option { padding:8px 10px; gap:3px; }
+  .care-auto-description,.care-auto-option small { font-size:11px; line-height:1.4; }
+  .care-v2-automation .modal-body { padding:9px 12px; }
+  .care-v2-automation .care-v2-content,.care-auto-console { gap:6px; }
+  .care-v2-automation .care-v2-page-nav { padding-bottom:4px; }
+  .care-auto-guide-compact { padding:5px 10px!important; }
+  .care-auto-guide-compact .care-auto-guide-actions { flex-direction:column; }
+  .care-v2-card .care-auto-guide-compact .dg-btn { min-height:27px; padding:3px 8px; }
+  .whale-autocare-status { font-size:10px; }
+}
+@media (max-height:450px) and (orientation:landscape) {
+  .care-auto-console .care-auto-note,.care-auto-console .care-auto-last { display:none; }
+  .care-auto-options { grid-template-columns:repeat(3,minmax(0,1fr)); }
+  .care-auto-console[data-care-auto-tab="team"] .care-auto-options { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .care-v2-automation .care-v2-content,.care-auto-console { gap:5px; }
+  .care-auto-energy { padding:4px 10px; }
+  .care-auto-tabs button { min-height:28px; }
+  .care-v2-card .modal-body .care-auto-option { padding:8px 10px; gap:4px; }
+  .care-auto-guide-compact { padding:5px 9px!important; }
+  .care-v2-automation .care-v2-page-nav { padding-bottom:0; border:0; }
+  .care-auto-option-head b { font-size:13px; }
+  .care-auto-description,.care-auto-option small { font-size:11px; line-height:1.35; }
+}
+@media (prefers-reduced-motion:reduce) { .whale-autocare-actor img,.whale-autocare-effect i,.whale-autocare-effect b { animation:none!important; transition:none; } .whale-autocare-effect[data-pop] b { opacity:1; } }
+
+/* Natural short-screen cards reserve real room for the longest salary terms. */
+@media (orientation:landscape) and (max-height:450px) {
+ .care-v2-host .care-v2-automation .modal-body { padding-block:4px; }
+ .care-v2-card .modal-body .care-auto-option { padding:6px 8px; }
+}
+@media (orientation:portrait) and (max-height:680px) {
+ .care-auto-options { gap:6px; }
+ .care-v2-card .modal-body .care-auto-option { padding:6px 10px; gap:2px; }
+}
+
+@media (orientation:portrait) {
+  .office-scene.v2a-scene .whale-autocare-status { font-size:calc(10px * var(--v2a-screen-unit,1)); line-height:calc(16px * var(--v2a-screen-unit,1)); padding:calc(2px * var(--v2a-screen-unit,1)) calc(6px * var(--v2a-screen-unit,1)); }
+}

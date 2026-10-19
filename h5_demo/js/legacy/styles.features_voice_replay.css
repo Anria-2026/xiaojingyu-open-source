@@ -1,0 +1,3 @@
+@import url("../../features/voice_replay.css?v=20261010p");
+/* Generated legacy capability patch; original CSS is imported by the builder. */
+@supports not (gap:1px){.chat-voice-replay{grid-gap:4px;gap:4px}}

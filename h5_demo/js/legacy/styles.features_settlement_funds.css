@@ -1,0 +1,3 @@
+@import url("../../features/settlement_funds.css?v=20261010e");
+/* Generated legacy capability patch; original CSS is imported by the builder. */
+@media (orientation:landscape) and (max-height:600px){@supports not (gap:1px){.reward-page #act-3{grid-gap:8px;gap:8px}}@supports not (gap:1px){.reward-page #act-3>.act-head{grid-gap:4px 12px;gap:4px 12px}}@supports not (gap:1px){.reward-page #act-3>.act-foot{grid-gap:6px;gap:6px}}}

@@ -1,0 +1,26 @@
+:is(.office-scene.v2a-scene,.v2a-whale-layer) .v2a-bubble { position:absolute; inset:auto; width:max-content; min-width:0; height:auto; margin:0; transform:none; padding:5px 8px; box-sizing:border-box; border:1px solid var(--aqua-border); border-radius:var(--aqua-radius-sm); background:var(--aqua-card); color:var(--aqua-foreground); font-size:12px; line-height:1.45; white-space:normal; overflow-wrap:break-word; text-align:left; box-shadow:0 3px 8px -4px var(--aqua-ink-3); pointer-events:none; z-index:8; animation:none; }
+:is(.office-scene.v2a-scene,.v2a-whale-layer) .v2a-bubble-name { display:block; color:var(--aqua-primary-deep); font-size:.88em; line-height:1.3; margin-bottom:2px; font-weight:700; }
+:is(.office-scene.v2a-scene,.v2a-whale-layer) .v2a-bubble::after { content:""; position:absolute; width:6px; height:6px; margin:0; background:var(--aqua-card); border:solid var(--aqua-border); border-width:0 1px 1px 0; transform:rotate(45deg); }
+:is(.office-scene.v2a-scene,.v2a-whale-layer) .v2a-bubble[data-tail="down"]::after { left:var(--v2a-tail-x); top:auto; bottom:-4px; }
+:is(.office-scene.v2a-scene,.v2a-whale-layer) .v2a-bubble[data-tail="up"]::after { left:var(--v2a-tail-x); top:-4px; bottom:auto; transform:rotate(225deg); }
+:is(.office-scene.v2a-scene,.v2a-whale-layer) .v2a-bubble[data-tail="right"]::after { left:auto; right:-4px; top:var(--v2a-tail-y); bottom:auto; transform:rotate(-45deg); }
+:is(.office-scene.v2a-scene,.v2a-whale-layer) .v2a-bubble[data-tail="left"]::after { left:-4px; right:auto; top:var(--v2a-tail-y); bottom:auto; transform:rotate(135deg); }
+:is(.office-scene.v2a-scene,.v2a-whale-layer) .v2a-bubble.bye { opacity:0; transition:opacity .2s ease; }
+:is(.office-scene.v2a-scene,.v2a-whale-layer) .v2a-whale-bubble[hidden] { display:none; }
+:is(.office-scene.v2a-scene,.v2a-whale-layer) .v2a-whale-bubble { transform-origin:50% 100%; }
+:is(.office-scene.v2a-scene,.v2a-whale-layer) .v2a-whale-bubble[data-phase="enter"][data-pop="a"] { animation:office-whale-in-a .28s cubic-bezier(.2,.8,.3,1) both; }
+:is(.office-scene.v2a-scene,.v2a-whale-layer) .v2a-whale-bubble[data-phase="enter"][data-pop="b"] { animation:office-whale-in-b .28s cubic-bezier(.2,.8,.3,1) both; }
+:is(.office-scene.v2a-scene,.v2a-whale-layer) .v2a-whale-bubble[data-phase="exit"] { animation:office-whale-out .24s ease-in both; }
+@keyframes office-whale-in-a { 0% { opacity:0; transform:translateY(10px) scale(.8); } 72% { opacity:1; transform:translateY(-2px) scale(1.03); } 100% { opacity:1; transform:none; } }
+@keyframes office-whale-in-b { 0% { opacity:0; transform:translateY(10px) scale(.8); } 72% { opacity:1; transform:translateY(-2px) scale(1.03); } 100% { opacity:1; transform:none; } }
+@keyframes office-whale-out { from { opacity:1; transform:none; } to { opacity:0; transform:translateY(-7px) scale(.95); } }
+@media (prefers-reduced-motion:reduce) {
+  :is(.office-scene.v2a-scene,.v2a-whale-layer) .v2a-whale-bubble[data-phase="enter"][data-pop="a"] { animation:office-whale-fade-a .12s ease-out both; }
+  :is(.office-scene.v2a-scene,.v2a-whale-layer) .v2a-whale-bubble[data-phase="enter"][data-pop="b"] { animation:office-whale-fade-b .12s ease-out both; }
+  :is(.office-scene.v2a-scene,.v2a-whale-layer) .v2a-whale-bubble[data-phase="exit"] { animation:office-whale-fade-out .12s ease-in both; }
+}
+@keyframes office-whale-fade-a { from { opacity:0; } to { opacity:1; } }
+@keyframes office-whale-fade-b { from { opacity:0; } to { opacity:1; } }
+@keyframes office-whale-fade-out { from { opacity:1; } to { opacity:0; } }
+/* Smooth Q portraits; compact marker geometry lives in office_scene.css. */
+.office-scene.v2a-scene .emp-avatar img { image-rendering:auto; }

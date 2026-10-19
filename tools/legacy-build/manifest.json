@@ -1,0 +1,699 @@
+{
+  "schema": 1,
+  "target": "ES5; capability floor CSS custom properties/flex/grid/contents, Canvas2D, SVG, ArrayBuffer/XHR, MutationObserver",
+  "tools": {
+    "typescript": "5.9.3",
+    "esbuild": "0.27.0",
+    "acorn": "8.18.0",
+    "css-tree": "3.2.1"
+  },
+  "layout": {
+    "source": "tools/legacy-build/layout_runtime.js",
+    "sha256": "8158cf12e6ea74561a85f37dc8dfdc257f200fe3e9f1993cf5e2ca995a17aec6",
+    "hasMappings": [
+      {
+        "target": ".office-shell .modal-mask",
+        "condition": ".test-modal-body",
+        "className": "whale-has-ac3fc0557c"
+      },
+      {
+        "target": ".office-shell .modal-card",
+        "condition": ".test-modal-body",
+        "className": "whale-has-ac3fc0557c"
+      },
+      {
+        "target": ".office-shell .modal-mask",
+        "condition": ".plan-modal-body",
+        "className": "whale-has-416fc99275"
+      },
+      {
+        "target": ".office-shell .modal-card",
+        "condition": ".plan-modal-body",
+        "className": "whale-has-416fc99275"
+      },
+      {
+        "target": ".office-shell .emp-marker",
+        "condition": ".emp-bubble",
+        "className": "whale-has-ff1ddb534b"
+      },
+      {
+        "target": ".achv-art",
+        "condition": "img",
+        "className": "whale-has-b29814cf57"
+      },
+      {
+        "target": ".achv-wall .achv-art",
+        "condition": "img",
+        "className": "whale-has-b29814cf57"
+      },
+      {
+        "target": ".office-shell .modal-mask",
+        "condition": ".team-modal-body",
+        "className": "whale-has-7dae1af3cd"
+      },
+      {
+        "target": ".office-shell .modal-mask",
+        "condition": ".recruit-modal-body",
+        "className": "whale-has-e6c4ca8c12"
+      },
+      {
+        "target": ".office-shell .modal-mask",
+        "condition": ".shop-modal-body",
+        "className": "whale-has-8956af2a92"
+      },
+      {
+        "target": ".office-shell .modal-mask",
+        "condition": ".corpus-modal",
+        "className": "whale-has-6a247107cd"
+      },
+      {
+        "target": ".office-shell .modal-mask",
+        "condition": ".focus-quadrant",
+        "className": "whale-has-406684d2ee"
+      },
+      {
+        "target": ".office-shell .modal-mask",
+        "condition": ".review-modal-body",
+        "className": "whale-has-508bbb66b7"
+      },
+      {
+        "target": ".office-shell .corpus-modal .cms-row",
+        "condition": ".cms-val.wait",
+        "className": "whale-has-18bd87f62c"
+      },
+      {
+        "target": ".office-shell #modalContainer .modal-mask",
+        "condition": ".focus-quadrant",
+        "className": "whale-has-406684d2ee"
+      },
+      {
+        "target": ".office-shell #modalContainer[data-modal-key=corpus] .cms-row",
+        "condition": ".cms-val.wait",
+        "className": "whale-has-18bd87f62c"
+      },
+      {
+        "target": ".office-shell .modal-mask",
+        "condition": ".hire-modal-body",
+        "className": "whale-has-79c067ddad"
+      },
+      {
+        "target": ".care-v2-content[data-care-page=\"feeding\"]",
+        "condition": ".care-v2-line",
+        "className": "whale-has-68230a7655"
+      },
+      {
+        "target": ".v2b-responsive-card.care-v2-card",
+        "condition": "[data-care-page=\"feeding\"]",
+        "className": "whale-has-ec40abcc50"
+      },
+      {
+        "target": ".care-v2-room-home .care-v2-home-actions",
+        "condition": "[data-care-action=\"recall\"]",
+        "className": "whale-has-832992ae2b"
+      },
+      {
+        "target": ".office-scene",
+        "condition": ".whale-autocare-status",
+        "className": "whale-has-b0e50b988d"
+      },
+      {
+        "target": ".office-shell .team-overview .stat-item",
+        "condition": ".role-dist",
+        "className": "whale-has-1580615595"
+      },
+      {
+        "target": ".body-factory-switchable .v2b-panel-host",
+        "condition": ".body-factory-card,.more-menu-card,.care-v2-card",
+        "className": "whale-has-5b15caca69"
+      },
+      {
+        "target": ".body-factory-card .modal-footer",
+        "condition": "[data-factory-return]",
+        "className": "whale-has-e29bfa5f3d"
+      },
+      {
+        "target": ".office-shell.body-factory-switchable .v2b-panel-host",
+        "condition": ".body-factory-card,.more-menu-card,.care-v2-card",
+        "className": "whale-has-5b15caca69"
+      },
+      {
+        "target": ".office-shell #modalContainer .modal-mask .modal-card",
+        "condition": ".test-modal-body,.news-weibo-body",
+        "className": "whale-has-3212760305"
+      },
+      {
+        "target": ".office-shell.body-factory-switchable .v2b-panel-host",
+        "condition": ".body-factory-card,.care-v2-card",
+        "className": "whale-has-aa64f4945b"
+      },
+      {
+        "target": ".office-shell .modal-card",
+        "condition": ".city-journey-body",
+        "className": "whale-has-0f1c8fa316"
+      }
+    ],
+    "aspectFallbacks": [
+      ".focus-quadrant",
+      ".aqua-stage",
+      ".awh-hammer-rig",
+      ".awh-impact"
+    ]
+  },
+  "sources": [
+    {
+      "url": "js/fx.js?v=20261010b",
+      "path": "h5_demo/js/fx.js",
+      "sha256": "75d498c819678ba9aff7d5c44a2d5d51425d84ab1f6e915c46c47439ed3f5e4c"
+    },
+    {
+      "url": "js/achieve_store.js?v=20261009e",
+      "path": "h5_demo/js/achieve_store.js",
+      "sha256": "e3c31947093bc66042472ca1011e7accd0b64f0a7c44f6dc4150e2b749918218"
+    },
+    {
+      "url": "js/menu.js?v=20261019c",
+      "path": "h5_demo/js/menu.js",
+      "sha256": "cfe841cc95456be91369a1092b017258e624bdbb4d763325f538c143a4b9f679"
+    },
+    {
+      "url": "js/sfx.js?v=20261009e",
+      "path": "h5_demo/js/sfx.js",
+      "sha256": "719c177f1d3589fd6557cbdf8c44fcbfd03549b2805357e708f9472d4219bc8b"
+    },
+    {
+      "url": "js/game_cfg.js?v=20261019c",
+      "path": "h5_demo/js/game_cfg.js",
+      "sha256": "1de24f1bc6ef139de08445514fe51ffd193f229bf5c97d1086394336dec86dbc"
+    },
+    {
+      "url": "js/image_resources.js?v=20261018f",
+      "path": "h5_demo/js/image_resources.js",
+      "sha256": "00309f31090f20f909f597017ea13ac4c5a117a4f66c505811b6a7ca8024d327"
+    },
+    {
+      "url": "js/features/resource_paths.js?v=20261010b",
+      "path": "h5_demo/js/features/resource_paths.js",
+      "sha256": "47016d8ec72bd59bfd91edd5ce93141cfca33b19f235613607956d037e869bc5"
+    },
+    {
+      "url": "js/v35_core.js?v=20261011e",
+      "path": "h5_demo/js/v35_core.js",
+      "sha256": "b5794414d931090cf0da031b7c3872f8ff882032d673ec8d8bb47ed53651a6d6"
+    },
+    {
+      "url": "js/game_save.js?v=20261019c",
+      "path": "h5_demo/js/game_save.js",
+      "sha256": "d3917a3efa9600d2d010c181ba0dd502d1e3bb6aaf259356424c934d95a8dd43"
+    },
+    {
+      "url": "js/toy_cloud.js?v=20261018e",
+      "path": "h5_demo/js/toy_cloud.js",
+      "sha256": "d7a2f8d4975ee420dcfbff0c11d222c80d8b8812008032d477b440f14cc6d3d6"
+    },
+    {
+      "url": "js/v35_hire.js?v=20261010f",
+      "path": "h5_demo/js/v35_hire.js",
+      "sha256": "3a8ea632edd58799334fdf67c3f1bfc1dd48bc742748165818cc963a84c9a217"
+    },
+    {
+      "url": "js/game_core.js?v=20261018c",
+      "path": "h5_demo/js/game_core.js",
+      "sha256": "46210a519455c9ec346bd7ea36dabff80f812919bb17dd0045200d9a71126bef"
+    },
+    {
+      "url": "js/staff_raise_events.js?v=20261012f",
+      "path": "h5_demo/js/staff_raise_events.js",
+      "sha256": "b43a2f8c8eb4e84822da1474846778c93e7fdc2caebf507a4c5458ce41d45923"
+    },
+    {
+      "url": "js/v35_hire_ui.js?v=20261009e",
+      "path": "h5_demo/js/v35_hire_ui.js",
+      "sha256": "070853d7504c17665e3006d829a405ff27ef42e445d65570096bfc8bf50ddddb"
+    },
+    {
+      "url": "js/game_ui.js?v=20261018e",
+      "path": "h5_demo/js/game_ui.js",
+      "sha256": "b25e2a3b6c77e96d539a718f259e724d27e7226b16c7940ae461c94529e268b1"
+    },
+    {
+      "url": "js/features/agent_review.js?v=20261013d",
+      "path": "h5_demo/js/features/agent_review.js",
+      "sha256": "fa9b46999867e35c935452081ce175fe18c260086f473ab1fc0bc6d2cb3ea02c"
+    },
+    {
+      "url": "js/features/engineer_avatars.js?v=20261009e",
+      "path": "h5_demo/js/features/engineer_avatars.js",
+      "sha256": "60bca3dc0cdd4b72eb8b1589572009a1e2f04a16689701bde7428cb05b70738c"
+    },
+    {
+      "url": "js/features/office_geometry.js?v=20261017d",
+      "path": "h5_demo/js/features/office_geometry.js",
+      "sha256": "3c8d0e03d2ad7ca132198fc0bff87249ad5c4ba8addc600dd8ecdc4344896f7b"
+    },
+    {
+      "url": "js/features/office_scene.js?v=20261017m",
+      "path": "h5_demo/js/features/office_scene.js",
+      "sha256": "078eb00d034249147d106a1253182f7ae5f8e940ca52ffbad54049ed5396f673"
+    },
+    {
+      "url": "js/features/office_bubbles.js?v=20261011j",
+      "path": "h5_demo/js/features/office_bubbles.js",
+      "sha256": "45360a191d704ae7579f61d6f37c7c8f3f3889d1f79bd5b4679e7422ae78d146"
+    },
+    {
+      "url": "js/game_bus.js?v=20261009e",
+      "path": "h5_demo/js/game_bus.js",
+      "sha256": "3e5fb73c19cd44b59b494eb35be5562776feb3e84aa68f6abf344e6d39e2e195"
+    },
+    {
+      "url": "js/training.js?v=20260917a",
+      "path": "h5_demo/js/training.js",
+      "sha256": "893b8e40e0b02ba65d5804bf50a1177095f84d3d468893cd91d9d2ffe2f84b2b"
+    },
+    {
+      "url": "js/features/office_pause.js?v=20261017m",
+      "path": "h5_demo/js/features/office_pause.js",
+      "sha256": "afd07ba8e7ed5173802dfcce6d643eba0a0c20034fa820939e88b09f525d3fce"
+    },
+    {
+      "url": "js/features/embodied_presentation.js?v=20261018c",
+      "path": "h5_demo/js/features/embodied_presentation.js",
+      "sha256": "8bcb83d1f4effe5daa37ccaf98017c5c2516b5216e618fc0255ea2e21ba107b6"
+    },
+    {
+      "url": "js/features/embodied_review.js?v=20261015h",
+      "path": "h5_demo/js/features/embodied_review.js",
+      "sha256": "99532f56a1c94185f0caaa7629cf0e26e4c4f2b450ce0b07ba558781f92ac91b"
+    },
+    {
+      "url": "js/features/embodied_fitness_review.js?v=20261015h",
+      "path": "h5_demo/js/features/embodied_fitness_review.js",
+      "sha256": "74d275be9565849d5682e0347cac3c478f0082dec614380859f4a3cf3ff6b75f"
+    },
+    {
+      "url": "js/features/embodied_events.js?v=20261010f",
+      "path": "h5_demo/js/features/embodied_events.js",
+      "sha256": "3a1dca7851160d65e32872e083e10a2c5b58691fd5f4d1627cd98ca05e7c9f8d"
+    },
+    {
+      "url": "js/features/v2_panels.js?v=20261009e",
+      "path": "h5_demo/js/features/v2_panels.js",
+      "sha256": "86fac921c23926776073dbb5d77a45ee7c4f071c36adbfda66f300d160e78a5c"
+    },
+    {
+      "url": "js/features/follow_outfit.js?v=20261011m",
+      "path": "h5_demo/js/features/follow_outfit.js",
+      "sha256": "aa1b83e79814a4a93a25ee049a6091347a3524fb2c36150ab4f0d8657b3913ea"
+    },
+    {
+      "url": "js/features/feature_unlock.js?v=20261011e",
+      "path": "h5_demo/js/features/feature_unlock.js",
+      "sha256": "65736194251ae4e7b9be5d7834e2f0194822e2fdddbb4cee87660aad652a3a6e"
+    },
+    {
+      "url": "js/features/talk_tier.js?v=20261009e",
+      "path": "h5_demo/js/features/talk_tier.js",
+      "sha256": "6d1c90eb6adb7a22eb80b26d1fd2eab9b7779bbebc5188c72fd2207f79dc9230"
+    },
+    {
+      "url": "js/features/whale_care.js?v=20261017k",
+      "path": "h5_demo/js/features/whale_care.js",
+      "sha256": "47c754e096a26c5cb94ff343caf1981fc0998f0f9bcbb324e30fff95533311aa"
+    },
+    {
+      "url": "js/features/whale_autocare.js?v=20261017m",
+      "path": "h5_demo/js/features/whale_autocare.js",
+      "sha256": "d43b1e81aa03d190459c42ae855f463d3b6b6b548fe4002369a4d1c9563cc2da"
+    },
+    {
+      "url": "js/features/whale_room.js?v=20261017k",
+      "path": "h5_demo/js/features/whale_room.js",
+      "sha256": "b6c5ce08862f51dbba3f3db02f331a39e6cd8202da9e2d2f42874b69acdab744"
+    },
+    {
+      "url": "js/features/arcade_core.js?v=20261017k",
+      "path": "h5_demo/js/features/arcade_core.js",
+      "sha256": "74cd45de53ec120ec03be07c7192bf42fb24f44a413387782fc0e391d631d63c"
+    },
+    {
+      "url": "js/arcade_loader.js?v=20261017k",
+      "path": "h5_demo/js/arcade_loader.js",
+      "sha256": "859ab72e12acbc4ea105948ea3ab8b83a0c991e5f5b0d3c60b8b26bf92abf4cc"
+    },
+    {
+      "url": "js/arcade_glue.js?v=20261017k",
+      "path": "h5_demo/js/arcade_glue.js",
+      "sha256": "a08c6847b17371b7bab2d05bf34bc325a1f25ac41d8bcfdbf1bda06eebf8ff88"
+    },
+    {
+      "url": "js/features/arcade_ui.js?v=20261009e",
+      "path": "h5_demo/js/features/arcade_ui.js",
+      "sha256": "9d4111d75fa6fb6e95ba36b6e984dda2716066117c2e61bfac9b580052fe64d3"
+    },
+    {
+      "url": "js/features/v2b_scene_actions.js?v=20261009e",
+      "path": "h5_demo/js/features/v2b_scene_actions.js",
+      "sha256": "3b3645e25f95c24f186d66454b521ceb884c85acdc06c0c22bf6954e44d99ad4"
+    },
+    {
+      "url": "js/features/office_sleep.js?v=20261011j",
+      "path": "h5_demo/js/features/office_sleep.js",
+      "sha256": "4a37519b054a13f07bae5a1f6fbae5d570f0f56fcad6d884ef4ec632f4e6be67"
+    },
+    {
+      "url": "js/features/whale_size.js?v=20261009e",
+      "path": "h5_demo/js/features/whale_size.js",
+      "sha256": "36b47734630124d44a7f5fa021ad545ccd5742fcdef0cd2a681c0925ef3b7e76"
+    },
+    {
+      "url": "js/features/more_menu.js?v=20261017k",
+      "path": "h5_demo/js/features/more_menu.js",
+      "sha256": "6eeeb56d783ea643a097cf1ac637ba9a560d2cf908bd7a81d4cef5208a97c689"
+    },
+    {
+      "url": "js/features/embodied_factory.js?v=20261018a",
+      "path": "h5_demo/js/features/embodied_factory.js",
+      "sha256": "b13d6d6e52680f393ddb07f46f1c1ed08b03f889dbf5da4fbd79f2c0260e76ce"
+    },
+    {
+      "url": "js/features/city_journey.js?v=20261018j",
+      "path": "h5_demo/js/features/city_journey.js",
+      "sha256": "1d5c4f057ea9306743cc5247e66f06ce9912d0b2c18b8bef21ba3c02f2e62146"
+    },
+    {
+      "url": "js/features/life_music_pulse.js?v=20261011e",
+      "path": "h5_demo/js/features/life_music_pulse.js",
+      "sha256": "cec62eb3bee6b703a092a9235a1bd4e64b933589d3ba4ea7380c492c06d366ff"
+    },
+    {
+      "url": "js/features/life_text_dissolve.js?v=20261009e",
+      "path": "h5_demo/js/features/life_text_dissolve.js",
+      "sha256": "ddc66a7492e2b443ea35407b196f4b75ce79f2222a81d41d8fa315744b8c2b5d"
+    },
+    {
+      "url": "js/features/life_star_lake.js?v=20261009j",
+      "path": "h5_demo/js/features/life_star_lake.js",
+      "sha256": "56cb744de57adbc1e0d46cae3989ca39fcd6a4b9b250b524191b1668f3753317"
+    },
+    {
+      "url": "js/features/life_gpu_canvas.js?v=20261010p",
+      "path": "h5_demo/js/features/life_gpu_canvas.js",
+      "sha256": "c7851ce9f4fce0631b109e30763927a0e23d17e4f2dd45548ae8c84ff39485c1"
+    },
+    {
+      "url": "js/features/life_star_compositor.js?v=20261015h",
+      "path": "h5_demo/js/features/life_star_compositor.js",
+      "sha256": "2cd469bcd683a533c47a15fc25d9d5570f2b7f0c2421320f1e240dc21f72ceca"
+    },
+    {
+      "url": "js/features/life_timeline.js?v=20261011j",
+      "path": "h5_demo/js/features/life_timeline.js",
+      "sha256": "a641eb36cdbbbe84a7e1f96d407d286c6783ba42398bfbecc1457d604794b9a2"
+    },
+    {
+      "url": "js/features/life_video.js?v=20261010p",
+      "path": "h5_demo/js/features/life_video.js",
+      "sha256": "c2d7af31fd3f95db06f32a7a8753cba730c8c2abaf3cfa045610349b9c700603"
+    },
+    {
+      "url": "js/features/life_dialogue_voice.js?v=20261011b",
+      "path": "h5_demo/js/features/life_dialogue_voice.js",
+      "sha256": "c86ce629f47958dbf482b900057fa40b3addf37ac4e71ca00e780944e6487ca4"
+    },
+    {
+      "url": "js/features/screen_runtime.js?v=20261017k",
+      "path": "h5_demo/js/features/screen_runtime.js",
+      "sha256": "177c7b1481d838c35b2504974e59ac8673a18132083f189e70c6181165c88143"
+    },
+    {
+      "url": "js/features/life_finale.js?v=20261019c",
+      "path": "h5_demo/js/features/life_finale.js",
+      "sha256": "c9f02112a73e641f1faa2be3890474f0b5d0af30f55fe259d8a5b245d7e08790"
+    },
+    {
+      "url": "js/features/life_milestones.js?v=20261009e",
+      "path": "h5_demo/js/features/life_milestones.js",
+      "sha256": "2f581ac2047a9acd4a83133cedae34bf157fd83f46b8b5aedc27a2fcd4e1b4e1"
+    },
+    {
+      "url": "js/features/gallery.js?v=20261018c",
+      "path": "h5_demo/js/features/gallery.js",
+      "sha256": "b4841edd3e992a405df504ee23fb16629d6d1b5b53fde4fae7dfb8fa4a5e846a"
+    },
+    {
+      "url": "js/main.js?v=20261018f",
+      "path": "h5_demo/js/main.js",
+      "sha256": "d923d26cbbf467ea08221c163b06bde17f368a127ed7b5c7ba7b2ad700fa573b"
+    }
+  ],
+  "polyfills": {
+    "path": "h5_demo/js/legacy/polyfills.js",
+    "sha256": "d2385eab68fbb1c0fe31e3ffc1a0c3b18d8827962a155ca8513841d378ac97e0",
+    "bytes": 18912
+  },
+  "bundle": {
+    "path": "h5_demo/js/legacy/game.es5.js",
+    "sha256": "e9aa3e017d4485204cfccd13b556cca5ff4526999625bbb78a80ffab3725d75b",
+    "bytes": 1671684
+  },
+  "styles": [
+    {
+      "url": "style.css?v=20261018d",
+      "path": "h5_demo/style.css",
+      "sha256": "97918f317d083f6c88990700cc977893220324022d5f0611c9e39096fe10ede7",
+      "output": "h5_demo/js/legacy/styles.style.css",
+      "outputSha256": "837bcf113dd5ebb7071fcc246295acfdc3bd40842e602c2964a48a01e11bd829",
+      "bytes": 1053556,
+      "fallbackDeclarations": 902
+    },
+    {
+      "url": "features/voice_replay.css?v=20261010p",
+      "path": "h5_demo/features/voice_replay.css",
+      "sha256": "3d0ff6993fec43d26c2777d8deb35962f19dd9aedf3224664da6524ded5476b5",
+      "output": "h5_demo/js/legacy/styles.features_voice_replay.css",
+      "outputSha256": "83c3cbfa918870cd622f77d559b17c8ffb06d967de8024bbd8688855ec76e679",
+      "bytes": 208,
+      "fallbackDeclarations": 1
+    },
+    {
+      "url": "features/office_scene.css?v=20261017m",
+      "path": "h5_demo/features/office_scene.css",
+      "sha256": "a9bc33797a3c424cb6965b909745fdfe668914133ddb98cefa22fd0908b15958",
+      "output": "h5_demo/js/legacy/styles.features_office_scene.css",
+      "outputSha256": "8c400c7023d774cdc0ed2095df3495d22f60cb9f358e65a32cafb4aae98bc37d",
+      "bytes": 2669,
+      "fallbackDeclarations": 9
+    },
+    {
+      "url": "features/office_bubbles.css?v=20261009e",
+      "path": "h5_demo/features/office_bubbles.css",
+      "sha256": "fb6aa047b20f855ca41ca2794df4df0f26811ecca66a90e69121213aea700ece",
+      "output": "h5_demo/js/legacy/styles.features_office_bubbles.css",
+      "outputSha256": "01de810bda6c90ff11a2e2a9520bffe1d7648a462817bc638534d62225d04eac",
+      "bytes": 910,
+      "fallbackDeclarations": 1
+    },
+    {
+      "url": "features/office_sleep.css?v=20261011j",
+      "path": "h5_demo/features/office_sleep.css",
+      "sha256": "3db7f86a3496cb01435eacf002783b3d42891a3fb40bba5a10ed4122adcdf2a4",
+      "output": "h5_demo/js/legacy/styles.features_office_sleep.css",
+      "outputSha256": "f83ae5dbf66635383d2403fddd0a0c7f6306512a2d23d8cafcf6fe34460e3b2a",
+      "bytes": 143,
+      "fallbackDeclarations": 0
+    },
+    {
+      "url": "features/office_pause.css?v=20261017m",
+      "path": "h5_demo/features/office_pause.css",
+      "sha256": "7debb0cca1dc2d30ff1c63d75c37b7561eba73f6f188eeffc35e99844633a89a",
+      "output": "h5_demo/js/legacy/styles.features_office_pause.css",
+      "outputSha256": "5fac535bf5fa9c45987aa80ce1e3be109258bb403048b2936e07db949fd60cb4",
+      "bytes": 143,
+      "fallbackDeclarations": 0
+    },
+    {
+      "url": "features/v2_panels.css?v=20261012f",
+      "path": "h5_demo/features/v2_panels.css",
+      "sha256": "12957c4d00ec54e72793b0b507282e4e678416885c537b9426f6d4658a33e068",
+      "output": "h5_demo/js/legacy/styles.features_v2_panels.css",
+      "outputSha256": "190a40c216723cdc6175d3ffc4dc233bb44ed4e594db0e19f6701f3fc791e87f",
+      "bytes": 3636,
+      "fallbackDeclarations": 9
+    },
+    {
+      "url": "features/whale.css?v=20261015h",
+      "path": "h5_demo/features/whale.css",
+      "sha256": "c9163ecd25e2128ba10f615589c2e71059236f38ace9d1210a08a26d5f2164c6",
+      "output": "h5_demo/js/legacy/styles.features_whale.css",
+      "outputSha256": "ba91df792e903c8d68d8c02a7ec2edb55ed07ea79e2d999efa9d142b96471082",
+      "bytes": 46337,
+      "fallbackDeclarations": 129
+    },
+    {
+      "url": "features/whale_autocare.css?v=20261017d",
+      "path": "h5_demo/features/whale_autocare.css",
+      "sha256": "80aba591558c9bf8d2a7ed4a1fb88c3e41cbd856e5ec2b545bb6f65621308130",
+      "output": "h5_demo/js/legacy/styles.features_whale_autocare.css",
+      "outputSha256": "ca774c451c34b63d20765625aade0b206ac8a682772514573939975fedc2c48e",
+      "bytes": 4168,
+      "fallbackDeclarations": 26
+    },
+    {
+      "url": "features/embodied_presentation.css?v=20261018c",
+      "path": "h5_demo/features/embodied_presentation.css",
+      "sha256": "549fa770a51d136b8f4f3f58af9d948e1ecfd089c3fe08a67933b18866db3722",
+      "output": "h5_demo/js/legacy/styles.features_embodied_presentation.css",
+      "outputSha256": "b26bebc8470d4d62d421905afa5907937830b2780d409e3e2d9e6ef3dc68c87c",
+      "bytes": 62941,
+      "fallbackDeclarations": 90
+    },
+    {
+      "url": "features/cg_rating.css?v=20261015h",
+      "path": "h5_demo/features/cg_rating.css",
+      "sha256": "b601864e0bb16f4918c3d37bd9417405ad3ddfdbb5a08da0cdb563738d3d99d9",
+      "output": "h5_demo/js/legacy/styles.features_cg_rating.css",
+      "outputSha256": "65044ebc76d67c1e775509749d6ccbc0721cf8ccab02c9be77cc3ce75ed7b297",
+      "bytes": 2445,
+      "fallbackDeclarations": 4
+    },
+    {
+      "url": "css/embodied_fitness_review.css?v=20261015h",
+      "path": "h5_demo/css/embodied_fitness_review.css",
+      "sha256": "80de65381bddd5fca186b3eafbf3584eee2033ff2a3f7e8e78f0091f38f2ca4a",
+      "output": "h5_demo/js/legacy/styles.css_embodied_fitness_review.css",
+      "outputSha256": "2502d89f1ca6d90e476e2dee06b5c2fc72daadb71459ec7fe1aafac3785515d4",
+      "bytes": 5284,
+      "fallbackDeclarations": 23
+    },
+    {
+      "url": "features/whale_size.css?v=20261009e",
+      "path": "h5_demo/features/whale_size.css",
+      "sha256": "e07efc6bafd7771db7d01002e490808e152604da2a234c6831d62b98b26886f4",
+      "output": "h5_demo/js/legacy/styles.features_whale_size.css",
+      "outputSha256": "d2a8bdeae4a4c85808318000fdfc8329fa6708610a54a92a954ec8b0953dc875",
+      "bytes": 362,
+      "fallbackDeclarations": 3
+    },
+    {
+      "url": "features/more_menu.css?v=20261017m",
+      "path": "h5_demo/features/more_menu.css",
+      "sha256": "7b348e9af7042bf0d890435e015d93e375a8d3d7c4d60ad79794156c6485f859",
+      "output": "h5_demo/js/legacy/styles.features_more_menu.css",
+      "outputSha256": "1094cbd956c56eab1efac116e68ac0cd84806f4646fb909d5048c8da5488438f",
+      "bytes": 2605,
+      "fallbackDeclarations": 24
+    },
+    {
+      "url": "features/settlement_funds.css?v=20261010e",
+      "path": "h5_demo/features/settlement_funds.css",
+      "sha256": "4c71dcd0d57a9d8df9802f197910333fd8e54f1cf3b3ab44069ed617f92ca317",
+      "output": "h5_demo/js/legacy/styles.features_settlement_funds.css",
+      "outputSha256": "77b5fac7a331f5543bd798a0fb69e89433bf0d3e36f3864647abeb8d72bd726d",
+      "bytes": 430,
+      "fallbackDeclarations": 3
+    },
+    {
+      "url": "css/embodied_factory.css?v=20261017m",
+      "path": "h5_demo/css/embodied_factory.css",
+      "sha256": "af6a71e64c182ac6360c4063481e8c5614c3f8a8ca398d8cf6959cbcfd86f096",
+      "output": "h5_demo/js/legacy/styles.css_embodied_factory.css",
+      "outputSha256": "a5891df924a63cda965257e33001190f0da2306e27a17d246ba3b4fd93877284",
+      "bytes": 32947,
+      "fallbackDeclarations": 37
+    },
+    {
+      "url": "css/city_journey.css?v=20261018j",
+      "path": "h5_demo/css/city_journey.css",
+      "sha256": "47eb60b5f3df6febdeec9d20760fa208414b44d6945582696716edb9dfb8ff73",
+      "output": "h5_demo/js/legacy/styles.css_city_journey.css",
+      "outputSha256": "108519436c59f2aa7018924490e74f85a46968d2b2fc097bbb0a53d54969e41d",
+      "bytes": 20234,
+      "fallbackDeclarations": 23
+    },
+    {
+      "url": "css/life_finale.css?v=20261019c",
+      "path": "h5_demo/css/life_finale.css",
+      "sha256": "a8c9dc198afd4028e5903edd1f8929a474af34ca9feb57b904656c2c07ad6d7e",
+      "output": "h5_demo/js/legacy/styles.css_life_finale.css",
+      "outputSha256": "61ed0d8a748e10442f1e13b9e9def5be5a99f5874ee06bb8127a4cbe837c379e",
+      "bytes": 76144,
+      "fallbackDeclarations": 175
+    },
+    {
+      "url": "css/gallery.css?v=20261015h",
+      "path": "h5_demo/css/gallery.css",
+      "sha256": "3cc497221c27343d4a72e192c3f8d48b636e43c08a6cbbf9d93e29d4b3c4969d",
+      "output": "h5_demo/js/legacy/styles.css_gallery.css",
+      "outputSha256": "bca906a6ab7d0ce143b1f15e62a0b774e32f2460cf53fb9b6dedb05ba88069ba",
+      "bytes": 6962,
+      "fallbackDeclarations": 19
+    },
+    {
+      "url": "arcade.css?v=20261017k",
+      "path": "h5_demo/arcade.css",
+      "sha256": "e6c4a612795177c8d6c9ec9d9329950808f0d70f5fb29a4d2bf8c4a4fe128a74",
+      "output": "h5_demo/js/legacy/styles.arcade.css",
+      "outputSha256": "d9d61cd10bfa957a4326b667205418707739d3f4f1042fb0d4d5b609fa977dc7",
+      "bytes": 19340,
+      "fallbackDeclarations": 116
+    }
+  ],
+  "compatBytes": 3131152,
+  "onlineTargetCompatBytes": 1500000,
+  "packageBudgetPolicy": "actual Toy directory and ZIP must separately stay within the packaging hard limit",
+  "lazyScripts": [
+    {
+      "path": "h5_demo/js/arcade/core.js",
+      "sha256": "20d8992fc8aa13f0481c09980dcda7382daa3efae9ac3c15585e5a15f2bf7885",
+      "output": "h5_demo/js/legacy/arcade.core.es5.js",
+      "outputSha256": "54425ff81e9f4c56eb98565f05f892953324397b975c4f28848f6fa3373f6a01",
+      "bytes": 19128,
+      "inlineStyles": []
+    },
+    {
+      "path": "h5_demo/js/arcade/rice.js",
+      "sha256": "a06e49a5fafe3da7fdc62a1ff83349a561ccaf99e99f50ada5e3d46149ef34d7",
+      "output": "h5_demo/js/legacy/arcade.rice.es5.js",
+      "outputSha256": "a75f169f58ada643148523c7288a93af2d23503bb983d9a8e40cd432afd9ccab",
+      "bytes": 20191,
+      "inlineStyles": [
+        {
+          "sourceSha256": "f5884b25a9d609679523d1e6994a5fca9525e1740cc8374f3abd624dad931911",
+          "patchSha256": "c40dcd6826508e2b37deaf67efa0da155caff3ebd51cdc7d6acc3dae8fbb60ab",
+          "fallbackDeclarations": 13,
+          "hasMappings": []
+        }
+      ]
+    },
+    {
+      "path": "h5_demo/js/arcade/sort.js",
+      "sha256": "2d1f28a538f84e2bfeba68031121759085e385c8ff53cbd64a86eda2eed00e9c",
+      "output": "h5_demo/js/legacy/arcade.sort.es5.js",
+      "outputSha256": "d951c0d1c240cbd1fc5da108326f845592b854c0d01f7150b602c6e54f63bb0e",
+      "bytes": 36525,
+      "inlineStyles": [
+        {
+          "sourceSha256": "c502d5c5d3726b47178e8bc16492400a0bb58e44830769382969fd24f15bd95d",
+          "patchSha256": "5f129b473bccdd69e6b6ad241d391caca47a2caf7e4863cb38c16a7221516969",
+          "fallbackDeclarations": 21,
+          "hasMappings": []
+        }
+      ]
+    },
+    {
+      "path": "h5_demo/js/arcade/whack.js",
+      "sha256": "0d416ae98b62b0b629d4198a8661ec47cf22b8773cee9929ccd50abd3a15e687",
+      "output": "h5_demo/js/legacy/arcade.whack.es5.js",
+      "outputSha256": "18162f5e8ccfd2cfd82a01b31a9a73b3cb884493e50c2a2443266c6b9b6c3a95",
+      "bytes": 23248,
+      "inlineStyles": [
+        {
+          "sourceSha256": "c300fc7b9f017fe3dd83d4fe0a432b35b9439c8eea84582ff93b9de3327fe16b",
+          "patchSha256": "4335a4717b4105cac094f6f71775b7435b25f4b3360c338a4005ac71a696ab70",
+          "fallbackDeclarations": 14,
+          "hasMappings": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+/* Whale movement editing uses the existing editor palette and common fields. */
+.mh-panel { border-top: 1px solid var(--line-soft); margin-top: 12px; padding-top: 2px; }
+.mh-note { color: var(--text-dim); font-size: 12px; line-height: 1.5; margin: 6px 0; }
+.mh-actions { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 6px 0; }
+.mh-vertices { display: grid; gap: 5px; margin: 8px 0; }
+.mh-vertex { display: flex; gap: 5px; align-items: center; }
+.mh-vertex > span { color: var(--text-dim); width: 16px; flex: none; font-size: 11px; }
+.mh-vertex .field { min-width: 0; flex: 1; margin: 0; }
+.mh-vertex .field label { font-size: 11px; }
+.mh-vertex .field input { min-width: 0; width: 100%; }
+.mh-vertex button:disabled { opacity: .4; cursor: default; }
+.mh-layer-toggle { margin-top: 8px; border-top: 1px solid var(--line-soft); }
+#page-map .map-hint { line-height: 1.5; }

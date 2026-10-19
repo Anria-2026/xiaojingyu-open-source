@@ -1,0 +1,27 @@
+# Private/local generated files
+.git/
+.local-secrets/
+.env
+.env.*
+!.env.example
+editor/server_config.json
+saves/
+backup/
+backups/
+editor/backups/
+origin_source/
+output/
+tmp/
+doc/
+node_modules/
+.venv/
+__pycache__/
+*.pyc
+*.log
+*.bak*
+*.backup*
+.DS_Store
+Thumbs.db
+
+# Local-only publisher binding
+/.open-source-local.json

@@ -1,0 +1,11 @@
+'use strict';
+const assert=require('node:assert/strict');
+function prepare(r,ver='V5',grade='top'){
+ const {core:c,w}=r;c.newGame();c.startProject('原版具身结算');c._enterStage(ver);const s=c.state,m=c.missionOf(ver);
+ Object.assign(s,{phase:'office',arch:m.arch,paramTarget:m.param,planDone:true,funding:2e8,miniModels:[],officeModal:null,pendingEvent:null,mission:{ver,hit:true},tutSeen:c.cfg.TUTORIAL.map(t=>t.id),embodiedEra:{schema:1,entered:true,status:'done',tutorialStep:99,bodyAwakened:true,podExitSeen:true}});s.v35.corpus={token:30000,items:30000,q:[0,30000,0]};s.week=c.minWeeks(ver);w.WhaleCare.ensure(c).automationTutorial={version:1,step:3,done:true};
+ const caps=c.statCap();let found=false;for(let pct=0;pct<=100;pct++){for(const key of c.dimsOf(s))s[key]=Math.floor(caps[key]*pct/100);if(c.evaluate().verdict===grade&&(grade==='pass'||!c.isMissionFail())){found=true;break;}}assert(found,ver+' real grade '+grade);return s;
+}
+function settle(r){const {core:c,ui:u}=r,stage=u.el.firstElementChild;c.enterReview();u._evalWaitTut=false;u.render();assert(c.state.result.settled);assert(!u.el.querySelector('.fitness-review,.agent-review,.evalshow-stage'),'V5 gameplay goes directly to the original settlement');return{stage};}
+function revealCG(r){const {ui:u,core:c,w}=r;if(c.state.embodiedReward.part!=='special')return;const event=(node,name)=>{const e=new w.Event('animationend',{bubbles:true});Object.defineProperty(e,'animationName',{value:name});node.dispatchEvent(e);};if(c.state.embodiedReward.cg.stage==='closed')u.el.querySelector('[data-action="embodied-cg-open"]').click();if(c.state.embodiedReward.cg.stage==='opening')event(u.el.querySelector('.cg-envelope-flap'),'embodied-cg-flap-open');if(c.state.embodiedReward.cg.stage==='flying')event(u.el.querySelector('.cg-photo'),'embodied-cg-photo-fly');assert.equal(c.state.embodiedReward.cg.stage,'revealed');}
+function completePrelude(r){const {ui:u,core:c}=r;for(let n=0;n<100&&c.state.embodiedReward.part!=='original';n++){if(c.state.embodiedReward.part==='special')revealCG(r);u.el.querySelector('.act.active [data-action="embodied-reward-next"]').click();}assert.equal(c.state.embodiedReward.part,'original');assert.equal(u.el.querySelector('.act.active').id,'act-1');}
+module.exports={prepare,settle,revealCG,completePrelude};

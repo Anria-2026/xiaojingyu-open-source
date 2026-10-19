@@ -1,0 +1,4 @@
+/* Explicit replay control shared by ordinary chat voice messages. */
+.chat-voice-replay { display:inline-flex; align-items:center; gap:4px; margin-left:6px; padding:4px 8px; border:1px solid #acd3ed; border-radius:999px; background:#f6fcff; color:#2b6b96; font:inherit; font-size:11px; cursor:pointer; }
+.chat-voice-replay:hover { background:#fff; }
+.chat-voice-replay:focus-visible { outline:2px solid #2b7fb8; outline-offset:2px; }

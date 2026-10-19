@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="GCob8BdXb91UaU70CQM5HZ">
+<head data-page-node-id="HLHn9mB4Rn9drU57jrSXDj">
+<meta charset="UTF-8" data-page-node-id="8sDP3ApQBAjf31CLN8ZBcS">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="hmrb7pal9VdMig3axXPSgi">
+<title>游戏项目编辑器</title>
+<link rel="stylesheet" href="style.css?v=20260922a" data-page-node-id="AswygkdW7ZN0UGQMc2yGza">
+  <link rel="stylesheet" href="chat_tree.css?v=20260920a">
+<link rel="stylesheet" href="features/mapMovement.css?v=20261009e">
+<link rel="stylesheet" href="features/v2bGameplay.css?v=20261017j">
+<link rel="stylesheet" href="features/outfits.css?v=20261011e">
+<link rel="stylesheet" href="features/minigames.css?v=20261009e">
+<link rel="stylesheet" href="features/lifeStory.css?v=20261017e">
+<link rel="stylesheet" href="features/journey_graph.css?v=20261010a">
+<link rel="stylesheet" href="features/journeyTool.css?v=20261011b">
+<link rel="stylesheet" href="features/seedAudio.css?v=20261015a">
+<link rel="stylesheet" href="features/sfxGenerator.css?v=20261015a">
+</head>
+<body data-page-node-id="fG0UF6ne1HsiEoSmmFHMlI">
+
+  <!-- ======================= 顶部：第一行 标题+操作；第二行 分页导航 ======================= -->
+  <header class="topbar" data-page-node-id="rMII0LJoCSGD29ehhuaywp">
+    <div class="topbar-main" data-page-node-id="JTdyPx3p1ClERAyD2r6Y1m">
+      <div class="logo" data-page-node-id="Co0gw7iGlbLQLPZMdAZG4p">🎮 游戏项目编辑器</div>
+      <div class="top-actions" data-page-node-id="yPP79nugwUmBxHA4ZkkD0b">
+        <span id="save-indicator" class="save-indicator" data-page-node-id="gyc6hHTd017vu4ABHjsGgB">自动保存已开启</span>
+        <button id="btn-save" class="btn btn-ghost" data-page-node-id="m2OUn2n8zxDdHjqpmDjtRn">💾 保存全部</button>
+        <button id="btn-load" class="btn btn-ghost" data-page-node-id="o2DK22cR0evGVAMv4QvJEG">📂 加载项目</button>
+      </div>
+    </div>
+    <nav class="tabs" id="tabs" data-page-node-id="RdUbPmZJjvxmiAJsJYN2M6">
+      <button class="tab active" data-page="map" data-page-node-id="XD6lb8C3QGLZ6tVgOX7qai">🗺 地图编辑</button>
+      <button class="tab" data-page="image" data-page-node-id="E2EmqPlKk9GrkHkY91UiV9">🖼 图片处理</button>
+      <button class="tab" data-page="sfx" data-page-node-id="UKpVkCVHFUS5KWtL6PNGtx">🔊 音效配置</button>
+      <button class="tab" data-page="bgm" data-page-node-id="Zf8gCuIWtREJsoT8gUkRDx">🎵 BGM 配置</button>
+      <button class="tab" data-page="gamecfg" data-page-node-id="yB9tI2xA9eCzsoH3IrwWFO">🎮 玩法配置</button>
+      <button class="tab" data-page="minigames">🕹 小游戏</button>
+      <button class="tab" data-page="outfits">👗 时装</button>
+      <button class="tab" data-page="show" data-page-node-id="5bLWxfEn35xb1p84FZdDYE">🎬 演出</button>
+      <button class="tab" data-page="life-story">💙 完整的一生</button>
+      <button class="tab" data-page="trait" data-page-node-id="R5BAjsFgYgPLHOIK4zZoCh">🧬 词条</button>
+      <button class="tab" data-page="axis" data-page-node-id="DFAx91AmfGA3CMJKcrpkh7">🎯 能力轴</button>
+      <button class="tab" data-page="uicfg" data-page-node-id="A9SDKRWOxCK0WZceNIdOKK">🎛 UI 配置</button>
+      <button class="tab" data-page="text" data-page-node-id="YVdIV2Ez1pDDakDwol7u48">📝 文本</button>
+      <button class="tab" data-page="ui" data-page-node-id="xCMOLMqyX2M1Z9wjK9E23u">🖼 界面立绘</button>
+      <button class="tab" data-page="event" data-page-node-id="AJ8gzr1ApfnnBCs6sCOEfx">⚡ 事件</button>
+      <button class="tab" data-page="notice" data-page-node-id="P0pwaed2P2FsQ9vEiLfHoi">📣 新闻与提示</button>
+      <button class="tab" data-page="testui" data-page-node-id="uHi2WtvRcaQnL498GczVHh">💬 测试界面</button>
+      <button class="tab" data-page="journey">🐋 旅行鲸鱼</button>
+      <button class="tab" data-page="engineer" data-page-node-id="g8pFYUyvyHVc2LjA9I5zRP">🧑‍🔬 工程师</button>
+      <button class="tab" data-page="paper">📄 论文</button>
+<button class="tab" data-page="achv">🏆 成就</button>
+      <button class="tab" data-page="history" data-page-node-id="2M3zkNAjPNNpavcQlqP8SP">🕘 历史回溯</button>
+      <!-- 后续扩展页在此追加：<button class="tab" data-page="xxx">...</button> -->
+    </nav>
+  </header>
+
+  <!-- ======================= 地图编辑页 ======================= -->
+  <section id="page-map" class="page active" data-page-node-id="cfo9LE3jdAFodGrgpJG3ED">
+    <div class="map-layout" data-page-node-id="IiHLs7PV6hUJCcky3k0EuD">
+      <!-- 左工具栏 -->
+      <aside class="toolbar" data-page-node-id="8lW9l24fZ5ZkP9DHLU6iwP">
+        <div class="tool-group" data-page-node-id="VN5ATwSBwClTtK6bO54tMW">
+          <button class="tool active" data-tool="select" title="选择/移动" data-page-node-id="ZCceLeEz66XKC0NFB2jfH3">
+            <span class="tool-ico" data-page-node-id="ngDCodfEa3ITP6OxQXk7GF">🖱</span>选择
+          </button>
+          <button class="tool" data-tool="collision" title="编辑碰撞框" data-page-node-id="1ku24hdLHqWCDCmMRMdk3S">
+            <span class="tool-ico" data-page-node-id="wkiKRnkHoTnVczDbcezBxf">▣</span>碰撞框
+          </button>
+          <!-- 2026-08-30 取景框工具取消（默认全图视野）；mapEditor 的 camera 代码保留备用 -->
+          <button class="tool" data-tool="seat" title="座位区（办公室员工头像位置）" data-page-node-id="RjXP5v3vlxWFsEBiV97iGI">
+            <span class="tool-ico" data-page-node-id="bsBPQiRr08F6skKpnahQ15">🪑</span>座位
+          </button>
+        </div>
+        <div class="tool-group" data-page-node-id="piETkhYQB5xIiVI8hkNhiA">
+          <button id="btn-add-object" class="tool" title="添加物件(床等)" data-page-node-id="IWgderXzRWxrEBmDECsPNF">
+            <span class="tool-ico" data-page-node-id="xikaFcFkF3xYXPVc8HFt0d">➕</span>添加物件
+          </button>
+          <button id="btn-add-scene" class="tool" title="新建场景" data-page-node-id="H5YxvoGAZAiX6gSbyqc3hx">
+            <span class="tool-ico" data-page-node-id="c2BsLaN3xja7ZUoLKbflBH">🗂</span>新场景
+          </button>
+          <button id="btn-preview" class="tool" title="运行预览：点击移动，测试碰撞" data-page-node-id="66OF7Ro7hCLRJVrILhd5cF">
+            <span class="tool-ico" data-page-node-id="LwOiwNZa57nYAOiGN9DkUo">▶</span>预览
+          </button>
+        </div>
+      </aside>
+
+      <!-- 中央画布 -->
+      <div class="canvas-wrap" data-page-node-id="ynMMpnsDW2nFFbeiGQcgDb">
+        <canvas id="map-canvas" data-page-node-id="8x9IniHP6XgvBj1O5mpZ7A"></canvas>
+        <div id="map-hint" class="map-hint" data-page-node-id="7Z3AvfAYsl2UJA2tXAuEWZ"></div>
+      </div>
+
+      <!-- 右侧属性面板 -->
+      <aside class="inspector" id="inspector" data-page-node-id="mQGGKkiLKxmkfjOHTnas9g"></aside>
+    </div>
+  </section>
+
+  <!-- ======================= 图片处理页 ======================= -->
+  <section id="page-image" class="page" data-page-node-id="IswYg5mLJEDS4lvHyPoYaX">
+    <div class="img-tool" data-page-node-id="hjMqecQdeY4FaKvJg4d5Bd">
+      <div class="img-actions" data-page-node-id="1p9MBGOAGUAEXFTIOQp5l2">
+        <button id="img-add" class="btn btn-primary" data-page-node-id="Ny9GpI1t3BjEB4hCeI668O">➕ 添加图片</button>
+        <span class="img-tip" data-page-node-id="QqA4Yzm7bvtrNIo9I4qmsN">可一次选择多张</span>
+        <div class="spacer" data-page-node-id="lIg8GFaomUqVlO0EXbUYCw"></div>
+        <button id="img-compress" class="btn btn-accent" data-page-node-id="2d36k9FaJl8zRGiNjHnLlF">⚡ 一键压缩</button>
+      </div>
+      <div class="img-batch-tools" id="img-batch-tools" data-page-node-id="SDzTB0dAfBJ2SlZUDDLNu8"></div>
+      <div class="img-table" data-page-node-id="otYV6XchHutpRhkm85Th00">
+        <table data-page-node-id="a3gBPCkQUCo5Lz4qBotHA7">
+          <colgroup data-page-node-id="z2GCGXKPIgHF24zsIMEt8p">
+            <col class="c-prev" data-page-node-id="S39lcK0hwvH3v0wFb9CN1g">
+            <col class="c-name" data-page-node-id="FImbuNue8Sys5epD0LVyK6">
+            <col class="c-out" data-page-node-id="eIxOUo2OFVgjkqQMiAkknP">
+            <col class="c-cut" data-page-node-id="C79NQ2qxnWtIfcXOsXHlAg">
+            <col class="c-path" data-page-node-id="uo9TjcwqQ75mJj9vQvLFLc">
+            <col class="c-res" data-page-node-id="WiHu1HObRtEqdytev3kp9q">
+            <col class="c-del" data-page-node-id="JdIl9NPxAhatL8hgjh6Uwh">
+          </colgroup>
+          <thead data-page-node-id="L4KfqdSlEhZ9seM2ROkP1X">
+            <tr data-page-node-id="ByMzyx6i6s685gDvlnuV0x">
+              <th data-page-node-id="nDdjpGTlYPgwMK4nKwayFV">预览</th>
+              <th data-page-node-id="Ui73YB6YXV7xER6F8qqlIZ">源文件</th>
+              <th data-page-node-id="CEPB1mx6kLHpuEg9GvbpBU">目标文件名</th>
+              <th data-page-node-id="dgO8by6AlAuC0jUkByQevb">抠图</th>
+              <th data-page-node-id="MYq1HD2EwYQKpuJTCpPHJG">输出路径</th>
+              <th data-page-node-id="MDomXdRZUjlGy4CemMMvvb">结果</th>
+              <th data-page-node-id="yb9flN9JbMNdl4FaDT1B3K"></th>
+            </tr>
+          </thead>
+          <tbody id="img-list" data-page-node-id="6BgoYkTVoSLoFpAVjtw0Y6"></tbody>
+        </table>
+      </div>
+      <div id="img-status" class="img-status" data-page-node-id="5MrGx8D5LhP8lgCeyUqcmP"></div>
+    </div>
+  </section>
+
+  <!-- ======================= 音效配置页 ======================= -->
+  <section id="page-sfx" class="page" data-page-node-id="8tEfX0cFHkAGCTLlIXIZuW">
+    <div class="sfx-tool" data-page-node-id="EG62vqdH00nu19ow6Wc49T">
+      <!-- 剧情配音独立模块：仅显式保存音频，不写剧情配置。 -->
+      <div id="seed-audio-box"></div>
+      <!-- 生成音效模块：置顶（最常用） -->
+      <div class="sfx-gen" data-page-node-id="t2QQGwPPHAZtpcfZ4K30LM">
+        <div class="sfx-gen-head" data-page-node-id="qwx5x4detfI6T1Wg3fk3zD">🎛 AI 生成音效（ElevenLabs / 本地 Stable Audio / 程序化合成）</div>
+        <div class="sfx-gen-row" data-page-node-id="5z1IHFPwm1OEa7eLvS65WL">
+          <label data-page-node-id="MvlIpFxugjP3SdztDqzZl2">事件
+            <select id="sfx-event" class="sfx-event" data-page-node-id="HkTmCSrJC1sU4f41iP2dvI">
+              <option value="move" data-page-node-id="5MOWScVgfwkrspTRGpoVhg">移动（move）</option>
+              <option value="click" data-page-node-id="X1sorCIgFbGKWjbO74hlgd">点击（click）</option>
+              <option value="ui" data-page-node-id="XXTUMUwg4KkN2rE8iavMOZ">弹窗（ui）</option>
+              <option value="confirm" data-page-node-id="Te1pQVvGBZOpxnxxGf7Jnw">确认（confirm）</option>
+              <option value="float" data-page-node-id="EAm7HHV0lCHmPyAFPIXCwl">产出冒数字（float）</option>
+            </select>
+          </label>
+          <select id="sfx-platform" data-page-node-id="m0aMNRSZsVfZzuYOozMEwa">
+            <option value="synth" selected data-page-node-id="pkTBKnvrMvZul07rqSrG9w">🎹 程序化合成（无需 Key，即时可用）</option>
+            <option value="elevenlabs" data-page-node-id="9bn8jOCg8FxdeMawi98buq">☁️ ElevenLabs（在线）</option>
+            <option value="local" data-page-node-id="MSkTNJXjWWClpjEV5ImYLE">🤖 本地模型（Stable Audio）</option>
+          </select>
+          <label class="sfx-ai-only" data-page-node-id="K8YzpCKe5k4rvOfSDD0QGe">时长 <input id="sfx-duration" class="sfx-num" type="number" value="3" min="1" max="12" data-page-node-id="ZqShd7EPqklmhFfJVOAWsp"></label>
+          <label class="sfx-ai-only" data-page-node-id="ON9Jze4eCkzmnvwP7GVGWB">强度 <input id="sfx-influence" class="sfx-num" type="number" value="0.3" step="0.1" min="0" max="1" data-page-node-id="RJuy0z9kaCTnh40fKLmS7s"></label>
+          <button id="sfx-generate" class="btn btn-primary" data-page-node-id="Glcblzn6QZqzFnkZ9POhSN">✨ 生成</button>
+        </div>
+        <!-- 提示词：大输入框，单独一整行 -->
+        <div class="sfx-gen-row sfx-prompt-row" data-page-node-id="c5UZXgrx3Yg0CB6gKNPuIq">
+          <textarea id="sfx-prompt" class="sfx-prompt" rows="3" placeholder="该事件的英文提示词已自动预填，可直接生成或自行修改（写详细更容易成功）"></textarea>
+        </div>
+        <div id="sfx-synth-hint" class="sfx-hint" data-page-node-id="s5FoOKFwWsGdRaKwpmPa6Y">程序化合成：按事件用代码即时合成可爱短音效，无需任何 Key/本地模型，点「生成」→「试听」→「应用」即可。之后可再选 ElevenLabs/本地模型用预置英文提示词生成更丰富的版本。</div>
+        <div id="sfx-result" class="sfx-result" data-page-node-id="MFSHUpdAwmJGxJpFcNTZcw"></div>
+      </div>
+
+      <!-- 事件 → 音效文件映射表 -->
+      <div class="sfx-table-wrap" data-page-node-id="pBHp4cJKmAgqN0DFnCHSEi">
+        <table class="img-table sfx-table" data-page-node-id="eh4FpThEh6pOBRQ3aKko3k">
+          <colgroup data-page-node-id="1pDPmlfeXziBNIGQcmK05r">
+            <col class="c-ev" data-page-node-id="8tAwNOaGis4Z0f3LGBBTVB">
+            <col class="c-file" data-page-node-id="xrOrJyQPhkTgJe9Uiru5gy">
+            <col class="c-vol" data-page-node-id="BENvKLztQ8BTGjpQEuLFSY">
+            <col class="c-ops" data-page-node-id="EH4WiJ8ClozJgEjgVYBPTu">
+          </colgroup>
+          <thead data-page-node-id="wSsRyxGoxBG0pitoFmEXNz">
+            <tr data-page-node-id="0IyBwJYQVXimwJVSmuxpZW"><th data-page-node-id="t6ooYoNb5pWzGYFPh9JE0y">事件</th><th data-page-node-id="137XQtENCAVfir0f0W8yRY">音效文件（空 = 内置程序化）</th><th data-page-node-id="oGjGDGBzQOh0cO6OfdvVa4">音量</th><th data-page-node-id="eu3G5a7RtEVtsB8pKVgo5V">操作</th></tr>
+          </thead>
+          <tbody id="sfx-list" data-page-node-id="12W6CWVC258sNJJyyh9dDs"></tbody>
+        </table>
+      </div>
+
+      <!-- 平台配置：沉底（低频） -->
+      <div class="sfx-cfg-bar" data-page-node-id="lOL0aHIdGPcHLCsG0lgsJJ">
+        <span class="sfx-status" id="sfx-status" data-page-node-id="Sm4aUfoWSjypS5CN9D6Jhp">探测平台状态…</span>
+        <div class="spacer" data-page-node-id="dCz4CWeVP499so5fUfWhIC"></div>
+        <input id="sfx-key" class="sfx-key" type="password" placeholder="ElevenLabs API Key（服务端保存，不落前端）" data-page-node-id="hsn5sPwptmGvaPQsb1xhYV">
+        <input id="sfx-local-url" class="sfx-local-url" type="text" placeholder="本地模型地址 http://127.0.0.1:7861" data-page-node-id="LHIGDoHHJF6wNgZLl3btI8">
+      </div>
+      <!-- ============ 语音剪辑（doc/28）：上传任意 wav → 剪辑 → 一键保存到指定文件夹 ============
+           用途：处理聊天玩法里要用的语音。UI 由 editor/js/voiceClip.js 自建（此容器只是挂载点）。 -->
+      <div class="sfx-voice" id="voice-box"></div>
+    </div>
+
+  </section>
+
+  <!-- ======================= BGM 配置页 ======================= -->
+  <section id="page-bgm" class="page" data-page-node-id="uM3OzAFuBg22TwdspkJsRe">
+    <div class="bgm-tool scroll-region" data-page-node-id="XcFrKGu3NQG3XdMMFAcdQ6">
+      <div class="bgm-cfg" data-page-node-id="bX71OL2P6gXBqeX03y5zlY">
+        <div class="bgm-cfg-head" data-page-node-id="9TNxbfPzUxtdIyNYaayhIb">🎵 BGM 选曲（随右上角「保存全部」一并同步 assets/bgm）</div>
+        <div class="bgm-cfg-row" data-page-node-id="yGEvsIKW7DBbB6EtbGDaFh">
+          <label data-page-node-id="NwVjLPp56Ms0MaBfCAd298">主菜单 BGM
+            <select id="bgm-menu" class="bgm-select" data-page-node-id="K1oYIPyzpFigKSLjrBzzAh"></select>
+          </label>
+          <label data-page-node-id="DrcNE84uQVsBCTgwNVnBVl">主场景 BGM
+            <select id="bgm-scene" class="bgm-select" data-page-node-id="3i6ntRFjCksky9pNLpzgvz"></select>
+          </label>
+          <label data-page-node-id="XhmaaEAP8vEXYZeY197Kxx">评审界面 BGM
+            <select id="bgm-review" class="bgm-select" data-page-node-id="q5ALY0yjg8XSUShITrehZH"></select>
+          </label>
+          <label data-page-node-id="FDsWXGo6abbpYCzReyeCBE">结算演出 BGM
+            <select id="bgm-bonus" class="bgm-select" data-page-node-id="ZfeARM9fC0BfcYY1SiahT8"></select>
+          </label>
+          <span id="bgm-sync" class="bgm-sync dim" data-page-node-id="VAIpWGqMkZXczAajROLkFI"></span>
+        </div>
+        <div class="bgm-note dim" data-page-node-id="vJxsNkeXkHeQl6gguASAAU">评审 / 结算若留空，则沿用主场景 BGM。四个槽位独立保存，素材库里可直接「设为…」。</div>
+      </div>
+
+      <div class="bgm-lib-wrap" data-page-node-id="GZtHA44rfFwn6F8yI0uc35">
+        <div class="bgm-lib-head" data-page-node-id="Tz6H4acqbv79rDKa4VSRr5">BGM 素材库（resource/sound/BGM · 点击试听）</div>
+        <div id="bgm-lib" class="bgm-lib" data-page-node-id="wb28zpcjfejPHvRQh2su5Z"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= 玩法配置页（基础数值） ======================= -->
+  <section id="page-gamecfg" class="page" data-page-node-id="5qlzxdiq8wLAdzYftKUBAt">
+    <div id="gamecfg-root" class="gamecfg-tool scroll-region" data-page-node-id="qmTrfwnIUkPFQwLbhwHsbs">
+      <div class="gamecfg-bar" data-page-node-id="CJ5wy5zXVvPg7pv6ge4CS7">
+        <span class="history-head" data-page-node-id="ifUmLFe1wDu0VOtuVK9XNI">🎮 玩法配置 · 基础数值（随右上角「保存全部」一并保存）</span>
+        <div class="spacer" data-page-node-id="pLFImvwHPLexw5Z40CZTVD"></div>
+      </div>
+      <div class="gamecfg-note dim" data-page-node-id="odSe3DdorSTDjicpdnvan7">说明：数值分模块排版（经费奖金 / 评审 / 周期语料 / 团队招聘 / 算力 / 周常质检）。游戏厅奖励与玩法→【小游戏】页，事件→【事件】页，工程师→【工程师】页，文本→【文本】页，界面按钮顺序与空态→【UI 配置】页。保存后同步 h5_demo/data/game_cfg.json，游戏「开始训练」时自动生效。</div>
+      <div class="gamecfg-sec" data-page-node-id="nj6LSGYqvBwvGwC4ILjytG">
+        <div class="gamecfg-sec-head" data-page-node-id="CzplY0fijbu8qjvYFnxUET">📊 基础数值</div>
+        <div id="gamecfg-base" data-page-node-id="qMQmdiXVSLebGrFWVV69Nl"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= 演出配置页（结算 / 答题题库 / 阶段任务） ======================= -->
+  <section id="page-minigames" class="page">
+    <div class="gamecfg-tool scroll-region minigames-tool">
+      <div id="minigames-config"></div>
+    </div>
+  </section>
+  <section id="page-outfits" class="page">
+    <div class="gamecfg-tool scroll-region outfits-tool">
+      <div id="outfits-config"></div>
+    </div>
+  </section>
+
+  <section id="page-show" class="page" data-page-node-id="4XbnLW4LwouXmzDWfGtszE">
+    <div id="gamecfg-show" class="gamecfg-tool scroll-region" data-page-node-id="frzssQCnKVzCRarXfTHGgp">
+      <div class="gamecfg-bar" data-page-node-id="Elx7Pt9Vglysq8BNkySE6Q">
+        <span class="history-head" data-page-node-id="L2Vdh1NoFGSjdKRgD6FoAf">🎬 演出 · 结算与答题（随右上角「保存全部」一并保存）</span>
+        <div class="spacer" data-page-node-id="HIxxYC5s448mfPgGUbnn7v"></div>
+      </div>
+      <div class="gamecfg-note dim" data-page-node-id="g7vv0Q5FOg5TVLo8ZPE2Ym">说明：三幕结算演出（用户增长 / 能力榜 / 评价池）、评审答题动画与题库、阶段任务目标。数据词条 → 品质、词条升级与上限在【词条】页。保存后同步 h5_demo/data/game_cfg.json。</div>
+      <div id="gamecfg-show-base" data-page-node-id="KG6LoLijHQDJIEa4fWMJFU"></div>
+    </div>
+  </section>
+
+  <!-- ======================= 能力轴页（doc/27 P5 · 追加能力轴） ======================= -->
+  <section id="page-axis" class="page" data-page-node-id="IudY21dFLaLr9fPCxIPcNq">
+    <div id="gamecfg-axis" class="gamecfg-tool scroll-region" data-page-node-id="hNHvRFiUAa26ZlJwY93u35">
+      <div class="gamecfg-bar" data-page-node-id="RN76XSTfKvoWulFihenbVQ">
+        <span class="history-head" data-page-node-id="ApfbuIUiGf6dBW14pYDoff">🎯 能力轴 · 记忆 / 推理 / 工具（随右上角「保存全部」一并保存）</span>
+        <div class="spacer" data-page-node-id="3c6KmMSPpESPqcLVC7AZ2Z"></div>
+      </div>
+      <div class="gamecfg-note dim" data-page-node-id="EUpBzLO0qK2v7uv8eOJvsZ">说明：轴 = <b data-page-node-id="aYLBgECWdUDMfOWdFnQGCJ">架构天赋 × 参数规模</b>。这里配置三根轴的激活条件、产出岗位与档位、逐阶段上限 / 达标线、词条归属；「评审防偏科线」会同步写进阶段任务目标，「带出它的架构」会同步写进【架构】页。保存后同步 h5_demo/data/game_cfg.json。</div>
+    </div>
+  </section>
+
+  <!-- ======================= 词条配置页（词条等级数值 / 升级规则 / 上限） ======================= -->
+  <section id="page-trait" class="page" data-page-node-id="XTNXzNE6BgeDGNZX8j5BcE">
+    <div id="gamecfg-trait" class="gamecfg-tool scroll-region" data-page-node-id="Vp4zxCNta6n46dgDHviYKX">
+      <div class="gamecfg-bar" data-page-node-id="ybNPE8zgr7c1nhkbO2Uy6L">
+        <span class="history-head" data-page-node-id="78qI7mMLrzSJHGenjynSb5">🧬 词条 · 等级数值与升级（随右上角「保存全部」一并保存）</span>
+        <div class="spacer" data-page-node-id="yQKjBVRWzZkxKrLyjsO8WI"></div>
+      </div>
+      <div class="gamecfg-note dim" data-page-node-id="BULVTl0tzRIWMysEpLFwIF">说明：词条等级相关的全部数值——数据词条 → 语料品质概率、词条升级规则与各等级除数、各阶段词条等级上限、词条基准薪资、学术词条加算值。每个工程师具体带几条/哪种词条在【工程师】页维护。保存后同步 h5_demo/data/game_cfg.json。</div>
+      <div id="gamecfg-trait-base" data-page-node-id="PYdIw9HNFE18nwUlCAvGYk"></div>
+    </div>
+  </section>
+
+  <!-- ======================= 界面立绘配置页 ======================= -->
+  <section id="page-ui" class="page" data-page-node-id="w7PcFhq0lnYKtHgGXryntQ">
+    <div class="gamecfg-tool scroll-region" data-page-node-id="Xlukh2G7UllM5MAH0Ama1y">
+      <div class="gamecfg-bar" data-page-node-id="OyeNmmJMBOtRDCGZsILq5z">
+        <span class="history-head" data-page-node-id="WV4EFBNmB69pIPYL0SxH5M">🖼 界面立绘（随右上角「保存全部」一并保存）</span>
+        <div class="spacer" data-page-node-id="1VWSj6d0wERV10AxGd5IKh"></div>
+      </div>
+      <div class="gamecfg-note dim" data-page-node-id="XmJBFfGOyDJ0i4i3kTRbDy">说明：游戏里仍在使用鲸鱼娘立绘的位置——起名界面 / 教学·剧情气泡 / 测试聊天头像 / 结算页立绘 / 优秀与普通奖励立绘 / 兜底立绘，另有评审答题三态立绘（本页顶部）。上传图片会写入 resource/event/ 并自动压缩为 webp；也可点「浏览」选择 resource 下已有图片。未配置时使用默认立绘。</div>
+      <div id="ui-portrait-list" data-page-node-id="70EEoCxl4JrVjkdCjD7EZq"></div>
+    </div>
+  </section>
+
+  <!-- ======================= 事件配置页 ======================= -->
+  <section id="page-event" class="page" data-page-node-id="Hsl3b7920qROh9FGDfwBRm">
+    <div class="gamecfg-tool scroll-region" data-page-node-id="3KwA72U2k7fm72oyJZ2WMI">
+      <div class="gamecfg-bar" data-page-node-id="mGfmDrpFFrwBdnwBOQpqr6">
+        <span class="history-head" data-page-node-id="n22b1D0Mvy0Aa4eU3Fa90f">⚡ 事件配置（事件池 · 随右上角「保存全部」一并保存）</span>
+        <div class="spacer" data-page-node-id="tqkexgCbZItgu9GAESuXpA"></div>
+        <button id="event-add" class="btn" data-page-node-id="nvS5qfR3FvT1FwEBKf17EE">+ 新增事件</button>
+      </div>
+      <div class="gamecfg-note dim" data-page-node-id="EZojuCaPO6pa5xg0oah8f1">说明：按界面类型分组（固定/随机/前置/正面/负面/关键/团队/媒体/资本等，类型仅作事件分类标识）。触发机制：random=周范围+概率、fixed=指定周必触发、reward=数值达标触发（即前置事件）、critical=关键节点。选项效果正负值直接生效（经费单位：元）。</div>
+      <div id="event-list" data-page-node-id="ELmouOFtTJYd2uScgeGJB8"></div>
+    </div>
+  </section>
+
+  <!-- ======================= 新闻与提示配置页 ======================= -->
+  <section id="page-notice" class="page" data-page-node-id="BFzI09JAmvD709fUWWnS38">
+    <div class="gamecfg-tool scroll-region" data-page-node-id="MY23alRYo9rKh0bC77yP0J">
+      <div class="gamecfg-bar" data-page-node-id="RKpPJzzErJEvGNGcUcg5HF">
+        <span class="history-head" data-page-node-id="RapI1BT0bc5ZBR7HLmXRL0">📣 新闻与提示（随右上角「保存全部」一并保存）</span>
+        <div class="spacer" data-page-node-id="UufDbKiQCCFFyECxixbGTL"></div>
+        <button id="news-add" class="btn" data-page-node-id="4XYdspUJgyKRrNml7xU14N">+ 新增新闻</button>
+        <button id="rnews-add" class="btn">+ 新增随机新闻</button>
+        <button id="hint-add" class="btn" data-page-node-id="sJxPfSuViLgSAcWAJ5q4TG">+ 新增提示</button>
+      </div>
+      <div class="gamecfg-note dim" data-page-node-id="hAM93zhm8lY61YIIC95X6E">说明：时事新闻按 date（yyyy-mm-dd）映射到游戏周（第 N 周 = startDate + (N-1)×7 天），该周结算时从场景顶部小卡片弹出；本周没配新闻则回落到玩法配置里的随机氛围 NEWS 池。节点提示触发类型：payday=发薪前 N tick（每周期一次）/ week=指定周 / corpus_shortage=语料不足周需求 / fund_low=经费低于月工资单；每条还能单独设「触发频率」：一次性（整局只弹一次）/ 每阶段一次 / 每次满足都弹。</div>
+      <div class="ev-group" style="margin-top:12px;" data-page-node-id="duc40EEgaGbvjYBR1al0vF">
+        <div class="ev-group-head" data-page-node-id="AJEQ9oWJ39Z5xDgpVqQdVK">
+          <span class="ev-group-title" data-page-node-id="sXUTVxmfeton1Nh5QFWt3v">📰 时事新闻时间线（NEWS_TIMELINE）</span>
+          <span id="news-count" class="ev-group-count" data-page-node-id="k9KeEh0sQBlTkw8eySmPJC"></span>
+        </div>
+        <div id="news-list" data-page-node-id="TqJMCNm6lYpGtNz9P7L0eE"></div>
+      </div>
+      <div class="ev-group" style="margin-top:12px;">
+        <div class="ev-group-head">
+          <span class="ev-group-title">🎲 随机氛围新闻（NEWS · 信息流里补充气氛的日常新闻，每 3 分钟随一条）</span>
+          <span id="rnews-count" class="ev-group-count"></span>
+        </div>
+        <div id="rnews-list"></div>
+      </div>
+      <div class="ev-group" style="margin-top:12px;">
+        <div class="ev-group-head">
+          <span class="ev-group-title">📣 自家模型上线 · 吃瓜新闻（NEWS_SELF_RELEASE · 按架构一条，模型上线时自动推）</span>
+        </div>
+        <div id="selfnews-list"></div>
+      </div>
+      <div class="ev-group" style="margin-top:12px;" data-page-node-id="pokHJLzxUxjbYZCxnqYil8">
+        <div class="ev-group-head" data-page-node-id="PvmLB0MvkyYQpqCGhdzeNi">
+          <span class="ev-group-title" data-page-node-id="Mz9GbRXQsaULvxTk80qKhA">🔔 节点提示（OFFICE_HINTS）</span>
+          <span id="hint-count" class="ev-group-count" data-page-node-id="RiKh87udlVvb57ntfg3zuy"></span>
+        </div>
+        <div id="hint-list" data-page-node-id="zEICtY8Cji0JVPmaENSN9h"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= 测试界面配置页 ======================= -->
+        <section id="page-testui" class="page">
+        <div class="ct-wrap">
+          <div class="ct-bar">
+            <h1>对话树 · 测试聊天</h1>
+            <span class="sub" id="hdSub">正在载入…</span>
+            <div class="ct-tools">
+              <select class="tsel" id="navStage"></select>
+              <button class="tbtn" id="btnFit">全览</button>
+              <button class="tbtn" id="btnReset">复位布局</button>
+              <button class="tbtn" id="btnUndo" disabled title="撤回上一步（Ctrl+Z）"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px"><path d="M9 14L4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/></svg>撤回</button>
+              <button class="tbtn prim" id="btnAddNode">＋ 节点</button>
+              <button class="tbtn on" id="btnAns">回答节点</button>
+              <button class="tbtn" id="btnFar">远景线</button>
+              <button class="tbtn" id="btnZOut">−</button>
+              <input class="zoomi" id="zoomVal" value="100%" readonly>
+              <button class="tbtn" id="btnZIn">＋</button>
+              <input class="search" id="q" placeholder="搜 id / 文本…">
+              <button class="tbtn" id="chattree-validate">校验</button>
+            </div>
+          </div>
+          <div class="ct-body">
+            <div id="viewport">
+              <div id="canvas">
+                <div id="zones"></div>
+                <svg id="edges"></svg>
+                <svg id="ghost"></svg>
+                <div id="nodes"></div>
+              </div>
+            </div>
+            <aside id="insp"></aside>
+          </div>
+          <div class="legend">
+            <span><i class="lg-flow"></i>推进主线（开始→选项→回答→…）</span>
+            <span><i class="lg-ans"></i>回答 → 下一个选项</span>
+            <span><i class="lg-note"></i>记事本引用</span>
+            <span><i class="lg-cross"></i>跨阶段引用</span>
+            <span>拖卡片移动 · 拖阶段标题整段移动 · <b>把鼠标移到节点上，按住下方圆点拖到任意「选项」上方 = 建立引用</b> · 点线可删</span>
+          </div>
+          <div class="addmenu" id="addMenu" hidden>
+            <button type="button" data-addkind="opt">＋ 选项</button>
+            <button type="button" data-addkind="ans">＋ 回答</button>
+          </div>
+          <div class="addghost" id="addGhost" hidden></div>
+          <div class="ct-report" id="chattree-result" hidden></div>
+          <div class="toast" id="toast"></div>
+          <div class="hint" id="hint"></div>
+        </div>
+      </section>
+
+  <!-- ======================= 鲸鱼剧本（对话树 CHAT_TREE2）配置页 ======================= -->
+
+  <!-- ======================= 工程师配置页 ======================= -->
+  <section id="page-engineer" class="page" data-page-node-id="00LE54ZyxGnbA9hLRztagq">
+    <div class="gamecfg-tool scroll-region" data-page-node-id="TDR4CrFjiODEYS0GHAItgl">
+      <div class="gamecfg-bar" data-page-node-id="R5s5Xr8CCj34HRWBlDQUGy">
+        <span class="history-head" data-page-node-id="FFIFDeM94k0lIO25StYCol">🧑‍🔬 工程师配置（候选池 · 随右上角「保存全部」一并保存）</span>
+        <div class="spacer" data-page-node-id="QCjfr8oCy3rDo6002d2Sap"></div>
+        <button id="eng-add" class="btn" data-page-node-id="azd7h6CSdebO5gwqSPWI0U">+ 新增工程师</button>
+      </div>
+      <div class="gamecfg-note dim" data-page-node-id="WHsu4gmIXLVReqem7CFPQq">说明：词条=工作经验（确定加成）；潜力属性（协作/精力/代码/算法/文字）影响成长——对应属性高的工程师，训练中词条有概率升级。精力建议与年龄负相关。月薪 ×6 = 半年周期总成本。可刷出阶段决定该工程师在哪个阶段进入候选池。</div>
+      <div id="eng-list" data-page-node-id="ZrsP6p2m3LGFZUWacnGkKM"></div>
+    </div>
+  </section>
+
+
+  <!-- ======================= UI 配置页 ======================= -->
+  <section id="page-paper" class="page">
+    <div class="gamecfg-tool scroll-region">
+      <div class="gamecfg-bar">
+        <span class="history-head">📄 论文配置（论文池 · 阶段候选 · 随右上角「保存全部」一并保存）</span>
+        <div class="spacer"></div>
+        <button id="paper-add" class="btn">+ 新增论文</button>
+      </div>
+      <div class="gamecfg-note dim">说明：每篇论文 = <b>唯一 ID（no，4xxx 段，分配后永不变）</b> + 可自由改写的文案 + 效果（类型与数值分开给）。<b>改文案永远不影响玩法</b>；阶段候选与架构钥匙都只引用数字 no（doc/32）。论文全局参数（研究耗时等）在【玩法配置 → 论文研究】改，架构的钥匙论文在【架构】页改 —— 本页只做反查展示。</div>
+      <div id="paper-global" class="gamecfg-sec"></div>
+      <div class="ev-group" style="margin-top:12px;">
+        <div class="ev-group-head">
+          <span class="ev-group-title">🎓 每阶段候选（CANDIDATES_BY_VER · 每阶段 1 篇）</span>
+          <span id="paper-cand-count" class="ev-group-count"></span>
+        </div>
+        <div id="paper-cand-list"></div>
+        <div id="paper-legacy" style="margin-top:8px;"></div>
+      </div>
+      <div class="ev-group" style="margin-top:12px;">
+        <div class="ev-group-head">
+          <span class="ev-group-title">📚 论文池（PAPER.POOL）</span>
+          <span id="paper-count" class="ev-group-count"></span>
+        </div>
+        <div id="paper-list"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= 成就页（2026-09-17 · doc/35 P2）======================= -->
+  <section id="page-achv" class="page">
+    <div class="gamecfg-tool scroll-region">
+      <div class="gamecfg-bar">
+        <span class="history-head">🏆 成就配置（随右上角「保存全部」一并保存）</span>
+        <div class="spacer"></div>
+        <button id="achv-add" class="btn">+ 新增成就</button>
+      </div>
+      <div class="gamecfg-note dim">
+        说明：每条成就 = <b>编号 no（永不变，只增不复用）</b> + <b>key（稳定 id）</b> + 文案 + 稀有度 + <b>解锁条件</b>。<br>
+        <b>① key 只读</b>——它是解锁记录在浏览器本地存储里的主键，改了 = 所有人的解锁记录作废（成就全变回未解锁），而且不报错。<br>
+        <b>② 名字与描述是纯文本</b>（游戏里会转义），别写 HTML 标签；描述可用占位符：<code>{model}</code> 模型名 · <code>{param}</code> 参数档 · <code>{arch}</code> 架构名。<br>
+        <b>③ 条件按白名单自动生成</b>；「全部满足 / 任意一条」可以嵌套子条件。条件里<b>不要写死条数</b>（「全部论文」「全架构」由引擎按真源现取）。<br>
+        <b>④ 稀有度</b>同时驱动卡面配色、发光、环层数、粒子数与默认图标（颜色在 h5_demo/style.css 的 .rarity-* 里改）。
+      </div>
+      <div id="achv-hint"></div>
+      <div class="ev-group" style="margin-top:12px;">
+        <div class="ev-group-head">
+          <span class="ev-group-title">🏆 成就表（ACHIEVEMENTS）</span>
+          <span id="achv-count" class="ev-group-count"></span>
+        </div>
+        <div id="achv-list"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="page-uicfg" class="page" data-page-node-id="q5JoRxjxDWHF1CDwfoPgje">
+    <div class="gamecfg-tool scroll-region" data-page-node-id="C5RDdBQRdgrW0XIhMLYIHq">
+      <div class="gamecfg-bar" data-page-node-id="SGNEPEcwEXzWbWzhRQkMwi">
+        <span class="history-head" data-page-node-id="Aclrmv6sPgeV9SeVRrP13D">🎛 UI 配置（界面布局 · 随右上角「保存全部」一并保存）</span>
+        <div class="spacer" data-page-node-id="Q8ykMneE37SwkBNSvoBGYc"></div>
+      </div>
+      <div class="gamecfg-note dim" data-page-node-id="68F3SjVCZpzGw3tEBVOhPY">说明：配置主界面按钮排列与「主界面 / 更多」归属，以及「更多」二级按钮的顺序 / 名称 / 图标 / 显示开关，以及二级面板的空态图与文案。保存后同步游戏，刷新游戏页面生效。</div>
+      <div id="uicfg-list" data-page-node-id="vcU4heopGGeN2NBmbUvVmd"></div>
+    </div>
+  </section>
+
+  <!-- ======================= 文本配置页 ======================= -->
+  <section id="page-text" class="page" data-page-node-id="WNWOnW3xgFtQbKedwbSWWG">
+    <div class="gamecfg-tool scroll-region" data-page-node-id="s0DnC3IeplQeMeiYLqkuNJ">
+      <div class="gamecfg-bar" data-page-node-id="wVdPEmDWbTmc85kUcSSpIc">
+        <span class="history-head" data-page-node-id="bzJaFIhlk91DOchWFEl78I">📝 文本检索与修改（说明/剧情文本 · 随右上角「保存全部」一并保存）</span>
+        <div class="spacer" data-page-node-id="l5z1jdWINwBNXyjang5Wxl"></div>
+      </div>
+      <div class="gamecfg-note dim" data-page-node-id="e2l6byDW24mClz65c9ypkp">说明：输入关键词实时检索游戏内所有文本（事件 / 教学 / 测试问答 / 空态文案 / 起名建议名），直接在文本框里改，点「保存修改」落盘同步到游戏。改完的条目会高亮，可反复检索多次修改后一次性保存。</div>
+      <div id="textq-list" data-page-node-id="36zIqOp7ZPHF6RgRtBkguD"></div>
+    </div>
+  </section>
+
+  <!-- ======================= 历史回溯页 ======================= -->
+  <section id="page-history" class="page" data-page-node-id="eCxhCOmyLtFYfWhQDIulkX">
+    <div class="history-tool scroll-region" data-page-node-id="HO4ESKXvMI5OB7gvIF43Xb">
+      <div class="history-bar" data-page-node-id="Cz5F4tCeFaEBj9vbn0gmnT">
+        <span class="history-head" data-page-node-id="JyJAeyTEFGhIuMTlhhs2Mc">🕘 配置历史（每次保存自动生成快照，可一键回溯）</span>
+        <div class="spacer" data-page-node-id="9V3ozFxZex3Aof2mL1dlAY"></div>
+        <button id="history-clear" class="btn btn-ghost" data-page-node-id="MyWPt3LOiHWUA2I6fqXXhC">🗑 清空历史</button>
+        <button id="history-reset" class="btn btn-ghost" style="color:#ff6b6b;" data-page-node-id="pEmZjTsg6zk6lya87AtlCP">♻ 恢复出厂默认</button>
+      </div>
+      <div class="history-table-wrap" data-page-node-id="Gmlv0LXTXADZ3fwCBd6D1O">
+        <table class="img-table history-table" data-page-node-id="34RC5S20ZsGTS0ysqzF8TM">
+          <colgroup data-page-node-id="f2y3UEYLgDpayO5k2Tv1Gx">
+            <col class="c-time" data-page-node-id="93xupJMD04DrNGWoATb79R">
+            <col class="c-reason" data-page-node-id="PXF5A02koMt6wVyE0J0SDf">
+            <col class="c-files" data-page-node-id="2r7v2QsRUnHNYoMWAjLnFB">
+            <col class="c-ops" data-page-node-id="emhD5PLPSnIDxIq4kZFqbC">
+          </colgroup>
+          <thead data-page-node-id="9LMLkVsyk4AhpotnMbsCpt">
+            <tr data-page-node-id="OR31dkHvXjT7IoczC5jk9W"><th data-page-node-id="eQNB2TjOBYfPq9NTSkPcX7">时间</th><th data-page-node-id="6B3f6jMmgpSfqwuG0LwGLx">原因</th><th data-page-node-id="WnseGLFPXBNgQx51r0es17">包含配置</th><th data-page-node-id="ZiipOMebtlrGbP8yJJfaXb">操作</th></tr>
+          </thead>
+          <tbody id="history-list" data-page-node-id="e3FlHwxt0oM1IlgI6hP0Fo"></tbody>
+        </table>
+      </div>
+      <div class="history-note dim" data-page-node-id="LUIGuuXJhutkzoHTn7aYkb">说明：保存（含自动保存）、BGM 保存、恢复出厂前都会自动生成快照（最多保留 50 份）。「恢复」会覆盖当前项目/音效/BGM 配置并同步到游戏运行时；「恢复出厂默认」会把当前状态先存一份快照，可随时找回。</div>
+    </div>
+  </section>
+
+  <section id="page-life-story" class="page">
+    <div class="life-story-tool scroll-region"><div id="life-story-config"></div></div>
+  </section>
+
+  <section id="page-journey" class="page">
+    <div class="journey-tool scroll-region"><div id="journey-config"></div></div>
+  </section>
+
+  <input type="file" id="file-input" multiple hidden data-page-node-id="y3jbDsFBKGH9IO1bZf0WGM">
+  <input type="file" id="object-img-input" hidden data-page-node-id="DPhxqOosH8ghbNiauwZeZ1">
+
+  <script src="js/core.js?v=20260906a"></script>
+  <script src="js/ui.js?v=20260903m"></script>
+  <script src="js/mapEditor.js?v=20261009e"></script>
+  <script src="js/imageTool.js?v=20260903m"></script>
+  <script src="js/sfxTool.js?v=20261015a"></script>
+  <script src="js/seedAudioTool.js?v=20261015g"></script>
+  <script src="js/bgmTool.js?v=20260915a"></script>
+  <script src="js/gameDefaults.js?v=20261018b"></script>
+  <script src="../h5_demo/js/features/resource_paths.js?v=20261010b"></script>
+  <script src="js/resPicker.js?v=20261010a"></script>
+  <script src="js/gameCfgTool.js?v=20261017j"></script>
+<script src="js/features/v2bGameplay.js?v=20261017j"></script>
+  <script src="js/minigamesTool.js?v=20261017j"></script>
+  <script src="js/outfitsTool.js?v=20261017j"></script>
+  <script src="../h5_demo/js/features/life_music_pulse.js?v=20261011e"></script>
+  <script src="../h5_demo/js/features/life_text_dissolve.js?v=20261009e"></script>
+  <script src="../h5_demo/js/features/life_star_lake.js?v=20261009e"></script>
+  <script src="../h5_demo/js/features/life_gpu_canvas.js?v=20261010p"></script>
+  <script src="../h5_demo/js/features/life_star_compositor.js?v=20261010p"></script>
+  <script src="../h5_demo/js/features/life_timeline.js?v=20261010e"></script>
+  <script src="../h5_demo/js/features/life_video.js?v=20261010p"></script>
+  <script src="../h5_demo/js/features/life_dialogue_voice.js?v=20261011b"></script>
+  <script src="js/lifeStoryTool.js?v=20261017j"></script>
+  <script src="js/journeyTreeView.js?v=20261011b"></script>
+  <script src="js/journeyTool.js?v=20261017j"></script>
+  <script src="js/paperTool.js?v=20261013d"></script>
+<script src="js/achvTool.js?v=20261017j"></script>
+  <script src="js/uiCfgTool.js?v=20261009e"></script>
+  <script src="js/textTool.js?v=20260922a"></script>
+  <script src="js/uiPortraitTool.js?v=20260906a"></script>
+  <script src="js/eventTool.js?v=20261017j"></script>
+  <script src="js/noticeTool.js?v=20261017a"></script>
+  <script src="js/chatTreeView.js?v=20260921c"></script>
+  <script src="js/chatTree.js?v=20260921a"></script>
+  <script src="js/voiceClip.js?v=20261015a"></script>
+  <script src="js/engineerTool.js?v=20261009e"></script>
+  <script src="js/historyTool.js?v=20260903m"></script>
+  <script src="js/main.js?v=20261015g"></script>
+<script src="js/features/mapMovement.js?v=20261009e"></script>
+</body>
+</html>

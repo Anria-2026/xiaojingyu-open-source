@@ -1,0 +1,23 @@
+/* The existing settings card owns layout and scaling; only this section is added. */
+.ws-size-settings {
+  display: grid;
+  gap: 8px;
+  margin-top: 14px;
+  padding: 14px;
+  border: 1px solid var(--aqua-border);
+  border-radius: 14px;
+  background: var(--aqua-surface);
+}
+.ws-size-settings .ws-size-range { width: 100%; margin: 0; }
+.ws-size-settings .ws-size-footer { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.ws-size-settings .ws-size-footer small { flex: 1; min-width: 0; line-height: 1.4; }
+.ws-size-settings .ws-size-footer button { flex: 0 0 auto; }
+.ws-size-settings .ws-size-storage { margin: 0; }
+.ws-size-settings .set-label { gap: 10px; }
+.ws-size-settings #ws-size-value { font: 800 16px var(--font-num); color: var(--aqua-primary-deep); }
+.ws-size-endpoints { display:flex; justify-content:space-between; color:var(--aqua-ink-3); font:11px var(--font-num); margin-top:-4px; }
+.ws-size-settings .ws-size-footer { margin-top:4px; }
+.ws-size-settings .ws-size-footer small { color:var(--aqua-ink-2); font-size:11px; line-height:1.5; }
+.ws-size-settings .dg-btn { min-height:34px; font-family:inherit; }
+.ws-size-settings .ws-size-storage { font-size:11px; line-height:1.5; color:var(--aqua-ink-3); }
+.ws-size-settings .dg-btn::before { pointer-events:none; }

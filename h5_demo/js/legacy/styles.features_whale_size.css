@@ -1,0 +1,3 @@
+@import url("../../features/whale_size.css?v=20261009e");
+/* Generated legacy capability patch; original CSS is imported by the builder. */
+@supports not (gap:1px){.ws-size-settings{grid-gap:8px;gap:8px}}@supports not (gap:1px){.ws-size-settings .ws-size-footer{grid-gap:8px;gap:8px}}@supports not (gap:1px){.ws-size-settings .set-label{grid-gap:10px;gap:10px}}

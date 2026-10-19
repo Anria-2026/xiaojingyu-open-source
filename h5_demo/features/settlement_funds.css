@@ -1,0 +1,55 @@
+/* Keep the settlement action accessible on short landscape screens.
+   The existing portrait layout already scrolls the middle of each act. */
+@media (orientation: landscape) and (max-height: 600px) {
+  .reward-page .aqua-stage {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto;
+  }
+  .reward-page #act-3 {
+    display: flex;
+    flex-direction: column;
+    align-content: normal;
+    justify-content: safe center;
+    gap: 8px;
+    overflow: hidden;
+  }
+  .reward-page #act-3 > .act-head,
+  .reward-page #act-3 > .act-foot {
+    flex: none;
+  }
+  .reward-page #act-3 > .act-head {
+    display: grid;
+    grid-template-columns: auto minmax(0, auto);
+    justify-content: center;
+    align-items: center;
+    gap: 4px 12px;
+  }
+  .reward-page #act-3 .act-title,
+  .reward-page #act-3 .act-meta,
+  .reward-page #act-3 .act-sub {
+    margin: 0;
+  }
+  .reward-page #act-3 .act-meta,
+  .reward-page #act-3 .act-sub {
+    grid-column: 1 / -1;
+  }
+  .reward-page #act-3 > .act3-grid {
+    flex: 0 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(111, 195, 255, .55) transparent;
+  }
+  .reward-page #act-3 > .act3-grid > .bonus-card {
+    align-self: start;
+  }
+  .reward-page #act-3 > .act-foot {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 0;
+  }
+}

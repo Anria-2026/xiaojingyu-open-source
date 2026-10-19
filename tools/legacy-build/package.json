@@ -1,0 +1,11 @@
+{
+  "name": "whale-legacy-build",
+  "private": true,
+  "description": "Build-only fixed tools. Never ship node_modules in Toy.",
+  "dependencies": {
+    "typescript": "5.9.3",
+    "esbuild": "0.27.0",
+    "acorn": "8.18.0",
+    "css-tree": "3.2.1"
+  }
+}

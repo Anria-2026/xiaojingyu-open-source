@@ -1,0 +1,13 @@
+.office-whale-nose { position:absolute; left:36.5%; top:30%; width:11%; height:7%; border:1px solid rgba(131,185,218,.9); border-radius:68% 68% 58% 58%; background:radial-gradient(circle at 28% 24%,rgba(255,255,255,.9) 0 12%,rgba(214,239,254,.63) 26%,rgba(181,220,249,.43) 100%); box-shadow:inset -1px -2px 3px rgba(139,187,230,.22); transform-origin:50% 100%; pointer-events:none; animation:office-nose-breathe 3s ease-in-out infinite; }
+.office-sleep-dream { position:fixed; width:50px; height:44px; box-sizing:border-box; display:flex; align-items:center; justify-content:center; z-index:33; pointer-events:none; border:1px solid var(--aqua-border); border-radius:48% 44% 46% 38%; background:rgba(255,255,255,.97); box-shadow:0 3px 8px -4px rgba(30,66,100,.28); }
+.office-sleep-dream[hidden] { display:none; }
+.office-sleep-dream img { width:34px; height:30px; object-fit:contain; }
+.office-sleep-dream::before,.office-sleep-dream::after { content:''; position:absolute; border:1px solid var(--aqua-border); border-radius:50%; background:rgba(255,255,255,.95); pointer-events:none; }
+.office-sleep-dream::before { width:8px; height:8px; left:0; bottom:-8px; }
+.office-sleep-dream::after { width:4px; height:4px; left:-6px; bottom:-13px; }
+.office-sleep-dream[data-pop='a'] { animation:office-dream-pop-a .45s ease-out both; }
+.office-sleep-dream[data-pop='b'] { animation:office-dream-pop-b .45s ease-out both; }
+@keyframes office-nose-breathe { 0%,100% { transform:scale(.72); opacity:.72; } 55% { transform:scale(1.05); opacity:1; } }
+@keyframes office-dream-pop-a { 0% { transform:scale(.92); } 45% { transform:scale(1.12); } 100% { transform:scale(1); } }
+@keyframes office-dream-pop-b { 0% { transform:scale(.92); } 45% { transform:scale(1.12); } 100% { transform:scale(1); } }
+@media (prefers-reduced-motion:reduce) { .office-whale-nose,.office-sleep-dream[data-pop] { animation:none; } }

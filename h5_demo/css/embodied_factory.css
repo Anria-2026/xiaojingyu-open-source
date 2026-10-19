@@ -1,0 +1,210 @@
+/* The original modal owns its glass and focus management; this page adds only
+   static local surfaces. No animated background, extra blur, or new assets. */
+/* Normal office menus leave the action rail reachable; story overlays retain
+   their own full-screen blocking layer. Reserve equal space on both sides of
+   a vertical rail so cards stay centered while the rail remains reachable. */
+.body-factory-switchable > #modalContainer .modal-mask,
+.body-factory-switchable .v2b-panel-host:has(.body-factory-card,.more-menu-card,.care-v2-card) .modal-mask{left:var(--body-switch-left,0px);right:var(--body-switch-left,0px);top:var(--body-switch-top,0px);align-items:center}
+.body-factory-switchable > #modalContainer .modal-mask .modal-card{max-width:calc(100% - 24px);max-height:calc(100% - 24px);margin-top:0}
+/* Short landscape windows need the existing compact layouts based on the
+   actual card width, rather than the much wider browser viewport. */
+.body-factory-switchable > #modalContainer .modal-card{container:body-switch-panel / inline-size}
+@media(orientation:landscape){@container body-switch-panel (max-width:480px){
+ .body-factory-switchable .recruit-modal-body{grid-template-columns:minmax(0,2fr) minmax(0,3fr)}
+ .body-factory-switchable .recruit-list-col{padding:10px 6px;min-width:0}
+ .body-factory-switchable .recruit-detail-col{min-width:0}
+ .body-factory-switchable .shop-columns{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto}
+ .body-factory-switchable .shop-preview-col{flex-direction:row;align-items:center;gap:8px;padding:6px 10px;overflow:hidden}
+ .body-factory-switchable .shop-preview-col .shop-gpu-img{width:44px;height:44px}
+ .body-factory-switchable .review-modal-body::before{right:0}
+}}
+.v2b-panel-host .modal-card.body-factory-card{width:min(900px,calc(100vw - 32px));max-width:calc(100% - 24px);height:auto;max-height:min(760px,calc(100dvh - 32px),calc(100% - 24px));border-radius:24px}
+.v2b-panel-host .body-factory-card .modal-body{position:relative;overflow-x:hidden;overflow-y:auto;padding:24px;overscroll-behavior:contain;scrollbar-gutter:stable;scrollbar-width:thin;scrollbar-color:#a6d6e9 transparent}
+.body-factory-card .modal-close{min-width:44px;min-height:44px}
+.body-factory-content{color:#284b65;min-width:0}
+.body-factory-hero{display:grid;grid-template-columns:minmax(180px,.9fr) minmax(0,1.2fr);gap:28px;align-items:center}
+.body-factory-intro>span{display:block;font-size:12px;letter-spacing:1.4px;color:#3296b9;font-weight:800}
+.body-factory-intro h2{margin:10px 0;font-size:32px;line-height:1.2;letter-spacing:.5px;color:#193e57}
+.body-factory-intro .body-factory-profile{font-size:16px;font-weight:700;color:#4c7188;line-height:1.5;margin:0 0 10px}
+.body-factory-description,.body-factory-note,.body-factory-legacy{font-size:14px;line-height:1.65;margin:8px 0;color:#608097;overflow-wrap:anywhere}
+.body-factory-description{max-width:38em}
+.body-factory-state{display:inline-flex;gap:6px;align-items:center;margin-top:12px;padding:7px 11px;border-radius:99px;background:#edf5f9;color:#688698;font-size:12px;font-weight:800;line-height:1.4}
+.body-factory-state.is-ready{background:#e5f7f0;color:#328374}.body-factory-state svg{flex:none}
+.body-factory-card .modal-body .body-factory-art{position:relative;isolation:isolate;display:flex;align-items:center;justify-content:center;height:248px;border-radius:22px;background:radial-gradient(ellipse at 50% 65%,#fbfeff 0,#e1f6ff 50%,#d6effb 100%);border:1px solid #b9e3f1;overflow:hidden;padding:22px 24px 34px;box-sizing:border-box}
+.body-factory-art::before{content:"";position:absolute;pointer-events:none;z-index:-1;border:1px solid #ffffffb3;border-radius:50%}
+.body-factory-art::before{width:240px;height:240px;left:-90px;top:-125px}
+.body-factory-model-label{position:absolute;left:14px;top:14px;background:#ffffffb8;border:1px solid #ffffff;padding:5px 9px;border-radius:9px;font-size:12px;color:#2e89a9;font-weight:900;letter-spacing:.8px}
+.body-factory-art-caption{position:absolute;left:0;right:0;bottom:12px;text-align:center;font-size:11px;color:#5791a9;letter-spacing:1px}
+.body-model-preview{display:block;width:100%;height:100%;max-width:100%;max-height:100%;object-fit:contain;pointer-events:none}
+.body-factory-growth{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:18px 0 22px;padding:0;list-style:none}
+.body-factory-growth li{position:relative;display:flex;align-items:center;gap:8px;padding:10px;border:1px solid #e1edf3;border-radius:12px;background:#f6fafcd9;color:#93a8b5}
+.body-factory-growth-dot{display:grid;place-items:center;width:23px;height:23px;flex:none;border-radius:50%;background:#e8f0f5;color:#859dab;font-size:11px;font-weight:800}
+.body-factory-growth b{display:block;font-size:12px;line-height:1.4}.body-factory-growth small{display:block;font-size:11px;line-height:1.5}
+.body-factory-growth li.is-active{border-color:#9ed9ee;background:#e7f6fc;color:#2f7d9d}.body-factory-growth li.is-active .body-factory-growth-dot{background:#78c4e0;color:#fff}
+.body-factory-growth em{position:absolute;top:-7px;right:6px;padding:1px 5px;background:#6cbbd9;border-radius:5px;font-size:9px;font-style:normal;color:#fff}
+.body-factory-purchase-heading{display:flex;gap:12px;align-items:center;justify-content:space-between;margin:0 0 12px}
+.body-factory-purchase-heading h3{margin:0 0 5px;color:#284c63;font-size:16px;line-height:1.4}.body-factory-purchase-heading p{margin:0;font-size:12px;color:#7791a1;line-height:1.5}.body-factory-purchase-heading p b{color:#3b8fac;font-weight:800}
+.body-factory-wallet{display:flex;flex-direction:column;align-items:flex-end;flex:none;gap:3px;background:#eef8fc;border:1px solid #cde7f1;border-radius:12px;padding:9px 13px}
+.body-factory-wallet span{font-size:11px;color:#6e91a4}.body-factory-wallet b{font-size:17px;line-height:1.25;color:#2b8cad;white-space:nowrap;font-variant-numeric:tabular-nums}
+.body-factory-tiers{display:grid;gap:12px}
+.body-factory-tier{display:grid;grid-template-columns:minmax(0,1fr) minmax(100px,auto) 138px;gap:12px 20px;align-items:center;border:1px solid #c2e4f0;border-radius:18px;padding:18px 20px;background:linear-gradient(120deg,#fff,#f3fbff);box-shadow:0 4px 12px #3f8db908}
+.body-factory-tier.is-current{border-color:#a6dacf;background:linear-gradient(120deg,#fff,#eefaf6)}.body-factory-tier.is-covered{border-color:#d7e5ed;background:#f7fafc}.body-factory-tier.is-blocked{border-color:#dce8ed}
+.body-factory-tier-copy{min-width:0}.body-factory-tier-copy h3{margin:7px 0 6px;font-size:18px;line-height:1.35;color:#244b61;overflow-wrap:anywhere}.body-factory-tier-copy p{font-size:12px;line-height:1.6;margin:0;color:#668699}.body-factory-tier-copy p span{display:inline-block}
+.body-factory-tier-badge{display:inline-block;font-size:10px;font-weight:700;line-height:1.45;padding:3px 7px;border-radius:6px;background:#e8f6fb;color:#438caa}.is-current .body-factory-tier-badge{background:#e0f3ec;color:#3a8b78}.is-covered .body-factory-tier-badge{background:#e8eff3;color:#718b9b}.is-blocked .body-factory-tier-badge{background:#fff4df;color:#9c7b42}
+.body-factory-price{display:flex;flex-direction:column;align-items:flex-start;gap:4px;min-width:0}.body-factory-price>span,.body-factory-price small{font-size:11px;color:#7892a2;line-height:1.4}.body-factory-price strong{font-size:26px;font-weight:800;color:#2986aa;line-height:1.15;font-variant-numeric:tabular-nums;overflow-wrap:anywhere;max-width:100%}
+.body-factory-card .body-factory-tier .dg-btn{min-height:46px;height:auto;width:100%;white-space:normal;font-size:14px;line-height:1.45;padding:10px 15px;box-shadow:none}
+.body-factory-card .body-factory-buy:disabled{background:#eaf1f5;color:#78909e;border-color:#d8e6ed;opacity:1;cursor:default}.body-factory-card .is-current .body-factory-buy:disabled{background:#e0f2eb;color:#438f7b;border-color:#bddfd1}
+.body-factory-card .modal-body .body-factory-condition{grid-column:1/-1;font-size:12px;line-height:1.55;margin:0;padding-top:11px;border-top:1px solid #dfedf3;color:#6b8c9e}.body-factory-tier.is-blocked .body-factory-condition{color:#a08044}.body-factory-tier.is-current .body-factory-condition{color:#4b917f}
+.body-model-figure{position:relative;width:52px;height:68px;--head:16px;--torso:26px;--legs:26px;transform:scale(2)}
+.body-model-figure i{display:block;position:absolute;box-sizing:border-box;background:linear-gradient(90deg,#8dbfdf,#f8fdff);border:1px solid #69a9ce}
+.body-model-head{width:var(--head);height:var(--head);left:calc(50% - var(--head)/2);top:0;border-radius:50%}
+.body-model-torso{width:22px;height:var(--torso);left:15px;top:var(--head);border-radius:8px 8px 7px 7px}
+.body-model-arm{width:7px;height:calc(var(--torso) - 1px);top:calc(var(--head) + 3px);border-radius:5px}
+.body-model-arm-left{left:8px;transform:rotate(8deg)}.body-model-arm-right{right:8px;transform:rotate(-8deg)}
+.body-model-leg{width:9px;height:var(--legs);top:calc(var(--head) + var(--torso) - 2px);border-radius:5px}
+.body-model-leg-left{left:16px}.body-model-leg-right{right:16px}
+.body-factory-art[data-body-model="A1"] .body-model-figure{height:55px;--head:18px;--torso:20px;--legs:19px}
+.body-factory-art[data-body-model="A2"] .body-model-figure{height:62px;--head:17px;--torso:23px;--legs:24px}
+.body-factory-art[data-body-model="A4"] .body-model-figure{height:74px;--head:16px;--torso:28px;--legs:32px}
+.body-factory-note{margin:14px 2px 0;font-size:11px;color:#8298a6;line-height:1.6}.body-factory-legacy{padding:10px 12px;border-radius:12px;background:#fff8e8;color:#91752d}
+.body-factory-return-tip{color:#59809a;font-size:12px;line-height:1.5;flex:1;min-width:0}.body-factory-card .modal-footer:has([data-factory-return]){gap:12px;flex-wrap:wrap}.body-factory-card [data-factory-return]{min-height:44px;font-size:14px}
+.care-auto-guide{padding:14px 16px;border:1px solid #a3dcf5;border-radius:16px;background:linear-gradient(110deg,#e6f8ff,#fff);margin:0 0 16px;color:#285775;font-size:14px;line-height:1.55;box-shadow:0 4px 12px #329fca0e}
+.care-auto-guide h3{font-size:17px;margin:4px 0 7px;color:#21617e}.care-auto-guide p{margin:6px 0}.care-auto-guide>small{font-size:11px;font-weight:800;color:#359abd;letter-spacing:1px}
+.care-auto-guide-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.care-auto-guide .dg-btn{min-height:44px;height:auto;font-size:14px;white-space:normal;padding:9px 16px}
+.care-auto-tutorial-card{width:min(600px,calc(100vw - 24px))}.care-auto-tutorial-card .modal-body{overflow-x:hidden;overflow-y:auto;padding:20px}.care-auto-tutorial-card .care-auto-guide{border:0;box-shadow:none;margin:0;padding:4px}
+.care-v2-content[data-care-guide="1"] [data-care-action="page"][data-id="automation"],.care-v2-content[data-care-guide="2"] [data-care-action="auto-toggle"][data-id="talk"]{outline:3px solid #79d5ef;outline-offset:3px;box-shadow:0 0 0 7px #79d5ef22}
+@container v2b-panel (max-width:620px){.body-factory-hero{gap:16px;grid-template-columns:minmax(120px,.85fr) minmax(0,1.1fr)}.body-factory-intro h2{font-size:27px}.body-factory-tier{grid-template-columns:minmax(0,1fr) auto;gap:12px;padding:16px}.body-factory-tier .body-factory-buy{grid-column:1/-1}.body-factory-growth li{padding:9px 7px;gap:6px}.body-factory-growth-dot{width:20px;height:20px}}
+@container v2b-panel (max-width:420px){.v2b-panel-host .body-factory-card .modal-body{padding:16px}.body-factory-hero{grid-template-columns:1fr;gap:14px}.body-factory-card .modal-body .body-factory-art{height:190px;padding:14px 22px 28px}.body-factory-intro>span{font-size:11px}.body-factory-intro h2{font-size:27px;margin:7px 0}.body-factory-intro .body-factory-profile{font-size:14px;margin-bottom:7px}.body-factory-description{font-size:13px;margin:6px 0}.body-factory-state{margin-top:8px}.body-factory-growth{gap:6px;margin:17px 0}.body-factory-growth li{display:flex;flex-direction:column;gap:5px;text-align:center;padding:8px 3px}.body-factory-growth small{font-size:10px}.body-factory-growth em{right:3px}.body-factory-purchase-heading h3{font-size:14px}.body-factory-wallet{padding:8px 10px}.body-factory-wallet b{font-size:15px}.body-factory-price strong{font-size:23px}.body-factory-tier-copy h3{font-size:17px}}
+@media(max-height:500px) and (orientation:landscape){.v2b-panel-host .modal-card.body-factory-card{width:min(900px,calc(100vw - 24px));max-height:calc(100% - 24px);border-radius:19px}.v2b-panel-host .body-factory-card .modal-body{padding:16px 20px}.body-factory-hero{grid-template-columns:180px minmax(0,1fr);gap:22px}.body-factory-card .modal-body .body-factory-art{height:180px;padding:15px 18px 28px}.body-factory-intro h2{font-size:27px;margin:6px 0}.body-factory-intro .body-factory-profile{font-size:14px;margin:0 0 7px}.body-factory-description{margin:5px 0;font-size:13px}.body-factory-state{margin-top:6px}.body-factory-growth{margin:14px 0 18px}.body-factory-card .modal-close{min-width:44px;min-height:44px}}
+@media(max-width:600px){.care-auto-guide{padding:12px;font-size:13px}.care-auto-guide h3{font-size:16px}.care-auto-tutorial-card .modal-body{padding:16px}}
+@media(prefers-reduced-motion:reduce){.care-auto-guide *{animation:none!important}}
+/* [feature:portrait-full-height-no-scroll] */
+
+/* The viewport belongs to the open dialog. Covering the rail is intentional:
+   a portrait rail is not a safe-area inset and must not shorten every card.
+   Short dialogs use their intrinsic height; the viewport is only a ceiling. */
+@media (orientation:portrait) {
+ .office-shell > #modalContainer .modal-mask,
+ .office-shell.body-factory-switchable > #modalContainer .modal-mask,
+ .office-shell.body-factory-switchable .v2b-panel-host:has(.body-factory-card,.more-menu-card,.care-v2-card) .modal-mask { left:0; right:0; top:0; bottom:0; align-items:center; }
+ .office-shell #modalContainer .modal-mask .modal-card { width:calc(100% - 16px); height:auto; min-height:0; max-width:none; max-height:calc(100% - 20px); margin-top:0; }
+ .office-shell #modalContainer .modal-mask .modal-card:has(.test-modal-body,.news-weibo-body) { height:calc(100% - 20px); }
+ .office-shell .v2b-panel-host .modal-card.body-factory-card,
+ .office-shell .v2b-panel-host .modal-card.care-v2-card,
+ .office-shell .v2b-panel-host .modal-card.arcade-panel { width:calc(100% - 16px); max-width:calc(100% - 16px); max-height:calc(100% - 20px); }
+ .office-shell .v2b-panel-host .modal-card.body-factory-card,
+ .office-shell .v2b-panel-host .modal-card.care-v2-card,
+ .office-shell .v2b-panel-host .modal-card.arcade-panel:not(.arcade-playing) { height:auto; }
+ .office-shell .v2b-panel-host .body-factory-card .modal-body { padding:12px; }
+ .body-factory-card .body-factory-hero { grid-template-columns:100px minmax(0,1fr); gap:12px; }
+ .body-factory-card .modal-body .body-factory-art { height:150px; padding:22px 8px; }
+ .body-factory-card .body-factory-model-label { top:6px; left:6px; padding:3px 5px; font-size:10px; }
+ .body-factory-card .body-factory-intro h2 { font-size:23px; margin:4px 0; }
+ .body-factory-card .body-factory-intro .body-factory-profile { font-size:12px; margin-bottom:5px; }
+ .body-factory-card .body-factory-description { font-size:12px; line-height:1.5; margin:4px 0; }
+ .body-factory-card .body-factory-state { margin-top:5px; font-size:11px; padding:5px 7px; }
+ .body-factory-card .body-factory-growth { margin:14px 0; gap:4px; }
+ .body-factory-card .body-factory-growth li { padding:7px 3px; gap:4px; }
+ .body-factory-card .body-factory-growth b { font-size:11px; }
+ .body-factory-card .body-factory-growth small { font-size:10px; }
+ .body-factory-card .body-factory-tier { padding:12px; gap:10px; }
+ .body-factory-card .body-factory-price strong { font-size:24px; }
+ .body-factory-card .body-factory-note { margin-top:10px; font-size:11px; }
+}
+.v2b-panel-host .body-factory-card .modal-body,.v2b-panel-host .care-auto-tutorial-card .modal-body { overflow:visible; scrollbar-gutter:auto; }
+.body-factory-card .modal-body .body-factory-tier[hidden] { display:none!important; }
+
+
+
+
+@media (orientation:landscape) and (max-height:450px) {
+ .office-shell.body-factory-switchable > #modalContainer .modal-mask,
+ .office-shell.body-factory-switchable .v2b-panel-host:has(.body-factory-card,.care-v2-card) .modal-mask { left:0; right:0; top:0; bottom:0; }
+ .v2b-panel-host .modal-card.body-factory-card { width:calc(100% - 24px); max-width:calc(100% - 24px); }
+ .v2b-panel-host .body-factory-card .modal-body { padding:10px 12px; }
+ .body-factory-card .body-factory-content { display:grid; grid-template-columns:minmax(180px,.8fr) minmax(0,1.4fr); grid-template-rows:auto auto; gap:8px 14px; }
+ .body-factory-card .body-factory-hero { grid-column:1; grid-row:1; grid-template-columns:75px minmax(0,1fr); gap:8px; }
+ .body-factory-card .modal-body .body-factory-art { height:128px; padding:20px 7px; }
+ .body-factory-card .body-factory-model-label { left:4px; top:4px; padding:2px 5px; font-size:9px; }
+ .body-factory-card .body-factory-intro h2 { font-size:20px; }
+ .body-factory-card .body-factory-intro .body-factory-profile { font-size:11px; line-height:1.4; }
+ .body-factory-card .body-factory-description { font-size:11px; line-height:1.4; }
+ .body-factory-card .body-factory-state { padding:4px 6px; margin-top:4px; font-size:10px; }
+ .body-factory-card .body-factory-growth { grid-column:1; grid-row:2; margin:0; gap:3px; }
+ .body-factory-card .body-factory-growth li { gap:3px; padding:6px 2px; flex-direction:column; text-align:center; }
+ .body-factory-card .body-factory-growth b,.body-factory-card .body-factory-growth small { font-size:9px; }
+ .body-factory-card .body-factory-growth-dot { width:18px; height:18px; font-size:10px; }
+ .body-factory-card .body-factory-purchase { grid-column:2; grid-row:1 / 3; }
+ .body-factory-card .body-factory-purchase-heading { margin-bottom:7px; }
+ .body-factory-card .body-factory-purchase-heading h3 { font-size:13px; }
+ .body-factory-card .body-factory-wallet { padding:5px 8px; }
+ .body-factory-card .body-factory-wallet b { font-size:14px; }
+ .body-factory-card .body-factory-legacy { padding:5px 8px; margin:5px 0; font-size:10px; line-height:1.4; }
+ .body-factory-card .body-factory-tier { grid-template-columns:minmax(0,1fr) auto; padding:10px; gap:6px; }
+ .body-factory-card .body-factory-tier-copy h3 { font-size:15px; margin:3px 0; }
+ .body-factory-card .body-factory-tier-copy p { font-size:10px; }
+ .body-factory-card .body-factory-price strong { font-size:22px; }
+ .body-factory-card .body-factory-buy { grid-column:1 / -1; }
+ .body-factory-card .body-factory-tier .dg-btn { min-height:34px; padding:5px 10px; font-size:12px; }
+ .body-factory-card .modal-body .body-factory-condition { font-size:10px; padding-top:5px; line-height:1.4; }
+ .body-factory-card .body-factory-note { grid-column:1 / -1; margin:0; font-size:10px; line-height:1.4; }
+}
+
+@media (orientation:landscape) and (max-height:450px) {
+ .body-factory-card .body-factory-content { row-gap:4px; }
+ .body-factory-card .body-factory-description { font-size:10px; line-height:1.3; }
+ .body-factory-card .body-factory-growth li { padding-block:4px; }
+ .body-factory-card .body-factory-note { line-height:1.3; }
+}
+
+@media (orientation:landscape) and (max-height:450px) {
+ .body-factory-card .body-factory-tier-copy { grid-column:1; grid-row:1 / 3; }
+ .body-factory-card .body-factory-price { grid-column:2; grid-row:1; }
+ .body-factory-card .body-factory-buy { grid-column:2; grid-row:2; }
+ .body-factory-card .body-factory-tier-badge { font-size:9px; padding:2px 4px; }
+ .body-factory-card .body-factory-condition { grid-row:3; }
+}
+@media (orientation:portrait) and (max-height:680px) {
+ .office-shell .v2b-panel-host .body-factory-card .modal-body { padding:9px; }
+ .body-factory-card .body-factory-hero { grid-template-columns:76px minmax(0,1fr); gap:9px; }
+ .body-factory-card .modal-body .body-factory-art { height:114px; padding:18px 5px; }
+ .body-factory-card .body-factory-intro > span { font-size:10px; }
+ .body-factory-card .body-factory-intro h2 { font-size:20px; margin:2px 0; }
+ .body-factory-card .body-factory-intro .body-factory-profile { font-size:10px; margin-bottom:3px; }
+ .body-factory-card .body-factory-description { font-size:10px; line-height:1.35; margin:3px 0; }
+ .body-factory-card .body-factory-state { margin-top:3px; font-size:10px; padding:3px 5px; }
+ .body-factory-card .body-factory-growth { margin:8px 0; gap:3px; }
+ .body-factory-card .body-factory-growth li { padding:4px 2px; gap:2px; }
+ .body-factory-card .body-factory-growth-dot { width:17px; height:17px; font-size:10px; }
+ .body-factory-card .body-factory-growth small { font-size:9px; }
+ .body-factory-card .body-factory-purchase-heading { margin-bottom:4px; }
+ .body-factory-card .body-factory-purchase-heading h3 { font-size:12px; }
+ .body-factory-card .body-factory-purchase-heading p { font-size:10px; margin:3px 0; }
+ .body-factory-card .body-factory-wallet { padding:4px 6px; }
+ .body-factory-card .body-factory-wallet b { font-size:13px; }
+ .body-factory-card .body-factory-legacy { padding:5px 7px; margin:5px 0; font-size:10px; line-height:1.35; }
+ .body-factory-card .body-factory-tier { grid-template-columns:minmax(0,1fr) auto; padding:8px; gap:5px; }
+ .body-factory-card .body-factory-tier-copy { grid-column:1; grid-row:1 / 3; }
+ .body-factory-card .body-factory-tier-copy h3 { font-size:14px; margin:3px 0; }
+ .body-factory-card .body-factory-tier-copy p { font-size:10px; line-height:1.35; }
+ .body-factory-card .body-factory-tier-badge { font-size:9px; padding:2px 4px; }
+ .body-factory-card .body-factory-price { grid-column:2; grid-row:1; }
+ .body-factory-card .body-factory-price strong { font-size:20px; }
+ .body-factory-card .body-factory-buy { grid-column:2; grid-row:2; min-height:34px; padding:5px 8px; font-size:11px; }
+ .body-factory-card .modal-body .body-factory-condition { grid-row:3; font-size:10px; line-height:1.35; padding-top:4px; }
+ .body-factory-card .body-factory-note { margin-top:6px; font-size:9px; line-height:1.35; }
+}
+/* [/feature:portrait-full-height-no-scroll] */
+
+
+
+
+/* Complete procurement stays on the original card; no automatic content pages. */
+.v2b-panel-host .body-factory-card .modal-body { min-height:0; overflow-x:hidden; overflow-y:auto; }
+
+@media (orientation:landscape) and (min-height:451px) and (max-height:800px) {
+ .v2b-panel-host .body-factory-card .modal-body { padding:16px 20px; }
+ .body-factory-card .modal-body .body-factory-art { height:180px; }
+ .body-factory-card .body-factory-growth { margin:8px 0; }
+ .body-factory-card .body-factory-tier { padding:14px 16px; }
+}

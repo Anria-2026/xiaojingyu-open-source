@@ -1,0 +1,556 @@
+/* Responsive rules use the presentation dimensions, including in-page landscape. */
+.life-presentation-screen{position:fixed;inset:0;z-index:95000;overflow:hidden}
+.life-presentation{position:fixed;inset:0;z-index:95000;overflow:hidden;isolation:isolate}
+.life-presentation.is-rotated{inset:auto;top:0;left:100%;transform-origin:0 0;transform:rotate(90deg)}
+.life-finale{position:fixed;inset:0;z-index:95000;isolation:isolate;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:max-content minmax(0,1fr) max-content;align-content:stretch;min-height:0;min-width:0;margin:0;padding:0;overflow:hidden;overflow:clip;background:#06182e;color:#effbff;font-family:inherit}
+.life-finale *{box-sizing:border-box}.life-background,.life-atmosphere,.life-particles{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.life-background{z-index:-3;background-size:cover;background-position:center;transition:background-image .5s}.life-atmosphere{z-index:-2;background:linear-gradient(180deg,#02132766 0%,#031b2e22 35%,#06172bcc 100%)}.life-particles{z-index:5}.life-finale>header{position:relative;z-index:10;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 24px;text-shadow:0 2px 8px #00142a}.life-top-caption{font-size:14px;letter-spacing:2px;font-weight:600;min-width:0;line-height:1.5}.life-controls{display:flex;gap:8px;flex-shrink:0}.life-finale button{font:inherit;color:#eefbff;min-height:44px;min-width:44px;border:1px solid #9adfff66;background:#163452c9;cursor:pointer;border-radius:50px;padding:8px 15px;transition:background .2s,transform .2s}.life-finale button:hover{background:#316186}.life-finale button:focus-visible{outline:3px solid #9fedff;outline-offset:3px}.life-controls button{font-size:13px}.life-finale button[hidden]{display:none}.life-scene{position:relative;flex:1;min-height:0;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:16px calc(5 * var(--life-vw))}.life-finale>footer{position:relative;z-index:10;padding:10px 24px 16px;display:flex;gap:20px;align-items:center;color:#b8dcf2;font-size:12px}.life-finale>footer>button{margin-left:auto;min-width:130px;font-size:14px}.life-progress{--life-progress:0;height:2px;background:#8bceff30;position:absolute;top:0;left:24px;right:24px}.life-progress>i{display:block;height:100%;width:calc(var(--life-progress)*100%);background:#a4ecff;box-shadow:0 0 10px #8bcaff}
+.life-vn-character{position:absolute;bottom:0;inset-inline:0;height:100%;text-align:center;animation:lifeCharacterIn .7s both}.life-vn-character img{height:100%;max-width:85%;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 8px 16px #001c3280)}.life-dialogue-box{position:absolute;bottom:12px;left:7%;right:7%;padding:25px 32px 18px;background:linear-gradient(105deg,#0c233cec,#153853df);border-top:1px solid #a4e4ff66;box-shadow:0 12px 35px #00122555;border-radius:3px;cursor:pointer;z-index:4}.life-speaker{display:inline-block;color:#a4e7ff;letter-spacing:3px;font-weight:700;font-size:19px;margin-bottom:14px}.life-dialogue-text{font-size:20px;line-height:1.8;min-height:3.6em;margin:0;white-space:pre-wrap;overflow-wrap:anywhere}.life-dialogue-box small{display:block;text-align:right;color:#b5d7e9;font-size:12px;line-height:1.5;margin-top:8px}.life-dialogue-box small span{display:inline-block;animation:lifePrompt 1.3s infinite}
+.life-split{width:min(1120px,100%);height:100%;max-height:670px;display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:stretch;animation:lifeSceneIn .65s both}.life-memory,.life-journey{min-height:0;min-width:0;position:relative;background:#07223ac9;border:1px solid #7cceff40;border-radius:12px;overflow:hidden;padding:22px 25px;box-shadow:0 20px 40px #001c2d60}.life-journey{display:flex;flex-direction:column;background:#dff6ff12}.life-chapter-label{color:#9edcf6;font-size:12px;letter-spacing:2px;line-height:1.5;margin-bottom:16px}.life-memory-heading small{color:#b9def2;font-size:13px}.life-memory-heading h2{font-size:25px;color:#f3fcff;line-height:1.35;margin:12px 0;overflow-wrap:anywhere}.life-memory-heading time{font-size:14px;color:#a9cadd;letter-spacing:1px}.life-score{display:flex;align-items:baseline;gap:12px;margin:24px 0 18px}.life-score b{font-size:52px;letter-spacing:-2px;line-height:1;color:#c1f2ff;text-shadow:0 0 24px #5fc3fa80;animation:lifeNumberIn .8s both}.life-score span{font-size:12px;color:#c0dced}.life-memory-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:16px 0;border-top:1px solid #80cfff35;border-bottom:1px solid #80cfff35}.life-memory-stats div{display:flex;flex-direction:column;gap:8px}.life-memory-stats b{font-size:21px;color:#e3f7ff}.life-memory-stats span{font-size:11px;color:#a9cddf}.life-history-bars{display:flex;flex-direction:column;gap:9px;margin-top:22px}.life-history-row{display:grid;grid-template-columns:40px 1fr 45px;gap:8px;align-items:center;font-size:11px;color:#b2d8ec}.life-history-row i{height:5px;background:#4e9dd329;border-radius:8px;overflow:hidden}.life-history-row em{display:block;width:var(--fill);height:100%;background:linear-gradient(90deg,#3692d0,#afeefe);transform-origin:left;animation:lifeBarIn 1.2s both}.life-history-row b{font-weight:500;text-align:right}.life-memory-note{font-size:16px;line-height:1.9;color:#c5e2f1;margin-top:28px}.life-photo-frame{flex:1;min-height:0;overflow:hidden;display:flex;justify-content:center;align-items:center;background:#8cc8e812;border-radius:8px}.life-photo-frame img{height:100%;width:100%;object-fit:contain;will-change:transform}.life-journey>p{font-size:16px;line-height:1.8;margin:18px 0 0;color:#ebf9ff;overflow-wrap:anywhere}
+.life-ending-figure{position:absolute;inset:0;display:flex;justify-content:center;align-items:center;opacity:.6;animation:lifeCharacterIn 1.1s both}.life-ending-figure img{height:100%;max-width:80%;object-fit:contain}.life-ending-copy{position:relative;z-index:4;text-align:center;width:100%;margin-top:calc(15 * var(--life-vh));text-shadow:0 2px 15px #062542}.life-ending-copy small{color:#b5e4f6;letter-spacing:6px;font-size:14px}.life-ending-title{font-size:clamp(20px,calc(3.2 * var(--life-vw)),42px);letter-spacing:4px;line-height:1.8;margin:22px 0;color:#e0faff;text-shadow:0 0 15px #58b7e980;word-break:keep-all}.life-ending-title span{display:inline-block;animation:lifeGlyphIn .65s both;animation-delay:calc(var(--i)*.085s)}.life-ending-title.is-dissolving{opacity:0;transition:opacity .65s}.life-ending-copy>p{font-size:13px;color:#c2e2f0;line-height:1.8}.life-finale.is-paused *{animation-play-state:paused!important}
+@keyframes lifeCharacterIn{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}@keyframes lifeSceneIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}@keyframes lifeNumberIn{from{opacity:0;transform:translateY(10px) scale(.95)}to{opacity:1;transform:none}}@keyframes lifeBarIn{from{transform:scaleX(0)}to{transform:scaleX(1)}}@keyframes lifeGlyphIn{from{opacity:0;filter:blur(4px);transform:translateY(10px)}to{opacity:1;filter:blur(0);transform:none}}@keyframes lifePrompt{50%{transform:translateX(3px);opacity:.5}}
+/* Preserve native responsive rules in WebViews without :where(). */
+@supports not selector(:where(*)){@media(orientation:portrait),(max-width:640px){.life-finale>header{padding:10px 12px;gap:8px;align-items:flex-start}.life-top-caption{font-size:11px;letter-spacing:1px;max-width:42%}.life-controls{gap:5px}.life-controls button{padding:7px 9px;min-width:40px;font-size:11px;min-height:44px}.life-scene{padding:8px 12px}.life-finale>footer{padding:10px 12px max(12px,env(safe-area-inset-bottom));gap:8px;font-size:10px}.life-finale>footer>button{min-width:112px;min-height:44px;font-size:13px}.life-progress{left:12px;right:12px}.life-vn-character{height:94%;bottom:9%}.life-vn-character img{max-width:96%;height:100%}.life-dialogue-box{left:0;right:0;bottom:4px;padding:18px 18px 12px;max-height:48%;overflow:auto}.life-speaker{font-size:16px;margin-bottom:10px}.life-dialogue-text{font-size:16px;line-height:1.8;min-height:4em}.life-split{grid-template-columns:1fr;grid-template-rows:minmax(0,.92fr) minmax(0,1.08fr);gap:10px;max-height:none}.life-memory,.life-journey{padding:13px 16px;border-radius:10px}.life-chapter-label{font-size:10px;letter-spacing:1px;margin-bottom:8px}.life-memory-heading{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:12px}.life-memory-heading small{font-size:11px;flex-basis:100%}.life-memory-heading h2{font-size:18px;margin:7px 0}.life-memory-heading time{font-size:11px}.life-score{margin:8px 0;gap:10px}.life-score b{font-size:32px}.life-score span{font-size:10px}.life-memory-stats{padding:8px 0;gap:10px}.life-memory-stats div{gap:4px}.life-memory-stats b{font-size:16px}.life-memory-stats span{font-size:10px}.life-history-bars{gap:5px;margin-top:9px}.life-history-row{font-size:10px;grid-template-columns:32px 1fr 38px}.life-history-row i{height:4px}.life-journey>p{font-size:13px;line-height:1.65;margin-top:9px}.life-memory-note{font-size:13px;line-height:1.8;margin:16px 0 0}.life-ending-copy{margin-top:calc(12 * var(--life-vh))}.life-ending-title{font-size:clamp(18px,calc(5 * var(--life-vw)),26px);letter-spacing:1px;line-height:1.8}.life-ending-copy small{font-size:11px;letter-spacing:3px}.life-ending-copy>p{font-size:11px;max-width:250px;margin:auto}.life-photo-frame img{object-position:center}.life-ending-figure img{max-width:98%}}}
+/* Stage layout: (orientation:portrait),(max-width:640px) */
+.life-finale:where(.life-layout-portrait)>header{padding:10px 12px;gap:8px;align-items:flex-start}:where(.life-layout-portrait) .life-top-caption{font-size:11px;letter-spacing:1px;max-width:42%}:where(.life-layout-portrait) .life-controls{gap:5px}:where(.life-layout-portrait) .life-controls button{padding:7px 9px;min-width:40px;font-size:11px;min-height:44px}:where(.life-layout-portrait) .life-scene{padding:8px 12px}.life-finale:where(.life-layout-portrait)>footer{padding:10px 12px max(12px,env(safe-area-inset-bottom));gap:8px;font-size:10px}.life-finale:where(.life-layout-portrait)>footer>button{min-width:112px;min-height:44px;font-size:13px}:where(.life-layout-portrait) .life-progress{left:12px;right:12px}:where(.life-layout-portrait) .life-vn-character{height:94%;bottom:9%}:where(.life-layout-portrait) .life-vn-character img{max-width:96%;height:100%}:where(.life-layout-portrait) .life-dialogue-box{left:0;right:0;bottom:4px;padding:18px 18px 12px;max-height:48%;overflow:auto}:where(.life-layout-portrait) .life-speaker{font-size:16px;margin-bottom:10px}:where(.life-layout-portrait) .life-dialogue-text{font-size:16px;line-height:1.8;min-height:4em}:where(.life-layout-portrait) .life-split{grid-template-columns:1fr;grid-template-rows:minmax(0,.92fr) minmax(0,1.08fr);gap:10px;max-height:none}:where(.life-layout-portrait) .life-memory,:where(.life-layout-portrait) .life-journey{padding:13px 16px;border-radius:10px}:where(.life-layout-portrait) .life-chapter-label{font-size:10px;letter-spacing:1px;margin-bottom:8px}:where(.life-layout-portrait) .life-memory-heading{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:12px}:where(.life-layout-portrait) .life-memory-heading small{font-size:11px;flex-basis:100%}:where(.life-layout-portrait) .life-memory-heading h2{font-size:18px;margin:7px 0}:where(.life-layout-portrait) .life-memory-heading time{font-size:11px}:where(.life-layout-portrait) .life-score{margin:8px 0;gap:10px}:where(.life-layout-portrait) .life-score b{font-size:32px}:where(.life-layout-portrait) .life-score span{font-size:10px}:where(.life-layout-portrait) .life-memory-stats{padding:8px 0;gap:10px}:where(.life-layout-portrait) .life-memory-stats div{gap:4px}:where(.life-layout-portrait) .life-memory-stats b{font-size:16px}:where(.life-layout-portrait) .life-memory-stats span{font-size:10px}:where(.life-layout-portrait) .life-history-bars{gap:5px;margin-top:9px}:where(.life-layout-portrait) .life-history-row{font-size:10px;grid-template-columns:32px 1fr 38px}:where(.life-layout-portrait) .life-history-row i{height:4px}:where(.life-layout-portrait) .life-journey>p{font-size:13px;line-height:1.65;margin-top:9px}:where(.life-layout-portrait) .life-memory-note{font-size:13px;line-height:1.8;margin:16px 0 0}:where(.life-layout-portrait) .life-ending-copy{margin-top:calc(12 * var(--life-vh))}:where(.life-layout-portrait) .life-ending-title{font-size:clamp(18px,calc(5 * var(--life-vw)),26px);letter-spacing:1px;line-height:1.8}:where(.life-layout-portrait) .life-ending-copy small{font-size:11px;letter-spacing:3px}:where(.life-layout-portrait) .life-ending-copy>p{font-size:11px;max-width:250px;margin:auto}:where(.life-layout-portrait) .life-photo-frame img{object-position:center}:where(.life-layout-portrait) .life-ending-figure img{max-width:98%}
+/* Preserve native responsive rules in WebViews without :where(). */
+@supports not selector(:where(*)){@media(max-height:700px) and (orientation:portrait){.life-memory .life-history-bars{display:none}.life-score b{font-size:27px}.life-memory-stats{padding:5px 0}.life-journey>p{font-size:12px;line-height:1.5}.life-dialogue-text{font-size:15px}.life-finale>header{padding-block:6px}.life-scene{padding-block:4px}.life-chapter-label{margin-bottom:5px}}}
+/* Stage layout: (max-height:700px) and (orientation:portrait) */
+:where(.life-layout-portrait-700) .life-memory .life-history-bars{display:none}:where(.life-layout-portrait-700) .life-score b{font-size:27px}:where(.life-layout-portrait-700) .life-memory-stats{padding:5px 0}:where(.life-layout-portrait-700) .life-journey>p{font-size:12px;line-height:1.5}:where(.life-layout-portrait-700) .life-dialogue-text{font-size:15px}.life-finale:where(.life-layout-portrait-700)>header{padding-block:6px}:where(.life-layout-portrait-700) .life-scene{padding-block:4px}:where(.life-layout-portrait-700) .life-chapter-label{margin-bottom:5px}
+@media(prefers-reduced-motion:reduce){.life-finale *{animation:none!important;transition:none!important}.life-photo-frame img{will-change:auto}}
+
+/* Cue layout and motion share the editor's timeline contract. */
+.life-single{width:min(840px,100%);height:100%;max-height:670px;display:flex;min-height:0}
+.life-single>article{flex:1;min-height:0}
+.life-memory{overflow:auto;scrollbar-width:thin;scrollbar-color:#90d8f566 transparent}
+.life-journey-copy{flex-shrink:0;max-height:38%;overflow:auto;margin-top:18px;font-size:16px;line-height:1.8;color:#ebf9ff;overflow-wrap:anywhere;scrollbar-width:thin}
+.life-journey-copy>p{margin:0;white-space:pre-wrap}
+.life-journey-copy>p+p{margin-top:10px}
+.life-cue-narration{font-size:14px;line-height:1.8;color:#c5e2f1;white-space:pre-wrap;overflow-wrap:anywhere}
+.life-finale .life-vn-character,.life-finale .life-split,.life-finale .life-ending-figure{animation:none}
+.life-finale[data-motion="fade"] .life-scene>*,.life-finale[data-motion="pan"] .life-scene>*{animation:lifeFadeIn .65s both}
+.life-finale[data-motion="rise"] .life-scene>*{animation:lifeSceneIn .65s both}
+.life-finale[data-motion="particles"] .life-scene>*{animation:lifeFadeIn .8s both}
+.life-finale[data-motion="none"] *{animation:none!important;transition:none!important}
+.life-finale.is-paused:not(.is-media-buffering) .life-scene>*,.life-finale.is-paused:not(.is-media-buffering) .life-score b,.life-finale.is-paused:not(.is-media-buffering) .life-history-row em,.life-finale.is-paused:not(.is-media-buffering) .life-ending-title span{animation:none!important}
+@keyframes lifeFadeIn{from{opacity:0}to{opacity:1}}
+.life-finale[data-type="ending"] .life-ending-figure{opacity:.42;animation:lifeEndingFigureIn 1s both}
+.life-ending-copy{padding:24px 10px;background:linear-gradient(180deg,transparent,#071b36cf 26%,#071b36cf 76%,transparent)}
+.life-ending-title{font-weight:700;text-shadow:0 2px 5px #00152c,0 0 22px #59c8ff88}
+@keyframes lifeEndingFigureIn{from{opacity:0;transform:translateY(12px)}to{opacity:.42;transform:none}}
+/* Preserve native responsive rules in WebViews without :where(). */
+@supports not selector(:where(*)){@media(orientation:portrait),(max-width:640px){.life-single{max-height:none}.life-journey-copy{font-size:13px;line-height:1.65;margin-top:9px}.life-cue-narration{font-size:13px}}}
+/* Stage layout: (orientation:portrait),(max-width:640px) */
+:where(.life-layout-portrait) .life-single{max-height:none}:where(.life-layout-portrait) .life-journey-copy{font-size:13px;line-height:1.65;margin-top:9px}:where(.life-layout-portrait) .life-cue-narration{font-size:13px}
+/* Preserve native responsive rules in WebViews without :where(). */
+@supports not selector(:where(*)){@media(orientation:portrait),(max-width:640px){.life-ending-title{font-size:clamp(21px,calc(5.9 * var(--life-vw)),28px)}.life-ending-copy{padding:22px 8px}.life-controls button{min-width:44px}}}
+/* Stage layout: (orientation:portrait),(max-width:640px) */
+:where(.life-layout-portrait) .life-ending-title{font-size:clamp(21px,calc(5.9 * var(--life-vw)),28px)}:where(.life-layout-portrait) .life-ending-copy{padding:22px 8px}:where(.life-layout-portrait) .life-controls button{min-width:44px}
+/* Preserve native responsive rules in WebViews without :where(). */
+@supports not selector(:where(*)){@media(max-height:700px) and (orientation:portrait){.life-journey-copy{font-size:12px;line-height:1.5}}}
+/* Stage layout: (max-height:700px) and (orientation:portrait) */
+:where(.life-layout-portrait-700) .life-journey-copy{font-size:12px;line-height:1.5}
+
+/* Film composition: layers remain independent of the main scene's controls. */
+.life-background-previous,.life-cinema-light,.life-transition-flash{position:absolute;inset:0;pointer-events:none}
+.life-background,.life-background-previous{background-size:cover;background-position:center;will-change:transform}
+.life-background-previous{z-index:-2;opacity:0}
+.life-background-previous.is-leaving{animation:lifeBackgroundLeave 1.2s both}
+.life-atmosphere{z-index:-1;background:radial-gradient(ellipse at 75% 40%,#226aa426,transparent 65%),linear-gradient(105deg,#021227e6,#05263d66 52%,#09213fc9),linear-gradient(0deg,#04132de8,transparent 60%)}
+.life-cinema-light{z-index:0;overflow:hidden;opacity:.7;mix-blend-mode:screen}
+.life-cinema-light i{position:absolute;top:-25%;left:12%;height:150%;width:13%;transform:rotate(28deg);background:linear-gradient(90deg,transparent,#9ae4ff12,transparent);filter:blur(12px);animation:lifeLightBreath 14s ease-in-out infinite alternate}
+.life-cinema-light i:nth-child(2){left:62%;width:18%;animation-delay:-7s;opacity:.7}
+.life-cinema-light i:nth-child(3){left:88%;width:6%;animation-delay:-3s;opacity:.5}
+.life-finale>header{padding:18px calc(3 * var(--life-vw));border-bottom:1px solid #afe6ff18;background:linear-gradient(#03132666,transparent)}
+.life-heading{display:flex;flex-direction:column;gap:7px;min-width:0}
+.life-heading>small{font-size:9px;letter-spacing:5px;color:#7dc7e7;line-height:1.2}
+.life-heading .life-top-caption{font-size:13px;letter-spacing:2px;max-width:none}
+.life-chapter-index{font-variant-numeric:tabular-nums;letter-spacing:2px;font-size:10px;color:#8cbacd}
+.life-finale>footer>span:first-of-type{letter-spacing:2px}
+.life-scene{z-index:1;padding:16px calc(6 * var(--life-vw))}
+.life-split{width:min(1250px,100%);gap:calc(5 * var(--life-vw));max-height:740px;align-items:center}
+.life-memory,.life-journey{height:100%;background:linear-gradient(145deg,#0a2b45d9,#071b34ad);border-color:#b3e9ff3d;border-radius:4px;box-shadow:0 25px 70px #00142650,inset 0 1px #c5ecff0d}
+.life-memory{height:auto;max-height:100%;border-top:2px solid #80d5f2a6;padding:27px 30px}
+.life-memory:before{content:"";position:absolute;width:7px;height:7px;right:12px;top:12px;background:#9ee4fd;border-radius:50%;box-shadow:0 0 18px #73cbff;opacity:.7;pointer-events:none}
+.life-chapter-label{letter-spacing:3px;text-transform:uppercase;padding-bottom:11px;border-bottom:1px solid #9bdcf020}
+.life-memory-heading h2{font-size:clamp(20px,calc(2 * var(--life-vw)),30px);font-weight:650;letter-spacing:1px}
+.life-memory-heading time{color:#93bed8;font-size:12px;letter-spacing:2px}
+.life-score b{font-size:clamp(42px,calc(4.5 * var(--life-vw)),64px);font-weight:700;color:#e3faff}
+.life-real-chart{margin:19px 0 0;min-width:0}
+.life-real-chart svg{display:block;width:100%;max-height:135px;overflow:visible}
+.life-real-chart path{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.life-real-chart .life-chart-grid{stroke:#b2e1f31c;stroke-width:.8}
+.life-real-chart .life-chart-area{fill:#58b7e815;stroke:none}
+.life-real-chart .life-chart-line{stroke:#b3efff;stroke-width:2;filter:drop-shadow(0 0 3px #40adf3);stroke-dasharray:500;animation:lifeChartReveal 1.8s ease-out both}
+.life-real-chart circle{fill:#eafaff;stroke:#62b4ec;stroke-width:2}
+.life-real-chart text{font:8px sans-serif;fill:#a5cde0}
+.life-real-chart figcaption{font-size:10px;color:#87b9d0;line-height:1.6;letter-spacing:1px;text-align:center;margin-top:4px}
+.life-journey{border:none;background:linear-gradient(180deg,#d7f6ff08,transparent);box-shadow:none;padding:12px 0}
+.life-journey .life-chapter-label{border:none;text-align:right;color:#c0e6f6;letter-spacing:3px}
+.life-photo-frame{position:relative;border-radius:3px;background:linear-gradient(145deg,#bce7ff14,#104a7508);border:1px solid #c5edff38;box-shadow:0 20px 45px #02142738;isolation:isolate}
+.life-photo-frame:after{content:"";position:absolute;inset:8px;border:1px solid #c7efff16;pointer-events:none}
+.life-photo-frame img{position:relative;z-index:1;filter:drop-shadow(0 8px 16px #06192a44)}
+.life-journey.is-cutout .life-photo-frame{background:transparent;border-color:transparent;box-shadow:none}
+.life-journey.is-cutout .life-photo-frame:after{display:none}
+.life-growth-halo{display:none;position:absolute;inset:15% 8%;border-radius:50%;background:radial-gradient(ellipse,#8ccdeb26,transparent 65%);filter:blur(10px);pointer-events:none}
+.is-cutout .life-growth-halo{display:block}
+.life-journey-copy{padding:15px 0 0;margin-top:10px;border-top:1px solid #c5e9ff2b;font-size:16px;line-height:1.85;color:#e4f5ff;letter-spacing:.8px}
+.life-photo-missing{display:grid;place-items:center;flex:1;min-height:0;color:#9fd8ed55;font-size:70px}
+.life-vn-character img{max-width:90%;filter:drop-shadow(0 15px 28px #00152a66);transform-origin:center 65%}
+.life-dialogue-box{background:linear-gradient(105deg,#061b35f0,#0e2c47ed 75%,#16394edb);border-top:1px solid #d7f2ffa6;border-bottom:1px solid #b3e7ff2e;box-shadow:0 20px 60px #00102380;backdrop-filter:blur(8px);padding:24px 34px 18px}
+.life-speaker{font-size:18px;letter-spacing:3px;border-left:3px solid #8de0ff;padding-left:13px}
+.life-dialogue-text{font-size:19px;line-height:1.9;color:#eef8ff}
+.life-film-title{position:relative;max-width:850px;text-align:center;padding:25px;z-index:2;text-shadow:0 5px 25px #041831}
+.life-film-title small{font-size:10px;letter-spacing:5px;color:#97cde7}
+.life-film-title h1{font-size:clamp(24px,calc(4 * var(--life-vw)),48px);font-weight:600;letter-spacing:5px;line-height:1.7;white-space:pre-wrap;margin:20px 0}
+.life-film-title p{font-size:16px;color:#c3e0f0;line-height:1.8;white-space:pre-wrap}
+.life-ending-orbits,.life-light-burst{position:absolute;inset:0;overflow:hidden;pointer-events:none;display:grid;place-items:center}
+.life-ending-orbits i,.life-light-burst i{position:absolute;width:min(calc(62 * var(--life-vw)),680px);aspect-ratio:1;border:1px solid #93dfff23;border-radius:50%;box-shadow:0 0 80px #4794db0e;transform:rotateX(56deg) rotateZ(-22deg);animation:lifeOrbit 22s linear infinite}
+.life-ending-orbits i:nth-child(2),.life-light-burst i:nth-child(2){width:min(calc(78 * var(--life-vw)),920px);animation-duration:32s;animation-direction:reverse;opacity:.6}
+.life-ending-orbits i:nth-child(3),.life-light-burst i:nth-child(3){width:min(calc(90 * var(--life-vw)),1080px);animation-duration:39s;opacity:.3}
+.life-ending-figure img{filter:drop-shadow(0 0 35px #83c5f755)}
+.life-ending-copy{z-index:4;padding-block:30px}
+.life-ending-copy small{color:#b8e9ff;letter-spacing:8px}
+.life-ending-title{font-weight:600;letter-spacing:4px;text-shadow:0 0 30px #6ccfff80,0 4px 8px #00162e;line-height:1.9}
+.life-ending-copy>p{letter-spacing:2px;line-height:1.9}
+.life-aux-layers{position:absolute;inset:94px calc(6 * var(--life-vw)) 88px;z-index:3;pointer-events:none;overflow:hidden}
+.life-aux-clip{position:absolute;inset:0;isolation:isolate;overflow:hidden;animation:lifeFadeIn .8s both}
+.life-aux-clip[data-motion="rise"]{animation:lifeSceneIn .8s both}
+.life-aux-clip[data-transition="flash"]:after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse,#eafcff,transparent);animation:lifeFlash .65s both;pointer-events:none;z-index:8}
+.life-aux-memory{right:53%}
+.life-aux-journey{left:53%}
+.life-aux-clip .life-single{width:100%;max-height:none}
+.life-aux-clip .life-memory,.life-aux-clip .life-journey{width:100%;pointer-events:auto}
+.life-aux-caption{inset:auto 0 0;z-index:5;overflow:visible}
+.life-aux-caption .life-film-title{max-width:none;padding:16px 25px;background:linear-gradient(90deg,transparent,#061e37e8 24%,#061e37e8 76%,transparent)}
+.life-aux-caption .life-film-title small{display:none}
+.life-aux-caption .life-film-title h1{font-size:clamp(16px,calc(1.8 * var(--life-vw)),24px);letter-spacing:2px;margin:0;line-height:1.65}
+.life-aux-caption .life-film-title p{font-size:12px;margin:6px 0 0;line-height:1.7}
+.life-aux-fx{z-index:-1;pointer-events:none;mix-blend-mode:screen}
+.life-layer-background{position:absolute;inset:0;z-index:-1;background-size:cover;background-position:center;opacity:.2;filter:blur(2px);pointer-events:none}
+.life-finale.has-memory-layer[data-type="caption"] .life-scene,.life-finale.has-journey-layer[data-type="caption"] .life-scene{opacity:.18}
+.life-transition-flash{z-index:6;background:radial-gradient(ellipse at 60% 45%,#e9fbff,transparent);opacity:0}
+.life-finale[data-transition="flash"] .life-transition-flash.is-triggered{animation:lifeFlash .65s both}
+.life-finale[data-transition="slide"] .life-scene>*,.life-aux-clip[data-transition="slide"]{animation:lifeFilmSlide .8s both}
+.life-finale[data-transition="none"] .life-scene>*,.life-aux-clip[data-transition="none"],.life-aux-clip[data-motion="none"]{animation:none!important}
+.life-finale.is-paused:not(.is-media-buffering) .life-aux-clip,.life-finale.is-paused:not(.is-media-buffering) .life-real-chart .life-chart-line,.life-finale.is-paused:not(.is-media-buffering) .life-transition-flash,.life-finale.is-paused:not(.is-media-buffering) .life-background-previous{animation:none!important}
+.life-finale.is-paused:not(.is-media-buffering) .life-background-previous{opacity:0}
+.life-finale.is-paused:not(.is-media-buffering) .life-aux-clip:after,.life-finale.reduce-motion .life-aux-clip:after{animation:none!important;opacity:0}
+.life-finale.reduce-motion *{animation:none!important;transition:none!important}
+.life-finale.reduce-motion .life-transition-flash{display:none}
+@keyframes lifeBackgroundLeave{from{opacity:1}to{opacity:0}}
+@keyframes lifeLightBreath{from{opacity:.3;translate:-15px 0}to{opacity:.8;translate:35px 0}}
+@keyframes lifeChartReveal{from{stroke-dashoffset:500}to{stroke-dashoffset:0}}
+@keyframes lifeOrbit{to{transform:rotateX(56deg) rotateZ(338deg)}}
+@keyframes lifeFilmSlide{from{opacity:0;transform:translateX(35px)}to{opacity:1;transform:none}}
+@keyframes lifeFlash{0%{opacity:0}25%{opacity:.8}100%{opacity:0}}
+/* Preserve native responsive rules in WebViews without :where(). */
+@supports not selector(:where(*)){@media(orientation:portrait),(max-width:640px){
+  .life-finale>header{padding:10px 12px;align-items:center;gap:8px}
+  .life-heading{max-width:43%;gap:5px}
+  .life-heading>small{font-size:7px;letter-spacing:2.5px}
+  .life-heading .life-top-caption{font-size:11px;letter-spacing:.8px;line-height:1.4}
+  .life-controls button{min-width:44px;font-size:11px;padding:7px 8px}
+  .life-chapter-index{font-size:9px;letter-spacing:1px;margin-left:auto}
+  .life-finale>footer{gap:8px}
+  .life-finale>footer>button{min-width:108px}
+  .life-finale>footer>span:first-of-type{max-width:34%;letter-spacing:.5px;line-height:1.6}
+  .life-scene{padding:8px 12px}
+  .life-split{gap:12px;grid-template-rows:minmax(0,.94fr) minmax(0,1.06fr);align-items:stretch}
+  .life-memory,.life-journey{height:100%;max-height:none;padding:14px 17px}
+  .life-journey{padding:0 4px}
+  .life-chapter-label{font-size:10px;margin-bottom:7px;padding-bottom:6px;letter-spacing:1px}
+  .life-memory-heading h2{font-size:19px;margin:6px 0;letter-spacing:0}
+  .life-memory-heading time{font-size:10px;letter-spacing:.5px}
+  .life-score{margin:9px 0}
+  .life-score b{font-size:36px;letter-spacing:-1px}
+  .life-real-chart{margin:10px 0 0}
+  .life-real-chart svg{max-height:95px}
+  .life-real-chart figcaption{font-size:9px;margin-top:0}
+  .life-journey .life-chapter-label{text-align:left;letter-spacing:1px}
+  .life-journey-copy{font-size:13px;padding-top:9px;margin-top:6px;line-height:1.7;letter-spacing:.3px;max-height:31%}
+  .life-dialogue-box{padding:18px 18px 13px}
+  .life-dialogue-text{font-size:16px;line-height:1.9}
+  .life-speaker{font-size:16px;padding-left:10px}
+  .life-vn-character{height:89%;bottom:12%}
+  .life-film-title{padding:16px}
+  .life-film-title h1{font-size:clamp(23px,calc(7 * var(--life-vw)),32px);letter-spacing:2px;line-height:1.7}
+  .life-film-title p{font-size:14px;line-height:1.8}
+  .life-ending-copy{margin-top:calc(12 * var(--life-vh));padding:22px 8px}
+  .life-ending-copy small{font-size:11px;letter-spacing:3px}
+  .life-ending-title{font-size:clamp(21px,calc(5.9 * var(--life-vw)),28px);letter-spacing:1px}
+  .life-ending-copy>p{font-size:11px;letter-spacing:.6px}
+  .life-ending-orbits i,.life-light-burst i{width:calc(100 * var(--life-vw))}
+  .life-ending-orbits i:nth-child(2),.life-light-burst i:nth-child(2){width:calc(140 * var(--life-vw))}
+  .life-aux-layers{inset:82px 12px 84px}
+  .life-aux-memory{inset:0 0 54%;height:auto}
+  .life-aux-journey{inset:48% 0 0;height:auto}
+  .life-aux-caption{inset:auto 0 0}
+  .life-aux-caption .life-film-title{padding:12px 8px}
+  .life-aux-caption .life-film-title h1{font-size:15px;letter-spacing:.8px}
+  .life-aux-caption .life-film-title p{font-size:11px}
+  .life-aux-fx{inset:0}
+}}
+/* Stage layout: (orientation:portrait),(max-width:640px) */
+.life-finale:where(.life-layout-portrait)>header{padding:10px 12px;align-items:center;gap:8px}:where(.life-layout-portrait) .life-heading{max-width:43%;gap:5px}:where(.life-layout-portrait) .life-heading>small{font-size:7px;letter-spacing:2.5px}:where(.life-layout-portrait) .life-heading .life-top-caption{font-size:11px;letter-spacing:.8px;line-height:1.4}:where(.life-layout-portrait) .life-controls button{min-width:44px;font-size:11px;padding:7px 8px}:where(.life-layout-portrait) .life-chapter-index{font-size:9px;letter-spacing:1px;margin-left:auto}.life-finale:where(.life-layout-portrait)>footer{gap:8px}.life-finale:where(.life-layout-portrait)>footer>button{min-width:108px}.life-finale:where(.life-layout-portrait)>footer>span:first-of-type{max-width:34%;letter-spacing:.5px;line-height:1.6}:where(.life-layout-portrait) .life-scene{padding:8px 12px}:where(.life-layout-portrait) .life-split{gap:12px;grid-template-rows:minmax(0,.94fr) minmax(0,1.06fr);align-items:stretch}:where(.life-layout-portrait) .life-memory,:where(.life-layout-portrait) .life-journey{height:100%;max-height:none;padding:14px 17px}:where(.life-layout-portrait) .life-journey{padding:0 4px}:where(.life-layout-portrait) .life-chapter-label{font-size:10px;margin-bottom:7px;padding-bottom:6px;letter-spacing:1px}:where(.life-layout-portrait) .life-memory-heading h2{font-size:19px;margin:6px 0;letter-spacing:0}:where(.life-layout-portrait) .life-memory-heading time{font-size:10px;letter-spacing:.5px}:where(.life-layout-portrait) .life-score{margin:9px 0}:where(.life-layout-portrait) .life-score b{font-size:36px;letter-spacing:-1px}:where(.life-layout-portrait) .life-real-chart{margin:10px 0 0}:where(.life-layout-portrait) .life-real-chart svg{max-height:95px}:where(.life-layout-portrait) .life-real-chart figcaption{font-size:9px;margin-top:0}:where(.life-layout-portrait) .life-journey .life-chapter-label{text-align:left;letter-spacing:1px}:where(.life-layout-portrait) .life-journey-copy{font-size:13px;padding-top:9px;margin-top:6px;line-height:1.7;letter-spacing:.3px;max-height:31%}:where(.life-layout-portrait) .life-dialogue-box{padding:18px 18px 13px}:where(.life-layout-portrait) .life-dialogue-text{font-size:16px;line-height:1.9}:where(.life-layout-portrait) .life-speaker{font-size:16px;padding-left:10px}:where(.life-layout-portrait) .life-vn-character{height:89%;bottom:12%}:where(.life-layout-portrait) .life-film-title{padding:16px}:where(.life-layout-portrait) .life-film-title h1{font-size:clamp(23px,calc(7 * var(--life-vw)),32px);letter-spacing:2px;line-height:1.7}:where(.life-layout-portrait) .life-film-title p{font-size:14px;line-height:1.8}:where(.life-layout-portrait) .life-ending-copy{margin-top:calc(12 * var(--life-vh));padding:22px 8px}:where(.life-layout-portrait) .life-ending-copy small{font-size:11px;letter-spacing:3px}:where(.life-layout-portrait) .life-ending-title{font-size:clamp(21px,calc(5.9 * var(--life-vw)),28px);letter-spacing:1px}:where(.life-layout-portrait) .life-ending-copy>p{font-size:11px;letter-spacing:.6px}:where(.life-layout-portrait) .life-ending-orbits i,:where(.life-layout-portrait) .life-light-burst i{width:calc(100 * var(--life-vw))}:where(.life-layout-portrait) .life-ending-orbits i:nth-child(2),:where(.life-layout-portrait) .life-light-burst i:nth-child(2){width:calc(140 * var(--life-vw))}:where(.life-layout-portrait) .life-aux-layers{inset:82px 12px 84px}:where(.life-layout-portrait) .life-aux-memory{inset:0 0 54%;height:auto}:where(.life-layout-portrait) .life-aux-journey{inset:48% 0 0;height:auto}:where(.life-layout-portrait) .life-aux-caption{inset:auto 0 0}:where(.life-layout-portrait) .life-aux-caption .life-film-title{padding:12px 8px}:where(.life-layout-portrait) .life-aux-caption .life-film-title h1{font-size:15px;letter-spacing:.8px}:where(.life-layout-portrait) .life-aux-caption .life-film-title p{font-size:11px}:where(.life-layout-portrait) .life-aux-fx{inset:0}
+
+/* Preserve native responsive rules in WebViews without :where(). */
+@supports not selector(:where(*)){@media(max-height:740px) and (orientation:portrait){
+  .life-memory .life-real-chart{display:none}
+  .life-score b{font-size:30px}
+  .life-memory,.life-journey{padding:11px 13px}
+  .life-journey{padding:0 2px}
+  .life-aux-layers{inset:75px 12px 79px}
+  .life-aux-memory{bottom:53%}
+  .life-aux-journey{top:49%}
+  .life-ending-copy>p{max-width:260px}
+}}
+/* Stage layout: (max-height:740px) and (orientation:portrait) */
+:where(.life-layout-portrait-740) .life-memory .life-real-chart{display:none}:where(.life-layout-portrait-740) .life-score b{font-size:30px}:where(.life-layout-portrait-740) .life-memory,:where(.life-layout-portrait-740) .life-journey{padding:11px 13px}:where(.life-layout-portrait-740) .life-journey{padding:0 2px}:where(.life-layout-portrait-740) .life-aux-layers{inset:75px 12px 79px}:where(.life-layout-portrait-740) .life-aux-memory{bottom:53%}:where(.life-layout-portrait-740) .life-aux-journey{top:49%}:where(.life-layout-portrait-740) .life-ending-copy>p{max-width:260px}
+
+
+/* Fixed chrome cannot be scrolled away when the final action gains focus. */
+.life-finale>header{grid-row:1;min-width:0;min-height:0;margin:0;align-self:stretch}
+.life-finale>.life-scene{grid-row:2;min-width:0;min-height:0;margin:0}
+.life-finale>footer{grid-row:3;min-width:0;min-height:0;margin:0;align-self:stretch}
+.life-finale>audio{display:none}
+.life-heading{flex:1;min-width:0}
+.life-heading .life-top-caption{overflow-wrap:anywhere}
+.life-ending-copy{min-width:0;max-width:100%}
+.life-ending-title{max-width:100%;margin-inline:auto;text-wrap:balance;overflow-wrap:anywhere}
+
+/* A gallery moves past her footsteps; every picture keeps its own true date. */
+.life-memorial{position:absolute;inset:0;overflow:hidden;background:linear-gradient(180deg,#16395942,#091b35a8 68%,#082443);isolation:isolate}
+.life-wall-heading{position:absolute;top:4%;left:7%;right:7%;z-index:3;text-shadow:0 2px 16px #082033}
+.life-wall-heading>small{font-size:11px;letter-spacing:4px;color:#afdef0}
+.life-wall-heading>h1{font-size:clamp(18px,calc(2.1 * var(--life-vw)),30px);line-height:1.6;letter-spacing:2px;margin:9px 0;overflow-wrap:anywhere}
+.life-wall-viewport{position:absolute;inset:18% 0 27%;overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+.life-wall-track{display:flex;width:max-content;height:100%;will-change:transform;align-items:flex-start}
+.life-wall-cycle{display:flex;flex:none;gap:24px;padding:0 12px;height:100%;align-items:flex-start}
+.life-wall-card{position:relative;flex:none;width:288px;max-height:100%;margin:0;display:flex;flex-direction:column;padding:10px;background:#effaff;border:1px solid #c1ebff90;border-radius:4px;box-shadow:0 12px 26px #001d3470;color:#164f71;overflow:hidden}
+.life-wall-card:nth-child(3n+1){transform:rotate(-1.4deg)}.life-wall-card:nth-child(3n){transform:rotate(1.4deg)}
+.life-wall-card:nth-child(even){align-self:flex-end}
+.life-wall-card>img{width:100%;height:clamp(110px,calc(21 * var(--life-vh)),225px);object-fit:cover;flex:none;background:#abd6eb}
+.life-wall-card figcaption{padding:12px 8px 6px;min-height:98px;display:grid;gap:5px}
+.life-wall-card small{font-size:9px;letter-spacing:2px;color:#5992ab}
+.life-wall-card h2{font-size:17px;line-height:1.6;margin:0;overflow-wrap:anywhere}
+.life-wall-card time{font-size:13px;letter-spacing:1px;font-variant-numeric:tabular-nums}
+.life-wall-card figcaption>span{font-size:10px;color:#628295}
+.life-wall-card.is-unrecorded>img{opacity:.68}.life-wall-card.is-unrecorded figcaption>span{color:#698092}
+.life-wall-no-photo{height:calc(21 * var(--life-vh));min-height:100px;display:grid;place-items:center;background:linear-gradient(120deg,#9bcff0,#e7f8ff);font-size:50px;color:#477ea8}
+.life-walking-path{position:absolute;left:0;right:0;bottom:0;height:35%;background:linear-gradient(180deg,transparent,#2871a51a 58%,#b3eaf12b 59%,#061c36 100%)}
+.life-path-reflection{position:absolute;left:0;right:0;bottom:21%;height:1px;background:linear-gradient(90deg,transparent,#b4ecff70,transparent);box-shadow:0 0 15px #69cfff75}
+.life-walker{position:absolute;left:24%;bottom:20%;width:auto;aspect-ratio:.75;height:94%;transform:translateX(-50%);z-index:4;--step:0}
+.life-walk-sprite{position:absolute;inset:0;background-size:calc(var(--walk-frames,4)*100%) 100%;background-repeat:no-repeat;background-position:0 100%;filter:drop-shadow(0 7px 8px #02132990);transform:translateY(calc(var(--step)*-1.5px));transform-origin:50% 96%}
+.life-walk-shadow{position:absolute;bottom:-3px;left:20%;right:18%;height:11px;background:#01132788;border-radius:50%;filter:blur(4px);transform:scaleX(calc(1 + var(--step)*.1))}
+.life-footstep{position:absolute;bottom:0;left:28%;width:18px;height:4px;border:1px solid #a4eeff66;border-radius:50%;opacity:.25;transform:translateX(calc(var(--step)*-15px)) scale(calc(1 - var(--step)*.15))}
+.life-footstep:last-child{left:55%;opacity:.13;transform:translateX(calc(var(--step)*15px))}
+.life-walker.is-stopped .life-footstep{opacity:0}
+.life-age-label{position:absolute;bottom:3%;left:7%;right:7%;display:flex;align-items:baseline;gap:12px;font-size:25px;letter-spacing:2px;line-height:1.6;color:#e0faff;font-variant-numeric:tabular-nums;text-shadow:0 0 18px #8adbff70}
+.life-age-label>small{flex:1;min-width:0;font-size:12px;letter-spacing:1px;line-height:1.8;color:#c9e8f4}
+.life-farewell{position:absolute;inset:0;display:flex;justify-content:center;align-items:flex-end;overflow:hidden;background:radial-gradient(ellipse at 50% 48%,#5ba5c649,transparent 60%)}
+.life-farewell-portrait{position:absolute;inset:3% 0 0;display:flex;justify-content:center;align-items:flex-end}
+.life-farewell-portrait>img{height:100%;max-width:90%;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 15px 25px #02132690)}
+.life-farewell-copy{position:relative;z-index:3;width:100%;padding:26px 7% 38px;text-align:center;background:linear-gradient(transparent,#071a36db 25%);color:#e9faff}
+.life-farewell-copy>small{font-size:12px;letter-spacing:4px;color:#b4e3f5}
+.life-farewell-copy>h1{font-size:clamp(24px,calc(3 * var(--life-vw)),42px);font-weight:500;letter-spacing:3px;line-height:1.8;text-wrap:balance;margin:14px 0;overflow-wrap:anywhere;white-space:pre-wrap}
+.life-farewell-copy>p{font-size:14px;line-height:1.9;white-space:pre-wrap}
+.life-farewell.is-white{align-items:center;background:#f7fcff;color:#225774}
+.life-farewell.is-white .life-farewell-copy{background:none;color:#225774;padding:8%}
+.life-farewell.is-white .life-farewell-copy>small{color:#71a6c0}
+.life-farewell.is-white .life-farewell-copy>h1{font-size:clamp(24px,calc(3.6 * var(--life-vw)),48px);line-height:2.1;text-shadow:0 0 25px #94d5eb70}
+.life-finale[data-ending-style=white]{background:#f7fcff;color:#225774}
+.life-finale[data-ending-style=white]>.life-background,.life-finale[data-ending-style=white]>.life-atmosphere,.life-finale[data-ending-style=white]>.life-cinema-light,.life-finale[data-ending-style=white]>.life-particles{display:none}
+.life-finale[data-ending-style=white]>header{background:none;text-shadow:none;border-color:#64b7db24}
+.life-finale[data-ending-style=white] .life-top-caption,.life-finale[data-ending-style=white] .life-heading>small,.life-finale[data-ending-style=white]>footer{color:#407b9a}
+.life-finale[data-ending-style=white] button{background:#e1f5ff;color:#286486;border-color:#80c7e8}
+.life-finale.reduce-motion .life-wall-track{will-change:auto}
+.life-finale[data-type=wall] .life-scene>.life-memorial{animation:none!important}
+.life-walk-previous{position:absolute;inset:0;background-repeat:no-repeat;animation:lifePortraitOut 1.1s both;filter:drop-shadow(0 7px 8px #02132990);pointer-events:none}
+.life-farewell-portrait.is-crossfading>img{position:absolute;bottom:0;animation:lifePortraitIn 1.2s both}
+.life-farewell-portrait.is-crossfading>.life-farewell-previous{animation:lifePortraitOut 1.2s both}
+@keyframes lifePortraitIn{from{opacity:0}to{opacity:1}}
+@keyframes lifePortraitOut{from{opacity:1}to{opacity:0}}
+/* Preserve native responsive rules in WebViews without :where(). */
+@supports not selector(:where(*)){@media(orientation:portrait),(max-width:640px){
+ .life-wall-heading{top:3%;left:5%;right:5%}.life-wall-heading>small{font-size:9px;letter-spacing:2px}.life-wall-heading>h1{font-size:19px;letter-spacing:1px;line-height:1.7}
+ .life-wall-viewport{inset:17% 0 36%;mask-image:linear-gradient(90deg,transparent,#000 3%,#000 97%,transparent)}
+ .life-wall-card{width:230px;padding:8px}.life-wall-card>img{height:clamp(120px,calc(22 * var(--life-vh)),225px)}.life-wall-card h2{font-size:15px}.life-wall-card figcaption{padding:11px 6px 4px;min-height:92px}.life-wall-card time{font-size:12px}.life-wall-cycle{gap:18px;padding:0 9px}
+ .life-walking-path{height:30%}.life-walker{height:88%;bottom:22%}.life-age-label{left:6%;bottom:3%;font-size:23px}.life-age-label>small{display:inline;font-size:11px;letter-spacing:.5px}
+ .life-farewell-portrait{inset:6% -5% 0}.life-farewell-portrait>img{max-width:100%;height:100%}.life-farewell-copy{padding:24px 6% 28px}.life-farewell-copy>h1{font-size:24px;letter-spacing:1px;line-height:1.9}.life-farewell-copy>p{font-size:12px}.life-farewell.is-white .life-farewell-copy>h1{font-size:clamp(23px,calc(6.5 * var(--life-vw)),30px)}
+}}
+/* Stage layout: (orientation:portrait),(max-width:640px) */
+:where(.life-layout-portrait) .life-wall-heading{top:3%;left:5%;right:5%}:where(.life-layout-portrait) .life-wall-heading>small{font-size:9px;letter-spacing:2px}:where(.life-layout-portrait) .life-wall-heading>h1{font-size:19px;letter-spacing:1px;line-height:1.7}:where(.life-layout-portrait) .life-wall-viewport{inset:17% 0 36%;mask-image:linear-gradient(90deg,transparent,#000 3%,#000 97%,transparent)}:where(.life-layout-portrait) .life-wall-card{width:230px;padding:8px}:where(.life-layout-portrait) .life-wall-card>img{height:clamp(120px,calc(22 * var(--life-vh)),225px)}:where(.life-layout-portrait) .life-wall-card h2{font-size:15px}:where(.life-layout-portrait) .life-wall-card figcaption{padding:11px 6px 4px;min-height:92px}:where(.life-layout-portrait) .life-wall-card time{font-size:12px}:where(.life-layout-portrait) .life-wall-cycle{gap:18px;padding:0 9px}:where(.life-layout-portrait) .life-walking-path{height:30%}:where(.life-layout-portrait) .life-walker{height:88%;bottom:22%}:where(.life-layout-portrait) .life-age-label{left:6%;bottom:3%;font-size:23px}:where(.life-layout-portrait) .life-age-label>small{display:inline;font-size:11px;letter-spacing:.5px}:where(.life-layout-portrait) .life-farewell-portrait{inset:6% -5% 0}:where(.life-layout-portrait) .life-farewell-portrait>img{max-width:100%;height:100%}:where(.life-layout-portrait) .life-farewell-copy{padding:24px 6% 28px}:where(.life-layout-portrait) .life-farewell-copy>h1{font-size:24px;letter-spacing:1px;line-height:1.9}:where(.life-layout-portrait) .life-farewell-copy>p{font-size:12px}:where(.life-layout-portrait) .life-farewell.is-white .life-farewell-copy>h1{font-size:clamp(23px,calc(6.5 * var(--life-vw)),30px)}
+
+/* Preserve native responsive rules in WebViews without :where(). */
+@supports not selector(:where(*)){@media(max-height:650px){.life-wall-heading{top:2%}.life-wall-heading>h1{font-size:17px;margin:4px 0}.life-wall-card figcaption{min-height:75px;padding-block:8px}.life-wall-card h2{font-size:14px}.life-wall-card>img{height:calc(19 * var(--life-vh))}.life-farewell-copy{padding-block:16px}}}
+/* Stage layout: (max-height:650px) */
+:where(.life-layout-short-650) .life-wall-heading{top:2%}:where(.life-layout-short-650) .life-wall-heading>h1{font-size:17px;margin:4px 0}:where(.life-layout-short-650) .life-wall-card figcaption{min-height:75px;padding-block:8px}:where(.life-layout-short-650) .life-wall-card h2{font-size:14px}:where(.life-layout-short-650) .life-wall-card>img{height:calc(19 * var(--life-vh))}:where(.life-layout-short-650) .life-farewell-copy{padding-block:16px}
+
+/* A luminous blue memory space. All decoration stays behind the reading plane. */
+.life-background-effect{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:-2;overflow:hidden}
+.life-background-effect>svg{display:block;width:100%;height:100%}
+.life-background-effect[hidden],.life-finale[data-ending-style=white]>.life-background-effect{display:none}
+.life-finale[data-background-effect=star-lake]>.life-atmosphere{background:linear-gradient(180deg,#051a3022,transparent 45%,#04182b33)}
+.life-finale[data-background-effect=star-lake]>.life-atmosphere:before,.life-finale[data-background-effect=star-lake]>.life-atmosphere:after,.life-finale[data-background-effect=star-lake]>.life-cinema-light{display:none}
+.life-finale{background:#0c3b62;--life-ice:#dff9ff;--life-cyan:#8edfff}
+.life-background{background-image:radial-gradient(ellipse at 52% 44%,#61bad27a,transparent 62%),radial-gradient(ellipse at 12% 90%,#3596bf66,transparent 55%),linear-gradient(155deg,#082b54 3%,#236d9a 56%,#0c3359 100%)}
+.life-atmosphere{background:radial-gradient(ellipse at 50% 44%,#e1faff12,transparent 56%),linear-gradient(180deg,#02274914,transparent 42%,#082b5055);overflow:hidden}
+.life-atmosphere:before,.life-atmosphere:after{content:"";position:absolute;pointer-events:none;border:1px solid #bcf6ff25;border-radius:50%;width:130vmax;height:130vmax;left:50%;top:52%;transform:translate(-50%,-50%) rotateX(73deg) rotateZ(-15deg);box-shadow:0 0 55px #abedff12,inset 0 0 55px #95dfff0a}
+.life-atmosphere:after{width:100vmax;height:100vmax;top:57%;border-color:#dcfcff15;transform:translate(-50%,-50%) rotateX(76deg) rotateZ(12deg)}
+.life-cinema-light{opacity:.85}
+.life-cinema-light i{width:18%;background:linear-gradient(90deg,transparent,#cef7ff15,transparent);filter:blur(20px)}
+.life-finale>header{background:linear-gradient(#062d4e66,transparent);border-bottom-color:#c2ecff13}
+.life-finale>footer{background:linear-gradient(transparent,#06355866)}
+.life-heading>small{color:#b2dff0;font-size:9px;letter-spacing:4px}
+.life-finale button{background:#3f7c9b50;border-color:#d7f6ff42;backdrop-filter:blur(8px)}
+.life-finale button:hover{background:#74b5ce55}
+.life-finale.is-entering{animation:lifeOpenVeil 1.3s cubic-bezier(.2,.65,.2,1) both}
+.life-finale.is-film-entering>.life-scene{animation:lifeFilmReveal 1s cubic-bezier(.2,.65,.2,1) both}
+@keyframes lifeOpenVeil{from{opacity:0}to{opacity:1}}
+/* The curtain already supplies the reveal. A full-scene animated blur forces
+   large video/photo surfaces to be filtered again at native DPR. */
+@keyframes lifeFilmReveal{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* Dialogue advances by pages; it never turns into a scrolling panel. */
+.life-dialogue-box{left:8%;right:8%;bottom:3%;max-height:none;overflow:hidden;padding:20px 28px 14px;border-radius:5px;background:linear-gradient(115deg,#083459ed,#154965de);box-shadow:0 15px 48px #04284640}
+.life-dialogue-text{font-size:clamp(16px,calc(1.5 * var(--life-vw)),21px);line-height:1.85;min-height:0;height:var(--dialogue-text-height,clamp(70px,calc(21 * var(--life-vh)),170px));max-height:clamp(70px,calc(21 * var(--life-vh)),170px);overflow:hidden;white-space:pre-wrap}
+.life-finale.is-dialogue-continuing>.life-scene>*{animation:none!important}
+.life-finale>header{height:78px;padding-block:12px;align-items:center}
+.life-finale>footer{height:72px;min-height:72px}
+.life-heading .life-top-caption{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.life-dialogue-page{position:absolute;right:28px;top:23px;font-size:11px;letter-spacing:2px;color:#aad6e9;font-variant-numeric:tabular-nums}
+.life-dialogue-page[hidden]{display:none}
+.life-speaker{max-width:calc(100% - 65px);font-size:17px;line-height:1.5;margin-bottom:10px}
+.life-dialogue-box .life-dialogue-hint{font-size:11px;line-height:1.5;margin-top:10px;opacity:.82}
+.life-vn-character{height:100%;bottom:0;pointer-events:none}
+.life-vn-character img{max-width:100%;height:100%;object-fit:contain;object-position:center bottom}
+.life-memory,.life-journey-copy{overflow:hidden;scrollbar-width:none}
+
+/* Photos enter one at a time; runtime owns their centered travel and opacity. */
+.life-memorial{background:radial-gradient(ellipse at 50% 52%,#d7faff0b,transparent 65%)}
+.life-wall-heading{top:3%;text-align:center;left:8%;right:8%}
+.life-wall-heading>small{font-size:10px;letter-spacing:5px;color:#a8dae9}
+.life-wall-heading>h1{font-size:clamp(18px,calc(2 * var(--life-vw)),28px);font-weight:500;letter-spacing:2px;margin-top:8px;color:#effcff}
+.life-wall-viewport{inset:16% 0 22%;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.life-wall-cycle{position:relative;gap:clamp(50px,calc(7 * var(--life-vw)),130px);padding:0;height:100%;align-items:center}
+.life-wall-card{width:clamp(248px,calc(25 * var(--life-vw)),360px);border:1px solid #e4fbffad;background:linear-gradient(155deg,#f8ffff,#dceef6);padding:10px;border-radius:7px;box-shadow:0 18px 42px #062c4b38,0 0 24px #a7e8ff0a;opacity:var(--card-visibility,0);transform:translateY(calc(var(--card-offset,0px) + (1 - var(--card-entry,0))*12px)) rotate(var(--card-tilt,0deg));transition:none;will-change:opacity,transform}
+.life-wall-card:nth-child(3n+1){--card-tilt:-1.6deg;transform:translateY(calc(var(--card-offset,0px) + (1 - var(--card-entry,0))*12px)) rotate(var(--card-tilt))}
+.life-wall-card:nth-child(3n){--card-tilt:1.3deg;transform:translateY(calc(var(--card-offset,0px) + (1 - var(--card-entry,0))*12px)) rotate(var(--card-tilt))}
+.life-wall-card:nth-child(even){align-self:center}
+.life-wall-card>img{height:clamp(120px,calc(21 * var(--life-vh)),225px);object-fit:cover;border-radius:2px}
+.life-wall-card.is-unrecorded>img{opacity:1}
+.life-wall-card figcaption{min-height:96px;padding:12px 10px 7px;gap:5px}
+.life-wall-card h2{font-size:16px;line-height:1.55;font-weight:600;color:#1a5272}
+.life-wall-card time{font-size:12px;color:#3f7187;letter-spacing:.5px}
+.life-wall-card figcaption>span{line-height:1.6}
+.life-walking-path{height:31%;background:linear-gradient(180deg,transparent,#98e0f40d 66%,#2d769429 67%,#06436811)}
+.life-path-reflection{bottom:21%;background:linear-gradient(90deg,transparent,#c8faff4d 45%,#c8faff60 65%,transparent);box-shadow:0 0 16px #b6efff25}
+.life-walker{height:94%}
+.life-walk-sprite{transform:translateY(calc(var(--step)*-.6px));filter:drop-shadow(0 5px 7px #002b4552)}
+.life-walk-shadow{bottom:-1px;left:25%;right:20%;height:7px;opacity:.45;filter:blur(4px);transform:scaleX(calc(1 + var(--step)*.025))}
+.life-footstep{opacity:.15;transform:none;border-color:#d7f8ff5e;width:12px;height:3px}
+.life-footstep:last-child{opacity:.08;transform:none}
+.life-age-label{font-size:22px;letter-spacing:2px;color:#e7fbff;text-shadow:none}
+.life-age-label>small{font-size:11px;color:#c5e5f0;letter-spacing:1px}
+
+/* Complete cutouts have room for the head, hair and shoulders on every viewport. */
+.life-farewell{background:radial-gradient(ellipse at 50% 43%,#b8f3ff18,transparent 63%)}
+.life-farewell-portrait{inset:0;align-items:center;overflow:hidden}
+.life-farewell-portrait>img{position:absolute;top:50%;left:50%;bottom:auto;translate:-50% -50%;height:96%;max-width:90%;width:90%;object-fit:contain;object-position:center;filter:drop-shadow(0 12px 28px #06345340);mask-image:linear-gradient(#000 85%,transparent 100%)}
+.life-farewell-portrait.is-crossfading>img{top:50%;bottom:auto}
+.life-farewell-copy{padding:28px 7% 32px;background:linear-gradient(transparent,#0a3c5bdd 50%);text-shadow:0 2px 14px #04324870}
+.life-farewell-copy>small{color:#bdeaf4;font-size:11px;letter-spacing:4px}
+.life-farewell-copy>h1{font-size:clamp(23px,calc(2.4 * var(--life-vw)),36px);font-weight:500;letter-spacing:2px;line-height:1.7}
+.life-farewell.is-white{background:radial-gradient(ellipse at 50% 48%,#fff 0%,#effbff 75%,#ddecf6);transition:background .8s}
+.life-farewell.is-white .life-farewell-copy{text-shadow:none}
+/* Preserve native responsive rules in WebViews without :where(). */
+@supports not selector(:where(*)){@media(orientation:portrait),(max-width:640px){
+ .life-finale>header{height:68px;padding-block:8px;align-items:center}.life-finale>footer{height:68px;min-height:68px}
+ .life-dialogue-box{left:0;right:0;bottom:1%;padding:16px 17px 12px;max-height:none;overflow:hidden}
+ .life-dialogue-text{font-size:16px;line-height:1.8;max-height:clamp(85px,calc(23 * var(--life-vh)),185px)}
+ .life-dialogue-page{right:17px;top:20px;font-size:10px}.life-speaker{font-size:16px}
+ .life-vn-character{height:94%;bottom:7%}
+ .life-wall-heading{top:3%;left:6%;right:6%}.life-wall-heading>h1{font-size:18px;letter-spacing:1px;line-height:1.65}.life-wall-heading>small{font-size:9px;letter-spacing:3px}
+ .life-wall-viewport{inset:16% 0 29%;mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+ .life-wall-cycle{gap:60px}.life-wall-card{width:min(calc(72 * var(--life-vw)),292px);padding:8px}
+ .life-wall-card>img{height:clamp(110px,calc(22 * var(--life-vh)),225px)}.life-wall-card figcaption{min-height:92px;padding:11px 7px 6px}.life-wall-card h2{font-size:15px}
+ .life-walking-path{height:29%}.life-walker{height:87%;bottom:22%}.life-age-label{left:7%;font-size:22px;gap:9px}.life-age-label>small{font-size:10px;line-height:1.65}
+ .life-farewell-portrait{inset:0}.life-farewell-portrait>img{height:96%;width:90%;max-width:90%}
+ /* These cutouts include generous transparent margins; use them for a closer,
+    complete silhouette without changing the editor's contain behavior for other art. */
+ .life-farewell-portrait>img[src*="_youth_complete."]{width:130%;max-width:none}
+ .life-farewell-copy{padding:22px 7% 28px}.life-farewell-copy>h1{font-size:23px;line-height:1.8;letter-spacing:1px}
+}}
+/* Stage layout: (orientation:portrait),(max-width:640px) */
+.life-finale:where(.life-layout-portrait)>header{height:68px;padding-block:8px;align-items:center}.life-finale:where(.life-layout-portrait)>footer{height:68px;min-height:68px}:where(.life-layout-portrait) .life-dialogue-box{left:0;right:0;bottom:1%;padding:16px 17px 12px;max-height:none;overflow:hidden}:where(.life-layout-portrait) .life-dialogue-text{font-size:16px;line-height:1.8;max-height:clamp(85px,calc(23 * var(--life-vh)),185px)}:where(.life-layout-portrait) .life-dialogue-page{right:17px;top:20px;font-size:10px}:where(.life-layout-portrait) .life-speaker{font-size:16px}:where(.life-layout-portrait) .life-vn-character{height:94%;bottom:7%}:where(.life-layout-portrait) .life-wall-heading{top:3%;left:6%;right:6%}:where(.life-layout-portrait) .life-wall-heading>h1{font-size:18px;letter-spacing:1px;line-height:1.65}:where(.life-layout-portrait) .life-wall-heading>small{font-size:9px;letter-spacing:3px}:where(.life-layout-portrait) .life-wall-viewport{inset:16% 0 29%;mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}:where(.life-layout-portrait) .life-wall-cycle{gap:60px}:where(.life-layout-portrait) .life-wall-card{width:min(calc(72 * var(--life-vw)),292px);padding:8px}:where(.life-layout-portrait) .life-wall-card>img{height:clamp(110px,calc(22 * var(--life-vh)),225px)}:where(.life-layout-portrait) .life-wall-card figcaption{min-height:92px;padding:11px 7px 6px}:where(.life-layout-portrait) .life-wall-card h2{font-size:15px}:where(.life-layout-portrait) .life-walking-path{height:29%}:where(.life-layout-portrait) .life-walker{height:87%;bottom:22%}:where(.life-layout-portrait) .life-age-label{left:7%;font-size:22px;gap:9px}:where(.life-layout-portrait) .life-age-label>small{font-size:10px;line-height:1.65}:where(.life-layout-portrait) .life-farewell-portrait{inset:0}:where(.life-layout-portrait) .life-farewell-portrait>img{height:96%;width:90%;max-width:90%}:where(.life-layout-portrait) /* These cutouts include generous transparent margins; use them for a closer,:where(.life-layout-portrait) complete silhouette without changing the editor's contain behavior for other art. */
+ .life-farewell-portrait>img[src*="_youth_complete."]{width:130%;max-width:none}:where(.life-layout-portrait) .life-farewell-copy{padding:22px 7% 28px}:where(.life-layout-portrait) .life-farewell-copy>h1{font-size:23px;line-height:1.8;letter-spacing:1px}
+
+/* Preserve native responsive rules in WebViews without :where(). */
+@supports not selector(:where(*)){@media(max-height:650px){
+ .life-finale>header{padding-block:7px}.life-finale>footer{padding-block:7px}
+ .life-dialogue-box{padding-block:11px}.life-dialogue-text{font-size:15px;line-height:1.7;max-height:calc(21 * var(--life-vh))}.life-speaker{font-size:15px;margin-bottom:5px}.life-dialogue-box .life-dialogue-hint{margin-top:5px;font-size:10px}
+ .life-wall-heading{top:1%}.life-wall-heading>h1{font-size:16px;margin:4px 0}.life-wall-heading>small{font-size:9px}.life-wall-viewport{top:15%;bottom:27%}.life-wall-card>img{height:calc(18 * var(--life-vh))}.life-wall-card figcaption{min-height:0;padding:7px 5px;gap:3px}.life-wall-card h2{font-size:13px}.life-wall-card time{font-size:11px}.life-wall-card figcaption>span{font-size:9px}
+ .life-farewell-copy{padding-block:13px}.life-farewell-copy>h1{font-size:21px;margin:7px 0}
+}}
+/* Stage layout: (max-height:650px) */
+.life-finale:where(.life-layout-short-650)>header{padding-block:7px}.life-finale:where(.life-layout-short-650)>footer{padding-block:7px}:where(.life-layout-short-650) .life-dialogue-box{padding-block:11px}:where(.life-layout-short-650) .life-dialogue-text{font-size:15px;line-height:1.7;max-height:calc(21 * var(--life-vh))}:where(.life-layout-short-650) .life-speaker{font-size:15px;margin-bottom:5px}:where(.life-layout-short-650) .life-dialogue-box .life-dialogue-hint{margin-top:5px;font-size:10px}:where(.life-layout-short-650) .life-wall-heading{top:1%}:where(.life-layout-short-650) .life-wall-heading>h1{font-size:16px;margin:4px 0}:where(.life-layout-short-650) .life-wall-heading>small{font-size:9px}:where(.life-layout-short-650) .life-wall-viewport{top:15%;bottom:27%}:where(.life-layout-short-650) .life-wall-card>img{height:calc(18 * var(--life-vh))}:where(.life-layout-short-650) .life-wall-card figcaption{min-height:0;padding:7px 5px;gap:3px}:where(.life-layout-short-650) .life-wall-card h2{font-size:13px}:where(.life-layout-short-650) .life-wall-card time{font-size:11px}:where(.life-layout-short-650) .life-wall-card figcaption>span{font-size:9px}:where(.life-layout-short-650) .life-farewell-copy{padding-block:13px}:where(.life-layout-short-650) .life-farewell-copy>h1{font-size:21px;margin:7px 0}
+
+/* Preserve native responsive rules in WebViews without :where(). */
+@supports not selector(:where(*)){@media(max-height:460px) and (orientation:landscape){
+ .life-finale>header{height:48px}.life-finale>footer{height:48px;min-height:48px}
+ .life-finale>header{padding:5px 18px}.life-controls button{min-height:36px}.life-finale>footer{padding:5px 18px;font-size:10px}.life-finale>footer>button{min-height:36px}
+ .life-heading>small{font-size:8px;letter-spacing:3px}.life-heading .life-top-caption{font-size:11px}
+ .life-dialogue-box{left:8%;right:8%;bottom:0;padding:8px 16px}.life-dialogue-text{font-size:14px;line-height:1.6;max-height:calc(20 * var(--life-vh))}.life-dialogue-box .life-dialogue-hint{font-size:9px;margin-top:3px}.life-dialogue-page{right:15px;top:12px}
+ .life-wall-heading{top:0}.life-wall-heading>small{display:none}.life-wall-heading>h1{font-size:14px}.life-wall-viewport{top:15%;bottom:22%}.life-wall-card{width:180px;padding:5px}.life-wall-card>img{height:calc(22 * var(--life-vh))}.life-wall-card figcaption{padding:5px;gap:2px}.life-wall-card small{font-size:7px}.life-wall-card h2{font-size:11px;line-height:1.3}.life-wall-card time{font-size:9px}.life-wall-card figcaption>span{font-size:8px}
+ .life-walking-path{height:25%}.life-walker{height:100%;left:76%}.life-age-label{font-size:16px;bottom:1%}.life-age-label>small{font-size:9px}
+}}
+/* Stage layout: (max-height:460px) and (orientation:landscape) */
+.life-finale:where(.life-layout-landscape-460)>header{height:48px}.life-finale:where(.life-layout-landscape-460)>footer{height:48px;min-height:48px}.life-finale:where(.life-layout-landscape-460)>header{padding:5px 18px}:where(.life-layout-landscape-460) .life-controls button{min-height:36px}.life-finale:where(.life-layout-landscape-460)>footer{padding:5px 18px;font-size:10px}.life-finale:where(.life-layout-landscape-460)>footer>button{min-height:36px}:where(.life-layout-landscape-460) .life-heading>small{font-size:8px;letter-spacing:3px}:where(.life-layout-landscape-460) .life-heading .life-top-caption{font-size:11px}:where(.life-layout-landscape-460) .life-dialogue-box{left:8%;right:8%;bottom:0;padding:8px 16px}:where(.life-layout-landscape-460) .life-dialogue-text{font-size:14px;line-height:1.6;max-height:calc(20 * var(--life-vh))}:where(.life-layout-landscape-460) .life-dialogue-box .life-dialogue-hint{font-size:9px;margin-top:3px}:where(.life-layout-landscape-460) .life-dialogue-page{right:15px;top:12px}:where(.life-layout-landscape-460) .life-wall-heading{top:0}:where(.life-layout-landscape-460) .life-wall-heading>small{display:none}:where(.life-layout-landscape-460) .life-wall-heading>h1{font-size:14px}:where(.life-layout-landscape-460) .life-wall-viewport{top:15%;bottom:22%}:where(.life-layout-landscape-460) .life-wall-card{width:180px;padding:5px}:where(.life-layout-landscape-460) .life-wall-card>img{height:calc(22 * var(--life-vh))}:where(.life-layout-landscape-460) .life-wall-card figcaption{padding:5px;gap:2px}:where(.life-layout-landscape-460) .life-wall-card small{font-size:7px}:where(.life-layout-landscape-460) .life-wall-card h2{font-size:11px;line-height:1.3}:where(.life-layout-landscape-460) .life-wall-card time{font-size:9px}:where(.life-layout-landscape-460) .life-wall-card figcaption>span{font-size:8px}:where(.life-layout-landscape-460) .life-walking-path{height:25%}:where(.life-layout-landscape-460) .life-walker{height:100%;left:76%}:where(.life-layout-landscape-460) .life-age-label{font-size:16px;bottom:1%}:where(.life-layout-landscape-460) .life-age-label>small{font-size:9px}
+
+@media(prefers-reduced-motion:reduce){.life-finale.is-entering,.life-finale.is-film-entering>.life-scene{animation:none}.life-wall-card{will-change:auto;transform:none!important}.life-background{will-change:auto}}
+
+/* Custom memory/journey copy is paged to fit one screen; default wall cues keep their layout. */
+.life-readable-copy{position:relative;flex-shrink:0;overflow:hidden;white-space:pre-wrap}
+.life-reader-text{display:block;white-space:pre-wrap;overflow-wrap:anywhere}
+.life-copy-page{display:block;margin-top:6px;text-align:right;font-size:11px;line-height:16px;letter-spacing:.5px;color:#a4d7ec}
+.life-memory.has-readable-pages>.life-real-chart,.life-memory.has-readable-pages>.life-history-bars,.life-memory.has-readable-pages>.life-memory-note{display:none}
+.life-memory.has-readable-pages>.life-score{margin:8px 0}.life-memory.has-readable-pages>.life-score b{font-size:28px}
+.life-memory.has-readable-pages>.life-memory-stats{padding:6px 0}.life-memory.has-readable-pages .life-memory-stats b{font-size:16px}
+.life-memory.has-readable-pages>.life-readable-copy{position:absolute;left:18px;right:18px;bottom:14px;margin:0;padding-top:6px;background:linear-gradient(180deg,#07223af2,#07223aff);border-top:1px solid #a4d7ec35}
+.life-journey.has-readable-pages>.life-readable-copy{max-height:50%;margin-top:10px;padding-top:6px}
+/* Preserve native responsive rules in WebViews without :where(). */
+@supports not selector(:where(*)){@media(orientation:portrait),(max-width:640px){.life-memory.has-readable-pages>.life-readable-copy{left:14px;right:14px;bottom:10px}.life-copy-page{font-size:10px}}}
+/* Stage layout: (orientation:portrait),(max-width:640px) */
+:where(.life-layout-portrait) .life-memory.has-readable-pages>.life-readable-copy{left:14px;right:14px;bottom:10px}:where(.life-layout-portrait) .life-copy-page{font-size:10px}
+
+/* Shared real-glyph ending dissolve; the caller supplies the movie clock. */
+.life-finale .life-text-dissolve-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:8;pointer-events:none;animation:none!important;transition:none}
+.life-finale .life-text-dissolve-source{position:relative}
+.life-finale .life-text-dissolve-char{display:inline-block;white-space:pre;vertical-align:baseline;mask-repeat:no-repeat;-webkit-mask-repeat:no-repeat;transition:none}
+
+/* User-supplied walking/closeup clips; the movie remains paused in portrait. */
+.life-native-media{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.life-native-media>video,.life-native-media>img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:50% 100%;pointer-events:none}
+.life-native-media>[hidden]{display:none!important}
+.life-walker.has-walk-video .life-walk-sprite,.life-walker.has-walk-video .life-walk-previous,.life-walker.has-walk-video .life-footstep{display:none}
+.life-walker.has-walk-video{filter:none;will-change:transform,opacity}
+.life-walk-outgoing{z-index:1;pointer-events:none;animation:none!important}
+.life-finale[data-age-transition] .life-walker:not(.life-walk-outgoing){z-index:2}
+.life-walker.has-walk-video .life-native-media{overflow:visible}
+.life-walking-path{background:linear-gradient(180deg,transparent,#6bbedb06)}
+.life-path-reflection{display:none}
+.life-wall-card{will-change:opacity;contain:layout paint}
+.life-wall-card>img{content-visibility:auto;contain-intrinsic-size:240px 200px}
+.life-closeup-screen{display:none;position:absolute;inset:0;z-index:20;background:#f7fcff}
+.life-finale.has-closeup-video>.life-closeup-screen{display:block}
+.life-closeup-screen .life-native-media>video,.life-closeup-screen .life-native-media>img{object-fit:cover;object-position:center}
+.life-media-veil{position:absolute;inset:0;z-index:30;pointer-events:none;background:#f7fcff;opacity:0}
+.life-finale.has-closeup-video>header,.life-finale.has-closeup-video>footer,.life-finale.has-final-caption>header,.life-finale.has-final-caption>footer{visibility:hidden;pointer-events:none}
+.life-finale.has-final-caption>.life-scene{position:absolute;inset:0;grid-row:1 / -1;grid-column:1 / -1;z-index:10}
+.life-finale.has-final-caption .life-farewell-copy>small,.life-finale.has-final-caption .life-farewell-copy>p{display:none}
+.life-finale.has-final-caption .life-farewell-copy>h1{font-size:clamp(20px,calc(3.4 * var(--life-vw)),48px);letter-spacing:.11em;line-height:2.05;font-weight:500;white-space:pre;overflow-wrap:normal;text-wrap:initial}
+.life-farewell-line{display:inline-block;opacity:0;will-change:opacity,transform}
+.life-rotate-gate{position:absolute;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px;background:radial-gradient(ellipse at 50% 30%,#1c5375,#081b31 72%);color:#e7f9ff;text-align:center}
+.life-rotate-gate[hidden]{display:none}
+.life-rotate-phone{width:64px;height:106px;border:2px solid #b2eaff;border-radius:14px;display:grid;place-items:center;font-size:40px;color:#c7f6ff;box-shadow:0 0 32px #6ac8ff24;margin:0 0 32px;transform:rotate(-25deg)}
+.life-rotate-gate h2{font-size:24px;letter-spacing:3px;margin:0 0 14px}.life-rotate-gate p{font-size:14px;line-height:1.9;max-width:270px;margin:0 0 24px}
+.life-rotate-gate button{min-height:48px;padding:12px 24px;border:1px solid #a1e9ff66;border-radius:24px;background:#3d779b44;color:#e7f9ff;font-size:14px}
+.life-rotate-gate small{font-size:11px;color:#9fc8db;margin-top:20px}
+.life-finale.needs-landscape>:not(.life-rotate-gate){visibility:hidden}
+/* The prologue is an opaque black reading stage, including its first frame. */
+.life-finale.is-intro-dialogue{background:#000;animation:none}
+.life-finale.is-intro-dialogue>.life-background,.life-finale.is-intro-dialogue>.life-background-previous,.life-finale.is-intro-dialogue>.life-background-effect,.life-finale.is-intro-dialogue>.life-atmosphere,.life-finale.is-intro-dialogue>.life-cinema-light,.life-finale.is-intro-dialogue>.life-particles,.life-finale.is-intro-dialogue>.life-aux-layers,.life-finale.is-intro-dialogue>.life-transition-flash{visibility:hidden;display:none}
+.life-finale.is-intro-dialogue>header,.life-finale.is-intro-dialogue>footer{background:transparent}
+.life-intro-curtain{position:absolute;inset:0;z-index:40;pointer-events:none;background:#000;opacity:0}
+.life-finale.is-prologue-entry{background:transparent;animation:none}
+.life-finale.is-prologue-entry>:not(.life-intro-curtain){visibility:hidden}
+/* Each subtitle has one reading location. Keep the controls, clear the repeated labels. */
+.life-finale .life-heading,.life-finale>footer>span:first-of-type,.life-film-title>small,.life-wall-heading>small,.life-ending-copy>small{display:none}
+.life-finale .life-controls{margin-left:auto}
+/* Preserve native responsive rules in WebViews without :where(). */
+@supports not selector(:where(*)){@media(orientation:landscape) and (max-height:500px){
+ .life-finale>header{height:42px;padding:4px 14px}.life-finale>footer{height:42px;min-height:42px;padding:4px 14px}
+ .life-controls button,.life-finale>footer>button{min-height:32px;padding:4px 10px}
+ .life-wall-heading{top:1%;left:5%}.life-wall-heading h1{font-size:15px;margin:3px 0}.life-wall-heading small{font-size:8px}
+ .life-wall-viewport{inset:18% 0 28%}.life-wall-card{width:210px;padding:6px}.life-wall-card>img{height:calc(27 * var(--life-vh));min-height:0}
+ .life-wall-card figcaption{padding:5px 3px;min-height:0;gap:2px}.life-wall-card h2{font-size:11px;line-height:1.55}.life-wall-card time{font-size:9px}.life-wall-card small,.life-wall-card figcaption>span{font-size:8px}
+ .life-walking-path{height:33%}.life-walker{height:112%;bottom:8%;left:76%}.life-age-label{bottom:3%;left:5%;font-size:17px;gap:8px}.life-age-label>small{font-size:9px;max-width:calc(58 * var(--life-vw))}
+ .life-finale.has-final-caption .life-farewell-copy>h1{font-size:clamp(20px,calc(3.2 * var(--life-vw)),30px)}
+}}
+/* Stage layout: (orientation:landscape) and (max-height:500px) */
+.life-finale:where(.life-layout-landscape-500)>header{height:42px;padding:4px 14px}.life-finale:where(.life-layout-landscape-500)>footer{height:42px;min-height:42px;padding:4px 14px}:where(.life-layout-landscape-500) .life-controls button,.life-finale:where(.life-layout-landscape-500)>footer>button{min-height:32px;padding:4px 10px}:where(.life-layout-landscape-500) .life-wall-heading{top:1%;left:5%}:where(.life-layout-landscape-500) .life-wall-heading h1{font-size:15px;margin:3px 0}:where(.life-layout-landscape-500) .life-wall-heading small{font-size:8px}:where(.life-layout-landscape-500) .life-wall-viewport{inset:18% 0 28%}:where(.life-layout-landscape-500) .life-wall-card{width:210px;padding:6px}:where(.life-layout-landscape-500) .life-wall-card>img{height:calc(27 * var(--life-vh));min-height:0}:where(.life-layout-landscape-500) .life-wall-card figcaption{padding:5px 3px;min-height:0;gap:2px}:where(.life-layout-landscape-500) .life-wall-card h2{font-size:11px;line-height:1.55}:where(.life-layout-landscape-500) .life-wall-card time{font-size:9px}:where(.life-layout-landscape-500) .life-wall-card small,:where(.life-layout-landscape-500) .life-wall-card figcaption>span{font-size:8px}:where(.life-layout-landscape-500) .life-walking-path{height:33%}:where(.life-layout-landscape-500) .life-walker{height:112%;bottom:8%;left:76%}:where(.life-layout-landscape-500) .life-age-label{bottom:3%;left:5%;font-size:17px;gap:8px}:where(.life-layout-landscape-500) .life-age-label>small{font-size:9px;max-width:calc(58 * var(--life-vw))}.life-finale:where(.life-layout-landscape-500).has-final-caption .life-farewell-copy>h1{font-size:clamp(20px,calc(3.2 * var(--life-vw)),30px)}
+
+
+/* Warm decoded frames off-screen without changing the visible movie. */
+.life-media-preload{position:absolute;left:-4096px;top:0;width:400px;height:512px;opacity:0;pointer-events:none;contain:strict}
+
+/* Keep the dialogue page count beside the speaker in normal flow. */
+.life-dialogue-box{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:12px}
+.life-dialogue-box>.life-speaker{grid-column:1;grid-row:1;max-width:none;min-width:0;overflow-wrap:anywhere}
+.life-dialogue-box>.life-dialogue-text{grid-column:1/-1;grid-row:2;min-width:0}
+.life-dialogue-box>.life-dialogue-hint{grid-column:1/-1;grid-row:3}
+.life-dialogue-box>.life-dialogue-page{position:static;grid-column:2;grid-row:1;align-self:start;margin:0;line-height:1.5}
+
+/* Unattained memories preserve their title without revealing the picture. */
+.life-wall-no-photo.is-locked{height:clamp(120px,calc(21 * var(--life-vh)),225px);min-height:0;font-size:16px;letter-spacing:3px;color:#698a9b;background:linear-gradient(135deg,#c9dee8,#e7f2f6)}
+/* Preserve native responsive rules in WebViews without :where(). */
+@supports not selector(:where(*)){@media(max-width:640px){.life-wall-no-photo.is-locked{height:clamp(110px,calc(22 * var(--life-vh)),225px);font-size:14px}}}
+/* Stage layout: (max-width:640px) */
+:where(.life-layout-compact) .life-wall-no-photo.is-locked{height:clamp(110px,calc(22 * var(--life-vh)),225px);font-size:14px}
+/* Preserve native responsive rules in WebViews without :where(). */
+@supports not selector(:where(*)){@media(max-height:480px){.life-wall-no-photo.is-locked{height:calc(27 * var(--life-vh));font-size:12px;letter-spacing:2px}}}
+/* Stage layout: (max-height:480px) */
+:where(.life-layout-short-480) .life-wall-no-photo.is-locked{height:calc(27 * var(--life-vh));font-size:12px;letter-spacing:2px}
+
+/* 2026-10-17 终章播完：在收尾白屏（.life-farewell.is-white）上弹出确认框，主按钮「返回办公室」。 */
+.life-finish-prompt{position:absolute;inset:0;z-index:110;display:flex;align-items:center;justify-content:center;padding:24px;background:#f7fcffe0;backdrop-filter:blur(4px);animation:lifeFadeIn .35s both}
+.life-finish-prompt[hidden]{display:none}
+.life-finish-card{width:min(430px,100%);text-align:center;padding:30px 28px 24px;border-radius:18px;background:linear-gradient(160deg,#ffffff,#e7f4fc);border:1px solid #a9d8ec;box-shadow:0 24px 64px #0a3a5c33;color:#225774}
+.life-finish-card>small{display:block;font-size:11px;letter-spacing:4px;color:#71a6c0}
+.life-finish-card>h2{font-size:21px;font-weight:600;letter-spacing:2px;line-height:1.7;margin:12px 0 10px;color:#17455f}
+.life-finish-card>p{font-size:13px;line-height:1.9;color:#4d7f99;margin:0 0 22px}
+.life-finish-actions{display:flex;flex-direction:column;gap:10px}
+.life-finish-actions>button{width:100%;min-height:48px;border-radius:52px;font-size:15px;letter-spacing:1px}
+.life-finish-actions>button[data-life="office"]{border:0;background:linear-gradient(100deg,#3fa0d8,#7fd8f2);color:#04283d;font-weight:700;box-shadow:0 12px 28px #3ea0d85c}
+.life-finish-actions>button[data-life="office"]:hover{filter:brightness(1.06)}
+.life-finish-actions>button[data-life="replay-end"]{border:1px solid #9ccfe4;background:#ffffffcc;color:#2b6c8c}
+.life-finish-actions>button[data-life="replay-end"]:hover{background:#eaf7ff}
+/* Preserve native responsive rules in WebViews without :where(). */
+@supports not selector(:where(*)){@media(orientation:portrait),(max-width:640px){.life-finish-prompt{padding:18px}.life-finish-card{padding:24px 20px 18px}.life-finish-card>h2{font-size:19px}}}
+/* Stage layout: (orientation:portrait),(max-width:640px) */
+:where(.life-layout-portrait) .life-finish-prompt{padding:18px}:where(.life-layout-portrait) .life-finish-card{padding:24px 20px 18px}:where(.life-layout-portrait) .life-finish-card>h2{font-size:19px}
+
+/* Read through the original panel, or inspect the complete background. */
+.life-dialogue-box{background:linear-gradient(115deg,rgba(8,52,89,var(--life-dialogue-opacity)),rgba(21,73,101,var(--life-dialogue-opacity)));backdrop-filter:none;text-shadow:0 1px 3px #001427,0 0 9px #001427}
+.life-finale.is-dialogue-hidden .life-dialogue-box{visibility:hidden;pointer-events:none}
+.life-finale.is-dialogue-hidden>footer{visibility:hidden;pointer-events:none}
+.life-film-title{width:100%;margin-inline:auto;box-sizing:border-box;text-align:center}
+.life-film-title h1{letter-spacing:.1em;padding-inline-start:.1em;text-align:center}
+/* The photograph defines its frame; compact metadata stays outside the image. */
+.life-wall-card{box-sizing:border-box;width:var(--life-wall-card-size,288px);height:auto;display:grid;grid-template-rows:auto auto;gap:7px;padding:8px;max-height:none}
+.life-wall-photo,.life-wall-card>.life-wall-no-photo{position:relative;min-height:0;width:100%;height:auto;aspect-ratio:var(--life-wall-photo-ratio,1);display:grid;place-items:center;background:#c7e7f4;border-radius:2px;overflow:hidden}
+.life-wall-photo>img{width:100%;height:100%;min-height:0;object-fit:contain;display:block;grid-area:1/1}
+.life-wall-photo.is-loading>img{visibility:hidden}
+.life-wall-photo>button{grid-area:1/1;z-index:1;max-width:95%;min-width:0;font-size:12px;line-height:1.5;border-radius:8px;padding:8px;color:#245571;background:#edfaffed;white-space:normal}
+.life-wall-photo>button:disabled{cursor:wait}
+.life-wall-card figcaption{display:flex;flex-direction:column;gap:2px;padding:0 3px;min-height:0;min-width:0;overflow:visible}
+.life-wall-card figcaption>*{flex:none}
+.life-wall-card h2{font-size:clamp(11px,calc(1.4 * var(--life-vw)),17px);line-height:1.35}
+.life-wall-meta{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 8px;font-size:clamp(8px,calc(.9 * var(--life-vw)),11px);line-height:1.35;color:#3f7187}
+.life-wall-meta .life-wall-score{white-space:nowrap}
+.life-wall-card time{font-size:inherit;line-height:inherit;letter-spacing:0;white-space:nowrap}
+
+.life-wall-heading{left:5%;right:5%}
+.life-wall-heading>h1{letter-spacing:.1em;padding-inline-start:.1em;text-align:center}
+
+/* Preserve native responsive rules in WebViews without :where(). */
+@supports not selector(:where(*)){@media(orientation:landscape){.life-wall-viewport{top:14%;bottom:18%}}}
+/* Stage layout: (orientation:landscape) */
+:where(.life-layout-landscape) .life-wall-viewport{top:14%;bottom:18%}
+/* Preserve native responsive rules in WebViews without :where(). */
+@supports not selector(:where(*)){@media(orientation:landscape) and (max-height:500px){.life-wall-viewport{bottom:12%}}}
+/* Stage layout: (orientation:landscape) and (max-height:500px) */
+:where(.life-layout-landscape-500) .life-wall-viewport{bottom:12%}
+
+/* The walking lane is decorative and must not intercept photo/caption input. */
+.life-walking-path{pointer-events:none}

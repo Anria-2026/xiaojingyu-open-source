@@ -1,0 +1,26 @@
+#page-minigames .minigames-tool { max-width: 1320px; margin: 0 auto; }
+#minigames-config { padding-bottom: 36px; }
+#minigames-config .minigames-intro { display:flex; align-items:center; justify-content:space-between; gap:20px; margin:4px 0 20px; }
+#minigames-config h2 { margin:0 0 8px; font-size:24px; }
+#minigames-config h3 { margin:0; font-size:17px; }
+#minigames-config h4 { margin:10px 0; font-size:14px; }
+#minigames-config .minigames-intro p { margin:0; color:var(--text-dim); line-height:1.6; }
+#minigames-config .minigames-game-heading { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+#minigames-config .minigames-duration { flex-shrink:0; padding:6px 10px; border-radius:20px; color:var(--accent); background:var(--panel-2); font-size:12px; white-space:nowrap; }
+#minigames-config .minigames-grades { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; }
+#minigames-config .minigames-grade { min-width:0; border:1px solid var(--line); border-radius:10px; padding:0 12px 12px; background:var(--panel-2); }
+#minigames-config .minigames-grade h4 { color:var(--accent); }
+#minigames-config .minigames-reward-fields { display:grid; gap:10px; }
+#minigames-config .gcf-field { min-width:0; }
+#minigames-config .gcf-field label { white-space:normal; line-height:1.5; }
+#minigames-config .gcf-field input { max-width:100%; }
+#minigames-config details { margin-top:14px; }
+#minigames-config summary { padding:8px 0; cursor:pointer; line-height:1.5; }
+#minigames-config .minigames-advanced > summary { font-size:15px; font-weight:700; }
+#minigames-config .gcf-row-card { min-width:0; }
+#minigames-config .v2b-invalid { border-color:var(--danger); color:var(--danger); }
+#minigames-config-errors { padding:12px; border:1px solid var(--danger); color:var(--danger); border-radius:10px; overflow-wrap:anywhere; }
+@media (max-width:760px) {
+  #minigames-config .minigames-grades { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  #minigames-config .minigames-intro { align-items:flex-start; flex-direction:column; gap:10px; }
+}

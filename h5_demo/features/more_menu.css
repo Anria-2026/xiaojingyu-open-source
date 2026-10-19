@@ -1,0 +1,85 @@
+/* The collection uses the same header, card lines and Aqua button language as the office. */
+.v2b-panel-host .modal-card.more-menu-card { width:min(640px,calc(100% - 24px)); height:auto; flex:0 1 auto; }
+.more-menu-card .modal-body { display:flex; gap:14px; flex:0 1 auto; }
+.office-more-intro { margin:0; font-size:12px; line-height:1.5; color:var(--aqua-ink-2); display:flex; justify-content:space-between; gap:12px; }
+.office-more-intro span { flex:none; font:700 11px var(--font-num); color:var(--aqua-primary-deep); background:var(--aqua-primary-soft); border-radius:99px; padding:3px 8px; }
+.more-menu-card .office-more-tabs { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+.office-more-tab { position:relative; display:flex; flex-direction:column; align-items:flex-start; justify-content:center; gap:12px; min-height:126px; min-width:0; padding:16px; border:1px solid var(--aqua-border); border-radius:14px; background:linear-gradient(145deg,var(--aqua-white),var(--aqua-surface)); color:var(--aqua-foreground); font:inherit; text-align:left; cursor:pointer; box-shadow:0 10px 18px -20px var(--aqua-primary-deep); transition:border-color .16s,background .16s,transform .16s; }
+.office-more-tab:hover,.office-more-tab:focus-visible { background:var(--aqua-primary-soft); border-color:var(--aqua-primary); transform:translateY(-2px); }
+.office-more-tab:disabled { opacity:1; background:#f2f7fa; border-color:#cadfe9; color:#496879; cursor:default; transform:none; }
+.office-more-tab:disabled .office-more-copy small { color:#537185; }
+.office-more-tab > * { pointer-events:none; }
+.office-more-icon { display:grid; place-items:center; width:38px; height:38px; flex:none; border-radius:11px; color:var(--aqua-primary-deep); background:var(--aqua-primary-soft); }
+.office-more-copy { display:flex; flex-direction:column; gap:4px; min-width:0; width:100%; }
+.office-more-label { font-size:13px; font-weight:800; line-height:1.35; overflow-wrap:anywhere; }
+.office-more-copy small { color:var(--aqua-ink-2); font-size:11px; line-height:1.45; overflow-wrap:anywhere; }
+.office-more-chevron { position:absolute; right:14px; top:20px; color:var(--aqua-primary); font:500 24px/1 var(--font-num); }
+
+
+
+.office-more-empty { margin:12px; text-align:center; color:var(--aqua-ink-2); }
+@container v2b-panel (max-width:420px) { .more-menu-card .office-more-tabs { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; } .office-more-tab { min-height:112px; padding:13px; gap:8px; } .office-more-intro { font-size:11px; } }
+@media(max-height:450px) { .more-menu-card .modal-body { gap:8px; } .office-more-tab { min-height:88px; flex-direction:row; align-items:center; gap:9px; padding:10px; } .office-more-chevron { display:none; } .office-more-icon { width:32px; height:32px; } .office-more-copy small { font-size:10px; } .more-menu-card .office-more-tabs { gap:8px; }  }
+@media(prefers-reduced-motion:reduce) { .office-more-tab { transition:none; } }
+
+/* [feature:office-aux-no-scroll-pages] */
+/* Menu collection pages keep all entries reachable through fixed controls. */
+#achv-modal .achv-wall-card { height:auto; }
+#achv-modal #achv-wall-body { display:flex; flex-direction:column; min-height:0; gap:8px; overflow:hidden; }
+#achv-modal .achv-wall-stats,#achv-modal .achv-wall-tip { flex:none; margin-bottom:0; }
+#achv-modal .achv-wall { flex:1 1 auto; min-height:0; grid-template-columns:repeat(var(--achv-page-cols,5),minmax(0,1fr)); align-content:start; }
+#achv-modal .achv-wall.is-thumb .achv-wrap { min-height:94px; }
+#achv-modal .achv-wall-pager { flex:none; display:flex; justify-content:center; align-items:center; gap:16px; padding-top:4px; }
+#achv-modal .achv-wall-pager .dg-btn { min-width:84px; min-height:34px; }
+#achv-modal .achv-wall-pager span { font:700 12px var(--font-num); color:var(--aqua-ink-2); }
+@media(orientation:portrait) { #achv-modal .achv-wall-card { height:auto; } }
+
+/* These collections already paginate their records. Fit the complete page,
+   including the recent three logs and size controls, inside a short viewport. */
+#settingsPop .sub-modal-card,#codexPop .codex-card { max-height:calc(100vh - 20px); }
+#settingsPop .sub-modal-body,#codexPop .sub-modal-body,#codexPop .cdx-log { overflow:hidden; }
+#codexPop .cdx-cards:not(.is-thumb) .cdx-card { aspect-ratio:auto; }
+#codexPop .cdx-detail .cdx-card { aspect-ratio:auto; }
+#codexPop .cdx-cards:not(.is-thumb) .cdx-card-bars,#codexPop .cdx-detail .cdx-card-bars { grid-template-columns:minmax(0,1fr); }
+#codexPop .cdx-cards:not(.is-thumb) .cdx-dim,#codexPop .cdx-detail .cdx-dim { gap:4px; }
+#codexPop .cdx-cards:not(.is-thumb) .cdx-dim i,#codexPop .cdx-detail .cdx-dim i { white-space:nowrap; }
+#codexPop .cdx-cards:not(.is-thumb) .cdx-dim b,#codexPop .cdx-detail .cdx-dim b { flex:none; }
+@media(orientation:landscape) and (max-height:560px) {
+  #settingsPop .sub-modal-card { width:min(740px,96vw); }
+  #settingsPop .set-body { display:grid; grid-template-columns:1fr 1fr; gap:8px 24px; padding:10px 16px; }
+  #settingsPop .set-body > .set-row,#settingsPop .set-body > .set-tip { grid-column:1; }
+  #settingsPop [data-whale-size-settings] { grid-column:2; grid-row:1 / span 3; margin:0; padding-top:0; border-top:0; }
+  #settingsPop .sub-modal-header,#codexPop .sub-modal-header { padding:9px 16px; }
+  #settingsPop .sub-modal-footer,#codexPop .sub-modal-footer { padding:8px 16px; }
+  #codexPop .codex-card { width:min(920px,96vw); }
+  #codexPop .set-body { display:grid; grid-template-columns:minmax(0,2fr) minmax(0,1fr); grid-template-rows:auto auto 1fr; gap:6px 12px; padding:8px 12px; }
+  #codexPop .cdx-stat { grid-column:1 / -1; margin:0; }
+  #codexPop .cdx-cards,#codexPop .cdx-empty { grid-column:1; grid-row:2 / span 2; margin:0; align-self:start; }
+  #codexPop .gcf-subhead { grid-column:2; grid-row:2; margin:0; }
+  #codexPop .cdx-log { grid-column:2; grid-row:3; max-height:none; }
+  #codexPop .cdx-log-row { display:grid; grid-template-columns:auto 1fr auto; gap:3px 5px; padding:6px; }
+  #codexPop .cdx-log-name { grid-column:2; grid-row:1; }
+  #codexPop .cdx-log-score { grid-column:3; grid-row:1; }
+  #codexPop .cdx-log-arch { grid-column:1 / 3; grid-row:2; }
+  #codexPop .cdx-log-vd { grid-column:3; grid-row:2; }
+  #codexPop .cdx-card { aspect-ratio:auto; padding:7px; }
+  #codexPop .cdx-card-inner { padding:6px; gap:3px; }
+  #codexPop .cdx-card-score { margin:2px 0; }
+  #codexPop .cdx-card-score b { font-size:24px; }
+  #codexPop .cdx-card-times { margin-top:2px; }
+  #codexPop .cdx-card-bars { grid-template-columns:minmax(0,1fr); gap:2px; }
+  #codexPop .cdx-dim { gap:4px; padding:0 5px; line-height:1.1; }
+  #codexPop .cdx-dim i { white-space:nowrap; }
+  #codexPop .cdx-dim b { flex:none; }
+}
+/* Contain only the pager button's sweep decoration, which otherwise expands
+   the measured wall width after a real pointer click. The label remains full. */
+#achv-modal .achv-wall-pager .dg-btn { overflow:hidden; }
+#achv-modal .achv-wall-pager .dg-btn::before,
+#achv-modal .achv-wall-pager .dg-btn::after { pointer-events:none; }
+/* [/feature:office-aux-no-scroll-pages] */
+
+/* Show all current entries together, with native overflow only for genuinely long configured lists. */
+.more-menu-card .modal-body { min-height:0; overflow-y:auto; }
+@media (orientation:portrait) and (max-height:680px) { .more-menu-card .office-more-tab { min-height:76px; padding:10px; gap:6px; } }
+@media (orientation:landscape) and (max-height:450px) { .more-menu-card .office-more-tab { min-height:58px; padding:8px; } }

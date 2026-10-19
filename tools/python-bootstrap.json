@@ -1,0 +1,12 @@
+{
+  "version": "3.13.16",
+  "downloadBase": "https://www.python.org/ftp/python/3.13.16/",
+  "releasePage": "https://www.python.org/downloads/release/python-31316/",
+  "installDirectory": "Python313",
+  "cacheDirectory": "WhaleGame/bootstrap",
+  "installers": {
+    "AMD64": {"file": "python-3.13.16-amd64.exe", "sha256": "fb4f9f5d438b2396da0086dc70b935c530cb578e37adc6d354f7ad2037fee83b"},
+    "X86": {"file": "python-3.13.16.exe", "sha256": "394ca84150ea428db952cb617c1163c49fbc30e47ec53048c26e6ae44265df07"},
+    "ARM64": {"file": "python-3.13.16-arm64.exe", "sha256": "696e2226062c6ec3622c13f143d28336a856968518e49cb4f4c62513215a4f5d"}
+  }
+}

@@ -1,0 +1,45 @@
+/* 暂停提示沿用原深蓝胶囊与暖黄色脉冲，独立于场景缩放层。 */
+.office-shell #ob-pausedtag {
+  z-index: 95;
+  padding: calc(6px * var(--office-tag-unit,1)) calc(12px * var(--office-tag-unit,1));
+  min-height: calc(30px * var(--office-tag-unit,1));
+  box-sizing: border-box;
+  font-size: calc(14px * var(--office-tag-unit,1));
+  line-height: calc(18px * var(--office-tag-unit,1));
+  width: max-content;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background: rgba(23, 50, 77, .9);
+  border: 1px solid rgba(255, 194, 75, .7);
+  cursor: default;
+}
+.office-shell #ob-pausedtag[data-action] { cursor: pointer; }
+.office-shell #ob-pause { position: relative; }
+.office-shell #ob-pause.office-is-paused { background: rgba(255, 194, 75, .32); }
+.office-shell #ob-speed { font-family:var(--font-num, sans-serif); font-size:14px; line-height:1; font-weight:800; letter-spacing:0; }
+.office-shell #ob-speed:disabled { opacity:1; color:#637d8b; background:#edf3f6; cursor:default; }
+.office-shell.rl-mode #ob-speed { font-size:calc(14px * var(--rl-scale,1)); }
+@media (orientation: portrait) {
+  .office-shell #ob-pausedtag {
+    font-size: calc(12px * var(--office-tag-unit, 1));
+    font-weight: 600;
+    line-height: 1.4;
+    padding: calc(5px * var(--office-tag-unit, 1)) calc(9px * var(--office-tag-unit, 1));
+    min-height: calc(27px * var(--office-tag-unit, 1));
+  }
+  .office-shell .office-scene #ob-speed {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    z-index: 7;
+    width: 32px;
+    height: 28px;
+    font-size: 12px;
+  }
+}
+/* 保留挖人确认的背景点击取消；蒙层从顶栏下沿开始绘制和命中。 */
+.v2b-event-confirm.dg-modal-mask {
+  clip-path: inset(var(--v2bf-confirm-clear-top, 0px) 0 0 0);
+}
+.v2b-event-confirm .dg-modal { overflow: hidden; }

@@ -1,0 +1,13 @@
+{
+  "file": "saves/storage.json",
+  "api": "/__local_saves__/storage",
+  "keyPrefixes": ["whale_dev_v35_"],
+  "keys": ["whale_special_cg_ledger_v1"],
+  "messages": {
+    "error": "项目存档未能读写。请保留当前页面和 saves 文件夹，检查启动窗口、目录权限或其他游戏页面后再处理；不要覆盖原文件。",
+    "reload": "请刷新页面重新连接本地存档服务。",
+    "unavailable": "本地存档服务不可用。",
+    "writeFailed": "本地存档写入失败。"
+  },
+  "maxBytes": 16777216
+}
