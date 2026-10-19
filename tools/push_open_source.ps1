@@ -123,8 +123,8 @@ try {
     } finally { Remove-Item -LiteralPath $pathspec -Force }
     if ((Git-Run @('diff','--cached','--quiet') -AllowFailure).Code -ne 0) {
         $message = 'Update public game source ' + (Get-Date -Format 'yyyy-MM-dd HH:mm')
-        $committed = Git-Run @('commit','-m',$message)
-        Write-Host $committed.Out.Trim()
+        $committed = Git-Run @('commit','--quiet','-m',$message)
+        Write-Host ('Committed approved public files: ' + (Git-Run @('rev-parse','--short','HEAD')).Out.Trim())
     } else { Write-Host 'No allowlisted changes to commit.' }
     if ($CommitOnly) { Write-Host 'Local commit only: no fetch or push.'; exit 0 }
     # Do not merge, rebase, overwrite remote commits, or force push automatically.

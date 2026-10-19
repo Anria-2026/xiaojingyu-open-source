@@ -1,7 +1,5 @@
 {
     "mode":  "public-source",
-    "gitInitialized":  true,
-    "gitUploaded":  false,
     "files":  675,
     "resources":  458,
     "resourceBytes":  71271186,
@@ -77,7 +75,7 @@
 
                           ],
     "status":  "approved by author for initial public upload",
-    "bytesExcludingManifest":  82204527,
+    "bytesExcludingManifest":  82205679,
     "verification":  {
                          "sensitivePatterns":  [
 
@@ -3491,8 +3489,8 @@
                      },
                      {
                          "path":  "tools/push_open_source.ps1",
-                         "bytes":  12159,
-                         "sha256":  "c05178e8ad8dade6b18487f6749c3e7c0ae86b11fd0c8858c5755790997740b0"
+                         "bytes":  12240,
+                         "sha256":  "e3fb65a016d8ef969969f8892eb1bb39461c7a934c0e858905dd085dd84e6f9b"
                      },
                      {
                          "path":  "tools/python-bootstrap.json",
@@ -3516,8 +3514,8 @@
                      },
                      {
                          "path":  "开源检查说明.txt",
-                         "bytes":  1007,
-                         "sha256":  "1893f4d1150cb6cc88aecaa6ad26261052af31ad9fc7cb22aa0343259fd52a3e"
+                         "bytes":  2078,
+                         "sha256":  "d34299f5cad2f9298a1f8e6b4714bfd453c95ee082a1417efa3be70eb96d938a"
                      },
                      {
                          "path":  "启动编辑器.bat",
