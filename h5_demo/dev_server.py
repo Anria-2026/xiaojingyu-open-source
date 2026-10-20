@@ -146,4 +146,5 @@ if __name__ == "__main__":
         ThreadingHTTPServer(("127.0.0.1", PORT), Handler).serve_forever()
     except OSError as e:
         print("[错误] 端口 %d 被占用！请先关闭旧服务进程再启动。" % PORT)
-        input("按回车退出...")
+        if sys.stdin.isatty():
+            input("按回车退出...")

@@ -8,6 +8,7 @@ import json
 import os
 from pathlib import Path
 import runpy
+import shutil
 import socket
 import subprocess
 import sys
@@ -80,6 +81,97 @@ def find_server(handler, mode, port, allow_fallback=True):
     raise RuntimeError('未找到可用的本地端口。')
 
 
+def install_pillow(python):
+    print('正在安装图片处理依赖 Pillow（需要联网）……', flush=True)
+    subprocess.run([python, '-m', 'pip', 'install', 'Pillow'], check=True)
+
+
+def dependency_help():
+    if sys.platform == 'darwin':
+        return '请安装 Python 3.10+（python.org 或 brew install python），或手动执行 python3 -m pip install Pillow。'
+    hints = (
+        ('apt-get', 'sudo apt install python3-venv python3-pip'),
+        ('dnf', 'sudo dnf install python3-pip'),
+        ('pacman', 'sudo pacman -S python-pip'),
+        ('zypper', 'sudo zypper install python3-pip'),
+        ('apk', 'sudo apk add py3-pip'),
+    )
+    for command, hint in hints:
+        if shutil.which(command):
+            return hint
+    return '请用系统包管理器安装 python3-venv / python3-pip，或安装 python3-pil。'
+
+
+def ensure_editor_pillow():
+    if importlib.util.find_spec('PIL') is not None:
+        return
+    if os.name != 'posix':
+        # Windows keeps the existing one-step dependency install.
+        install_pillow(sys.executable)
+        return
+
+    in_venv = sys.prefix != sys.base_prefix
+    print('未检测到编辑器所需的图片处理依赖 Pillow。', flush=True)
+    if not sys.stdin.isatty():
+        print('请先安装 Pillow 后重试：' + dependency_help(), flush=True)
+        raise RuntimeError('编辑器需要 Pillow。')
+
+    if in_venv:
+        prompt = '是否在当前虚拟环境安装 Pillow？需要联网 [y/N] '
+    else:
+        prompt = '是否在项目内创建 .venv 并安装 Pillow？需要联网 [y/N] '
+    try:
+        answer = input(prompt).strip().lower()
+    except EOFError:
+        answer = ''
+    if answer not in ('y', 'yes'):
+        print('已取消。可手动安装 Pillow 后重新启动：', flush=True)
+        print('  ' + dependency_help(), flush=True)
+        raise RuntimeError('编辑器需要 Pillow。')
+
+    if in_venv:
+        try:
+            install_pillow(sys.executable)
+        except subprocess.CalledProcessError as error:
+            raise RuntimeError(f'Pillow 安装失败（退出码 {error.returncode}），请检查网络后重试。') from error
+        return
+
+    venv = ROOT / '.venv'
+    print(f'正在创建虚拟环境：{venv}', flush=True)
+    try:
+        subprocess.run([sys.executable, '-m', 'venv', str(venv)], check=True)
+    except (OSError, subprocess.CalledProcessError) as error:
+        print('创建虚拟环境失败。请先安装 python3-venv：', flush=True)
+        print('  ' + dependency_help(), flush=True)
+        raise RuntimeError('编辑器虚拟环境创建失败。') from error
+
+    python = venv / 'bin' / 'python'
+    if not python.is_file():
+        raise RuntimeError('虚拟环境创建失败：未找到 .venv/bin/python。')
+    try:
+        install_pillow(str(python))
+    except subprocess.CalledProcessError as error:
+        raise RuntimeError(f'Pillow 安装失败（退出码 {error.returncode}），请检查网络后重试。') from error
+
+    print('依赖已安装，正在重新启动编辑器……', flush=True)
+    os.execv(str(python), [str(python), '-B', str(Path(__file__).resolve()), *sys.argv[1:]])
+
+
+def browser_available():
+    if os.name == 'nt' or sys.platform == 'darwin':
+        return True
+    return bool(os.environ.get('DISPLAY') or os.environ.get('WAYLAND_DISPLAY') or os.environ.get('BROWSER'))
+
+
+def open_browser(url):
+    try:
+        opened = webbrowser.open(url)
+    except Exception:
+        opened = False
+    if not opened:
+        print(f'无法自动打开浏览器，请手动访问：{url}', flush=True)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('mode', choices=('game', 'editor'))
@@ -89,10 +181,9 @@ def main():
     if args.port is not None and not 0 <= args.port <= 65535:
         parser.error('--port must be between 0 and 65535')
     if sys.version_info < (3, 10):
-        raise RuntimeError('Please install Python 3.10 or newer, then restart.')
-    if args.mode == 'editor' and importlib.util.find_spec('PIL') is None:
-        print('First launch: installing the editor image dependency (Pillow)...', flush=True)
-        subprocess.run([sys.executable, '-m', 'pip', 'install', 'Pillow'], check=True)
+        raise RuntimeError('需要 Python 3.10 或更新版本，请安装后重新启动。')
+    if args.mode == 'editor':
+        ensure_editor_pillow()
     source = ROOT / ('editor/server.py' if args.mode == 'editor' else 'h5_demo/dev_server.py')
     sys.path.insert(0, str(source.parent))
     module = runpy.run_path(str(source))
@@ -107,12 +198,16 @@ def main():
     with server:
         if actual_port != port and port:
             print(f'默认端口 {port} 已被其他服务占用，已自动改用 {actual_port}。', flush=True)
-        print(f'Whale {args.mode}: {url}\nKeep this window open while using it.', flush=True)
+        label = '游戏' if args.mode == 'game' else '编辑器'
+        print(f'{label}地址：{url}\n使用期间请保留此窗口。', flush=True)
         if args.mode == 'game':
-            print(f'Project saves: {module["Handler"].save_store.file}', flush=True)
-        print('Close the window or press Ctrl+C to stop.', flush=True)
+            print(f'项目存档：{module["Handler"].save_store.file}', flush=True)
+        print('关闭窗口或按 Ctrl+C 停止服务。', flush=True)
         if not args.no_browser:
-            threading.Timer(0.4, webbrowser.open, args=(url,)).start()
+            if browser_available():
+                threading.Timer(0.4, open_browser, args=(url,)).start()
+            else:
+                print(f'当前没有可用的桌面会话，请手动访问：{url}', flush=True)
         try:
             server.serve_forever()
         except KeyboardInterrupt:
