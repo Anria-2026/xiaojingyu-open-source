@@ -75,7 +75,7 @@
 
                           ],
     "status":  "approved by author for initial public upload",
-    "bytesExcludingManifest":  82163278,
+    "bytesExcludingManifest":  82166190,
     "verification":  {
                          "sensitivePatterns":  [
 
@@ -3489,8 +3489,8 @@
                      },
                      {
                          "path":  "tools/start_local.py",
-                         "bytes":  2615,
-                         "sha256":  "fdc26a29115184282dc964de060f14f1bc1ad4b27e0150925b60b4b8d35d3355"
+                         "bytes":  5175,
+                         "sha256":  "350dc7470bee98bc6ed0b1ef81b29774a3517ad32741cd6b60b19cac51622dde"
                      },
                      {
                          "path":  "tools/sync_cfg_jsons.js",
@@ -3514,8 +3514,8 @@
                      },
                      {
                          "path":  "入门与编辑器指南.md",
-                         "bytes":  15182,
-                         "sha256":  "072be1f99bf895de7b37b79785a5b38f7671f5adb8a4638fb256e318bda5eab0"
+                         "bytes":  15534,
+                         "sha256":  "8f2fe529f051954665c51bbc8008c9b6803e9de0d75f76381eb090b546496d11"
                      },
                      {
                          "path":  "资源清单.csv",
