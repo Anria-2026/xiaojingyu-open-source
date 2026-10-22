@@ -81,9 +81,45 @@ def find_server(handler, mode, port, allow_fallback=True):
     raise RuntimeError('未找到可用的本地端口。')
 
 
+def pip_available(python):
+    try:
+        result = subprocess.run(
+            [python, '-m', 'pip', '--version'],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+    except OSError:
+        return False
+    return result.returncode == 0
+
+
 def install_pillow(python):
+    if not pip_available(python):
+        raise RuntimeError(f'{python} 缺少 pip，无法安装 Pillow。')
     print('正在安装图片处理依赖 Pillow（需要联网）……', flush=True)
     subprocess.run([python, '-m', 'pip', 'install', 'Pillow'], check=True)
+
+
+def ensure_pip(python):
+    if pip_available(python):
+        return True
+    print('当前环境缺少 pip，正在尝试修复……', flush=True)
+    try:
+        subprocess.run([python, '-m', 'ensurepip', '--upgrade'], check=True)
+    except (OSError, subprocess.CalledProcessError):
+        pass
+    return pip_available(python)
+
+
+def print_pip_help(python):
+    base = getattr(sys, '_base_executable', sys.executable)
+    venv = ROOT / '.venv'
+    print('当前环境缺少 pip，无法安装 Pillow。', flush=True)
+    print('请先安装 python3-venv（Debian/Ubuntu）或对应的 pip 包，然后执行：', flush=True)
+    print(f'  {python} -m ensurepip --upgrade', flush=True)
+    print(f'  {python} -m pip install Pillow', flush=True)
+    print('或重新创建虚拟环境：', flush=True)
+    print(f'  {base} -m venv "{venv}"', flush=True)
 
 
 def dependency_help():
@@ -130,6 +166,9 @@ def ensure_editor_pillow():
         raise RuntimeError('编辑器需要 Pillow。')
 
     if in_venv:
+        if not ensure_pip(sys.executable):
+            print_pip_help(sys.executable)
+            raise RuntimeError('编辑器虚拟环境缺少 pip。')
         try:
             install_pillow(sys.executable)
         except subprocess.CalledProcessError as error:
@@ -148,6 +187,9 @@ def ensure_editor_pillow():
     python = venv / 'bin' / 'python'
     if not python.is_file():
         raise RuntimeError('虚拟环境创建失败：未找到 .venv/bin/python。')
+    if not ensure_pip(str(python)):
+        print_pip_help(str(python))
+        raise RuntimeError('编辑器虚拟环境缺少 pip。')
     try:
         install_pillow(str(python))
     except subprocess.CalledProcessError as error:
