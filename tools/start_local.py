@@ -9,6 +9,7 @@ import os
 from pathlib import Path
 import runpy
 import shutil
+import shlex
 import socket
 import subprocess
 import sys
@@ -112,14 +113,15 @@ def ensure_pip(python):
 
 
 def print_pip_help(python):
-    base = getattr(sys, '_base_executable', sys.executable)
-    venv = ROOT / '.venv'
+    python = shlex.quote(str(python))
+    base = shlex.quote(str(getattr(sys, '_base_executable', sys.executable)))
+    venv = shlex.quote(str(ROOT / '.venv'))
     print('当前环境缺少 pip，无法安装 Pillow。', flush=True)
     print('请先安装 python3-venv（Debian/Ubuntu）或对应的 pip 包，然后执行：', flush=True)
     print(f'  {python} -m ensurepip --upgrade', flush=True)
     print(f'  {python} -m pip install Pillow', flush=True)
     print('或重新创建虚拟环境：', flush=True)
-    print(f'  {base} -m venv "{venv}"', flush=True)
+    print(f'  {base} -m venv {venv}', flush=True)
 
 
 def dependency_help():

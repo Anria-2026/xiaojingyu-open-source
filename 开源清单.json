@@ -1,6 +1,6 @@
 {
     "mode":  "public-source",
-    "files":  671,
+    "files":  677,
     "resources":  458,
     "resourceBytes":  71271186,
     "resourceExcluded":  [
@@ -75,7 +75,7 @@
 
                           ],
     "status":  "approved by author for initial public upload",
-    "bytesExcludingManifest":  82166190,
+    "bytesExcludingManifest":  82180211,
     "verification":  {
                          "sensitivePatterns":  [
 
@@ -189,8 +189,8 @@
                      },
                      {
                          "path":  ".gitattributes",
-                         "bytes":  132,
-                         "sha256":  "e91b0d0d23b514a8e8faa6f7d1f008833ec1cea7fe24eeca286b3c902d57d857"
+                         "bytes":  159,
+                         "sha256":  "c816945ca4bce3b947f32ab8e5ae8c721a9764be159de4f74fc9121a07927c61"
                      },
                      {
                          "path":  ".gitignore",
@@ -439,8 +439,8 @@
                      },
                      {
                          "path":  "editor/server.py",
-                         "bytes":  86194,
-                         "sha256":  "d52fa242f9049a2496ae31f4a8209674503bdfcd4625a89cfcb74f2c9f6203b6"
+                         "bytes":  88045,
+                         "sha256":  "5ce3dbd59dfd063c1235802990c7b7df595c2d4df9fcc7227c85417e75e4a10d"
                      },
                      {
                          "path":  "editor/server_config.example.json",
@@ -466,6 +466,11 @@
                          "path":  "editor/启动编辑器.bat",
                          "bytes":  70,
                          "sha256":  "0765f18de1d9a7062dd3acc97c1b7aec0027457f25e9afa22a6e3d5b97e64146"
+                     },
+                     {
+                         "path":  "editor/启动编辑器.sh",
+                         "bytes":  162,
+                         "sha256":  "c5ea4415c8a032f52fe8761553d23f5b8110a8ede3ca781066b868a3edfc94c0"
                      },
                      {
                          "path":  "h5_demo/arcade.css",
@@ -524,8 +529,8 @@
                      },
                      {
                          "path":  "h5_demo/dev_server.py",
-                         "bytes":  6907,
-                         "sha256":  "9bacf68b1bfd469cf0db5cb2e9fb477f8f62b1f9ed6337396e44f46b213b3fa6"
+                         "bytes":  6943,
+                         "sha256":  "3582661f0597b391bb6817d4e7a95df0fbc24888ab1a984d7d51e6f9cbfa446f"
                      },
                      {
                          "path":  "h5_demo/features/cg_rating.css",
@@ -1123,6 +1128,11 @@
                          "sha256":  "ce99c691332ee2c8a20fe473da4647aea957be396a90a6b1143aae5c1839c266"
                      },
                      {
+                         "path":  "h5_demo/启动游戏.sh",
+                         "bytes":  160,
+                         "sha256":  "86cda219cb2a6df6c7abc496b5cfa83a6b7ffd45b44148cb234589ae71178070"
+                     },
+                     {
                          "path":  "LICENSE",
                          "bytes":  1076,
                          "sha256":  "3aa829875b627e08d09c10e4ff37f577e291b009eb104d0c32546d3a24249382"
@@ -1144,8 +1154,8 @@
                      },
                      {
                          "path":  "README.md",
-                         "bytes":  3559,
-                         "sha256":  "b7d70c572cf62b048723d2e650e127150bcec187e09baf00b5989e1f7d312da1"
+                         "bytes":  4034,
+                         "sha256":  "d15fe3caabf1bcb7b0cd5e4cb4de8177adc11a386a588e23d2e95a43c0ce2d4c"
                      },
                      {
                          "path":  "resource/character/outfit_festive.webp",
@@ -3443,6 +3453,11 @@
                          "sha256":  "11e59570f70c296483d1767bb454b81e68eecf833852d396a7d59f10de58c394"
                      },
                      {
+                         "path":  "tools/install_desktop.sh",
+                         "bytes":  1077,
+                         "sha256":  "b2008e37d5999faf710bb3b4aa3f97639e1e4b0c1fb786a054c0e0c998260710"
+                     },
+                     {
                          "path":  "tools/launch_local.bat",
                          "bytes":  295,
                          "sha256":  "f08d70721d6ce88d7d8bc0e5f781afb5fe48b9cd68b6f2698bf5d32d8d0e252e"
@@ -3451,6 +3466,11 @@
                          "path":  "tools/launch_local.ps1",
                          "bytes":  7371,
                          "sha256":  "4dd4c09a7b5ba0a45bc9e91925d362349504e63c4bf7f1f40ea2ff021c2935c8"
+                     },
+                     {
+                         "path":  "tools/launch_local.sh",
+                         "bytes":  2916,
+                         "sha256":  "fb2a0f7de4d8b80a7cc8284e104cf1747568aca2e586337d737d6f56af67618c"
                      },
                      {
                          "path":  "tools/legacy-build/arcade_closure.js",
@@ -3489,8 +3509,8 @@
                      },
                      {
                          "path":  "tools/start_local.py",
-                         "bytes":  5175,
-                         "sha256":  "350dc7470bee98bc6ed0b1ef81b29774a3517ad32741cd6b60b19cac51622dde"
+                         "bytes":  10460,
+                         "sha256":  "39093479647436b3ff26724179c029796707f2f837f581528fd62c5b2064884c"
                      },
                      {
                          "path":  "tools/sync_cfg_jsons.js",
@@ -3508,14 +3528,24 @@
                          "sha256":  "1355c40589a1250c9e3a2992e291108305c8256c9293e6a163dd4fa5e6c04aa1"
                      },
                      {
+                         "path":  "启动编辑器.sh",
+                         "bytes":  122,
+                         "sha256":  "a656d7132d54f2c5f2a8b89979fcf8744d6b37d0bf00ff2beeade3fec630e2ad"
+                     },
+                     {
                          "path":  "启动游戏.bat",
                          "bytes":  65,
                          "sha256":  "0aa135527bec24db6d67709af08f382ae4a40e9749b84a54df85eaf03d6e166c"
                      },
                      {
+                         "path":  "启动游戏.sh",
+                         "bytes":  120,
+                         "sha256":  "9e066f1ce84b7769102c727d3db1c7ec59273efaca0f1f5834d3f310c86a8b2f"
+                     },
+                     {
                          "path":  "入门与编辑器指南.md",
-                         "bytes":  15534,
-                         "sha256":  "8f2fe529f051954665c51bbc8008c9b6803e9de0d75f76381eb090b546496d11"
+                         "bytes":  17324,
+                         "sha256":  "e8519da3e0372dd2ba620e7fcdd232427527b6c6b5d9ac25c7f2a026f7351c8e"
                      },
                      {
                          "path":  "资源清单.csv",
@@ -3583,6 +3613,7 @@
                         "editor/style.css",
                         "editor/voice_proc.py",
                         "editor/启动编辑器.bat",
+                        "editor/启动编辑器.sh",
                         "h5_demo/arcade.css",
                         "h5_demo/audit_cfg_sync.js",
                         "h5_demo/css/city_journey.css",
@@ -3714,6 +3745,7 @@
                         "h5_demo/test_save_restore_atomic.js",
                         "h5_demo/test_v35.js",
                         "h5_demo/启动游戏.bat",
+                        "h5_demo/启动游戏.sh",
                         "LICENSE",
                         "LICENSE-ASSETS.txt",
                         "NOTICE.txt",
@@ -4178,8 +4210,10 @@
                         "resource/ui/title_cut.webp",
                         "resource/ui/whale_rice_bowl.webp",
                         "tools/build_legacy_webview.js",
+                        "tools/install_desktop.sh",
                         "tools/launch_local.bat",
                         "tools/launch_local.ps1",
+                        "tools/launch_local.sh",
                         "tools/legacy-build/arcade_closure.js",
                         "tools/legacy-build/css_fallback.js",
                         "tools/legacy-build/layout_runtime.js",
@@ -4192,7 +4226,9 @@
                         "tools/sync_editor_defaults.js",
                         "开源清单.json",
                         "启动编辑器.bat",
+                        "启动编辑器.sh",
                         "启动游戏.bat",
+                        "启动游戏.sh",
                         "入门与编辑器指南.md",
                         "资源清单.csv"
                     ]
