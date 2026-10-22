@@ -8,13 +8,22 @@
 
 想改台词、立绘、地图和配置，双击 **启动编辑器.bat**。首次检查并安装图片处理依赖 Pillow，需要联网。改完点“保存全部”，确认成功后回游戏验证。
 
+Linux 用户双击或终端执行根目录 **启动游戏.sh** / **启动编辑器.sh**。缺少 Python 3.10+ 时启动器会给出对应发行版的安装命令；编辑器缺少 Pillow 时会先询问，输入 `y` 后在项目内创建 `.venv` 并安装。文件管理器不执行 shell 脚本时，运行 `sh tools/install_desktop.sh` 添加应用菜单入口。
+
 存档保存在项目根目录 **saves/storage.json**。保存并关闭游戏后，复制整个 saves 文件夹备份或迁移。已有玩家存档不随源码分发。
 
-详细操作见 [入门与编辑器指南.md](入门与编辑器指南.md)。macOS/Linux 可使用 Python 3.10+：
+详细操作见 [入门与编辑器指南.md](入门与编辑器指南.md)。macOS 与开发者也可手动启动：
 
 ```sh
-python tools/start_local.py game
-python tools/start_local.py editor
+./启动游戏.sh
+./启动编辑器.sh
+```
+
+或直接调用 Python（需要 3.10+）：
+
+```sh
+python3 tools/start_local.py game
+python3 tools/start_local.py editor
 ```
 
 ## 与 Agent 协作

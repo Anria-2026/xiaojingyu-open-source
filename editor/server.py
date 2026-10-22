@@ -1812,4 +1812,5 @@ if __name__ == "__main__":
         print("       可能有旧的编辑器服务进程残留。")
         print("       请关闭本窗口，重新双击「启动编辑器.bat」（会自动清理旧进程）。")
         print("       ", e)
-        input("按回车退出...")
+        if sys.stdin.isatty():
+            input("按回车退出...")
